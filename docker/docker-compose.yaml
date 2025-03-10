@@ -1,4 +1,3 @@
-version: "3.7"
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
@@ -18,7 +17,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   postgres:
-    image: 15
+    image: postgres:16
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
@@ -61,25 +60,25 @@ services:
     volumes:
       - ./debezium-plugins:/kafka/connect
 
-    kafka-mongo-connector:
-      image: confluentinc/cp-kafka-connect:7.5.0
-      depends_on:
-        - kafka
-        - mongodb
-        - elasticsearch
-      ports:
-        - "8084:8083"
-      environment:
-        CONNECT_BOOTSTRAP_SERVERS: kafka:9092
-        CONNECT_REST_PORT: 8083
-        CONNECT_GROUP_ID: "mongo-connect-group"
-        CONNECT_CONFIG_STORAGE_TOPIC: mongo-connect-configs
-        CONNECT_OFFSET_STORAGE_TOPIC: mongo-connect-offsets
-        CONNECT_STATUS_STORAGE_TOPIC: mongo-connect-statuses
-        CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
-        CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
-        CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: false
-        CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: false
-        CONNECT_PLUGIN_PATH: /usr/share/java
-      volumes:
-        - ./kafka-connectors:/usr/share/java
+  kafka-mongo-connector:
+    image: confluentinc/cp-kafka-connect:7.5.0
+    depends_on:
+      - kafka
+      - mongodb
+      - elasticsearch
+    ports:
+      - "8084:8083"
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: kafka:9092
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: "mongo-connect-group"
+      CONNECT_CONFIG_STORAGE_TOPIC: mongo-connect-configs
+      CONNECT_OFFSET_STORAGE_TOPIC: mongo-connect-offsets
+      CONNECT_STATUS_STORAGE_TOPIC: mongo-connect-statuses
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: false
+      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: false
+      CONNECT_PLUGIN_PATH: /usr/share/java
+    volumes:
+      - ./kafka-connectors:/usr/share/java
