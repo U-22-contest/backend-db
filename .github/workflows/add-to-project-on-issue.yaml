@@ -14,3 +14,5 @@ jobs:
         with:
           project-url: https://github.com/orgs/U-22-contest/projects/3 # 紐づけたいプロジェクトのURLをここに反映する
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }} # Step 2 でシークレットの Name を ADD_TO_PROJECT_PAT にしていたら、そのままでOK
+          field-id: PVTSSF_lADOC-ORwM4A0B7Wzgpufsw      # ← StatusフィールドのID
+          field-value-id: f75ad846                     # ← "Todo"の値のID
