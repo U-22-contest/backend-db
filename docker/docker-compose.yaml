@@ -1,0 +1,85 @@
+version: "3.7"
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  postgres:
+    image: 15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+
+  mongodb:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+
+  elasticsearch:
+    image: docker.elasticsearch.co/elasticsearch/elasticsearch:8.10.2
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+
+  debezium:
+    image: debezium/connect:2.5
+    depends_on:
+      - kafka
+      - postgres
+      - elasticsearch
+    ports:
+      - "8083:8083"
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: my_connect_configs
+      OFFSET_STORAGE_TOPIC: my_connect_offsets
+      STATUS_STORAGE_TOPIC: my_connect_statuses
+      KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: false
+      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: false
+      CONNECT_PLUGIN_PATH: /kafka/connect,/debezium-connector-postgres,/usr/share/java
+    volumes:
+      - ./debezium-plugins:/kafka/connect
+
+    kafka-mongo-connector:
+      image: confluentinc/cp-kafka-connect:7.5.0
+      depends_on:
+        - kafka
+        - mongodb
+        - elasticsearch
+      ports:
+        - "8084:8083"
+      environment:
+        CONNECT_BOOTSTRAP_SERVERS: kafka:9092
+        CONNECT_REST_PORT: 8083
+        CONNECT_GROUP_ID: "mongo-connect-group"
+        CONNECT_CONFIG_STORAGE_TOPIC: mongo-connect-configs
+        CONNECT_OFFSET_STORAGE_TOPIC: mongo-connect-offsets
+        CONNECT_STATUS_STORAGE_TOPIC: mongo-connect-statuses
+        CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+        CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+        CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: false
+        CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: false
+        CONNECT_PLUGIN_PATH: /usr/share/java
+      volumes:
+        - ./kafka-connectors:/usr/share/java
