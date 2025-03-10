@@ -1,4 +1,4 @@
-name: Add bugs to bugs project
+name: Add issues to project
 
 on:
   issues: # ここを pull_request にすると、PRを対象にできる
@@ -14,5 +14,3 @@ jobs:
         with:
           project-url: https://github.com/orgs/U-22-contest/projects/3 # 紐づけたいプロジェクトのURLをここに反映する
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }} # Step 2 でシークレットの Name を ADD_TO_PROJECT_PAT にしていたら、そのままでOK
-          labeled: bug, needs-triage # label条件を追加する場合、登録する
-          label-operator: OR # ANDも指定可能
