@@ -1,0 +1,18 @@
+name: Add bugs to bugs project
+
+on:
+  issues: # ここを pull_request にすると、PRを対象にできる
+    types:
+      - opened # 前述のイベントを指定する
+
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v1.0.1 #利用する Release バージョンに書き換える
+        with:
+          project-url: https://github.com/orgs/U-22-contest/projects/3 # 紐づけたいプロジェクトのURLをここに反映する
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }} # Step 2 でシークレットの Name を ADD_TO_PROJECT_PAT にしていたら、そのままでOK
+          labeled: bug, needs-triage # label条件を追加する場合、登録する
+          label-operator: OR # ANDも指定可能
