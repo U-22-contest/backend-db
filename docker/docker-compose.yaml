@@ -31,7 +31,7 @@ services:
       - "27017:27017"
 
   elasticsearch:
-    image: docker.elasticsearch.co/elasticsearch/elasticsearch:8.10.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
@@ -61,7 +61,7 @@ services:
       - ./debezium-plugins:/kafka/connect
 
   kafka-mongo-connector:
-    image: confluentinc/cp-kafka-connect:7.5.0
+    image: debezium/connect:2.5
     depends_on:
       - kafka
       - mongodb
@@ -77,8 +77,11 @@ services:
       CONNECT_STATUS_STORAGE_TOPIC: mongo-connect-statuses
       CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
       CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      # CONNECT_REST_ADVERTISED_HOST_NAME: kafka-mongo-connector
       CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: false
       CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: false
-      CONNECT_PLUGIN_PATH: /usr/share/java
+      # CONNECT_PLUGIN_PATH: /usr/share/java
+      CONNECT_PLUGIN_PATH: /kafka/connect
     volumes:
       - ./kafka-connectors:/usr/share/java
+    
