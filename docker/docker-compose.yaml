@@ -39,10 +39,11 @@ services:
       - "9200:9200"
 
   debezium:
-    image: debezium/connect:2.5
+    image: debezium/connect:2.5 # Kafka Connect本体 + Debezium内蔵
     depends_on:
       - kafka
       - postgres
+      - mongodb
       - elasticsearch
     ports:
       - "8083:8083"
@@ -58,30 +59,4 @@ services:
       CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: false
       CONNECT_PLUGIN_PATH: /kafka/connect,/debezium-connector-postgres,/usr/share/java
     volumes:
-      - ./debezium-plugins:/kafka/connect
-
-  kafka-mongo-connector:
-    image: debezium/connect:2.5
-    depends_on:
-      - kafka
-      - mongodb
-      - elasticsearch
-    ports:
-      - "8084:8083"
-    environment:
-      CONNECT_BOOTSTRAP_SERVERS: kafka:9092
-      CONNECT_REST_PORT: 8083
-      CONNECT_GROUP_ID: "mongo-connect-group"
-      CONNECT_CONFIG_STORAGE_TOPIC: mongo-connect-configs
-      CONNECT_OFFSET_STORAGE_TOPIC: mongo-connect-offsets
-      CONNECT_STATUS_STORAGE_TOPIC: mongo-connect-statuses
-      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
-      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
-      # CONNECT_REST_ADVERTISED_HOST_NAME: kafka-mongo-connector
-      CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: false
-      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: false
-      # CONNECT_PLUGIN_PATH: /usr/share/java
-      CONNECT_PLUGIN_PATH: /kafka/connect
-    volumes:
-      - ./kafka-connectors:/usr/share/java
-    
+      - ./kafka-connectors:/kafka/connect   # MongoDBやElastic用のJAR置き場
