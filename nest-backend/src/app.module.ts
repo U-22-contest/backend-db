@@ -10,17 +10,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 
-// const mongoUrl = process.env.MONGO_URL;
-// if (!mongoUrl) throw new Error('MONGO_URL environment variable is not defined');
+const mongoUrl = process.env.MONGO_URL;
+if (!mongoUrl) throw new Error('MONGO_URL environment variable is not defined');
 
 @Module({
   imports: [
     PrismaModule,
     ConfigModule.forRoot({ envFilePath: '../.env' }),
-    // MongooseModule.forRoot(mongoUrl),
-    MongooseModule.forRoot(
-      process.env.MONGO_URL || 'mongodb://localhost:27017/mydatabase',
-    ),
+    MongooseModule.forRoot(mongoUrl),
     AuthModule,
     UsersModule,
     NovelsModule,
