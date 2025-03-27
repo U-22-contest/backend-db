@@ -15,9 +15,6 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    UsersModule,
-    NovelsModule,
-    CommentsModule,
     PrismaModule,
     ConfigModule.forRoot({ envFilePath: '../.env' }),
     // MongooseModule.forRoot(mongoUrl),
@@ -25,6 +22,9 @@ import { ConfigModule } from '@nestjs/config';
       process.env.MONGO_URL || 'mongodb://localhost:27017/mydatabase',
     ),
     AuthModule,
+    UsersModule,
+    NovelsModule,
+    CommentsModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

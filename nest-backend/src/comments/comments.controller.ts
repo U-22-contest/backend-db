@@ -39,6 +39,6 @@ export class CommentsController {
     @Param('commentId') commentId: string,
     @Request() req: any,
   ): Promise<any> {
-    return this.commentsService.deleteBySharedId(commentId, req.user.userId);
+    return this.commentsService.deleteById(commentId, req.user.userId);
   }
 }

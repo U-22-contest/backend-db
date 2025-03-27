@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Comment, CommentDocument } from '../mongo/schema/comment.schema';
 import { Error, Model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
+import { CommentsModule } from "./comments.module";
 
 @Injectable()
 export class CommentsService {
@@ -50,14 +51,16 @@ export class CommentsService {
 
     //psqlCommentsのsharedIdからコメントを取得
     const sharedIds = psqlComments.map((comment) => comment.sharedId);
-    const mongoComments = await this.commentModel.find({ sharedId: { $in: sharedIds } }).cursor().toArray();
+    return psqlComments;
 
-    return { postgres: psqlComments, mongo: mongoComments }
+    // const mongoComments = await this.commentModel.find({ sharedId: { $in: sharedIds } }).cursor().toArray();
+    // return { postgres: psqlComments, mongo: mongoComments }
+
   }
 
 
   //コメント削除
-  async deleteBySharedId(id: string, userId: string) {
+  async deleteById(id: string, userId: string) {
     const comment = await this.prisma.comment.findUnique({
       where: { id },
     });
