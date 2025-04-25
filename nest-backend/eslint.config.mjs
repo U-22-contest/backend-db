@@ -33,7 +33,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-member-access': 'error',
       // any() のような関数呼び出しを禁止
       '@typescript-eslint/no-unsafe-call': 'error',
-      // 関数の戻り値型を明示
+      // 明示的に : any を書くことを禁止
       '@typescript-eslint/no-explicit-any': 'error',
       // await を忘れた Promise を警告
       '@typescript-eslint/no-floating-promises': 'error',
