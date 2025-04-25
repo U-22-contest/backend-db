@@ -1,8 +1,17 @@
-import {Controller, Post, Body, Request, Get, UseGuards, Param, Delete} from '@nestjs/common';
-import { NovelsService } from './novels.service';
+import {
+  Controller,
+  Post,
+  Body,
+  Request,
+  Get,
+  UseGuards,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { NovelsService } from './services/novels.service';
 import { CreateNovelDto } from './dto/create-novel.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { CommentsService } from "../comments/comments.service";
+import { CommentsService } from '../comments/comments.service';
 
 @Controller('novels')
 export class NovelsController {
@@ -15,7 +24,6 @@ export class NovelsController {
     createNovelDto.authorId = req.user.userId;
     return this.novelsService.createNovel(createNovelDto);
   }
-
 
   //全小説の取得
   @Get()
@@ -34,8 +42,10 @@ export class NovelsController {
   //小説の削除
   @Delete(':novelId')
   @UseGuards(AuthGuard('jwt'))
-  async delete(@Param('novelId') novelid: string, @Request() req: any) {
+  async delete(
+    @Param('novelId') novelid: string,
+    @Request() req: any,
+  ): Promise<any> {
     return this.novelsService.deleteNovel(novelid, req.user.userId);
   }
-
 }

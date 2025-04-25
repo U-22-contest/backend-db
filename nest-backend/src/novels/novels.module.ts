@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { NovelsService } from './novels.service';
+import { NovelsService } from './services/novels.service';
 import { NovelsController } from './novels.controller';
 import { PrismaModule } from '../prisma/prisma.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Novel, NovelSchema } from '../mongo/schema/novel.schema';
-import { CommentsModule } from "../comments/comments.module";
-import { CommentsService } from "../comments/comments.service";
-import {Comment, CommentSchema} from "../mongo/schema/comment.schema";
+import { CommentsModule } from '../comments/comments.module';
+import { CommentsService } from '../comments/comments.service';
+import {Comment, CommentSchema} from '../mongo/schema/comment.schema';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import {Comment, CommentSchema} from "../mongo/schema/comment.schema";
     PrismaModule,
     MongooseModule.forFeature([
       { name: Novel.name, schema: NovelSchema },
-      { name: Comment.name, schema: CommentSchema }
+      { name: Comment.name, schema: CommentSchema },
     ]),
   ],
   providers: [NovelsService, CommentsService],
