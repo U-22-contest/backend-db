@@ -35,11 +35,11 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': 'error',
       // 明示的に : any を書くことを禁止
       '@typescript-eslint/no-explicit-any': 'error',
-      // await を忘れた Promise を警告
+      // await を忘れた Promise を禁止
       '@typescript-eslint/no-floating-promises': 'error',
       // any を関数に渡すときに警告
       '@typescript-eslint/no-unsafe-argument': 'error',
-      // 関数の戻り値型を明示
+      // 関数の戻り値型を明示的に指定することを警告
       '@typescript-eslint/explicit-function-return-type': 'warn',
       // 未使用変数チェック
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
