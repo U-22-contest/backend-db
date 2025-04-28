@@ -4,14 +4,9 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { CreateNovelDto } from '../dto/create-novel.dto';
 import { v4 as uuidv4 } from 'uuid';
 import { Model } from 'mongoose';
-import { Novel, NovelDocument } from '../../mongo/schema/novel.schema';
 import { Comment, CommentDocument } from '../../mongo/schema/comment.schema';
-import { Novel as PrismaNovel } from '../../../generated/postgresql';
-
-export type CreateNovelResponse = {
-  postgresNovel: PrismaNovel;
-  mongoNovel: NovelDocument;
-};
+import { CreateNovelResponse } from '../types/novel.types';
+import { Novel, NovelDocument } from "../../mongo/schema/novel.schema";
 
 @Injectable()
 export class CreateNovelsService {
