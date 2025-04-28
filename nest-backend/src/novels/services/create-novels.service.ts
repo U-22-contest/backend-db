@@ -22,11 +22,13 @@ export class CreateNovelsService {
   ) {}
 
   //小説投稿
-  async createNovel(createNovelDto: CreateNovelDto) : Promise<CreateNovelResponse> {
+  async createNovel(
+    createNovelDto: CreateNovelDto,
+  ): Promise<CreateNovelResponse> {
     const sharedId = uuidv4();
 
     // PostgreSQLに保存
-    const postgresNovel  = await this.prisma.novel.create({
+    const postgresNovel = await this.prisma.novel.create({
       data: {
         sharedId: sharedId,
         authorId: createNovelDto.authorId,

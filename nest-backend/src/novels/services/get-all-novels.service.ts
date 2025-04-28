@@ -4,7 +4,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { Error, Model } from 'mongoose';
 import { Novel, NovelDocument } from '../../mongo/schema/novel.schema';
 import { Comment, CommentDocument } from '../../mongo/schema/comment.schema';
-import { Novel as PrismaNovel } from "../../../generated/postgresql";
+import { Novel as PrismaNovel } from '../../../generated/postgresql';
 
 export type GetAllNovelsResponse = {
   psqlNovels: PrismaNovel[];
@@ -20,14 +20,14 @@ export class GetAllNovelsService {
   ) {}
 
   //全小説の取得
-  async getAllNovel() : Promise<GetAllNovelsResponse> {
+  async getAllNovel(): Promise<GetAllNovelsResponse> {
     const psqlNovels = await this.prisma.novel.findMany({
       orderBy: { createdAt: 'desc' },
     });
     if (!psqlNovels) throw new Error('小説が投稿されていません');
 
     //内容取得
-    const mongoNovels = await this.novelModel.find()
+    const mongoNovels = await this.novelModel.find();
     return { psqlNovels, mongoNovels };
   }
 }

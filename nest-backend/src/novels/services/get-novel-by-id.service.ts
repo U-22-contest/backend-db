@@ -4,7 +4,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { Error, Model } from 'mongoose';
 import { Novel, NovelDocument } from '../../mongo/schema/novel.schema';
 import { Comment, CommentDocument } from '../../mongo/schema/comment.schema';
-import { Novel as PrismaNovel } from "../../../generated/postgresql";
+import { Novel as PrismaNovel } from '../../../generated/postgresql';
 
 export type GetNovelByIdResponse = {
   psqlNovel: PrismaNovel;
@@ -20,12 +20,14 @@ export class GetNovelsByIdService {
   ) {}
 
   //id指定で取得
-  async getNovelById(id: string) : Promise<GetNovelByIdResponse> {
+  async getNovelById(id: string): Promise<GetNovelByIdResponse> {
     const psqlNovel = await this.prisma.novel.findUnique({ where: { id } });
     if (!psqlNovel) throw new Error('該当する小説がありません');
 
     //小説内容の取得
-    const mongoNovel = await this.novelModel.findOne({ sharedId: psqlNovel.sharedId });
+    const mongoNovel = await this.novelModel.findOne({
+      sharedId: psqlNovel.sharedId,
+    });
     if (!mongoNovel) throw new Error('該当する小説内容がありません');
     return { psqlNovel, mongoNovel };
   }
