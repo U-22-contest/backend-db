@@ -1,3 +1,3 @@
 export class SearchNovelsDto {
-    keyword: string;
+  keyword: string;
 }

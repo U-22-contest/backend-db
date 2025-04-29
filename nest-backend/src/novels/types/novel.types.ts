@@ -7,10 +7,7 @@ export type CreateNovelResponse = {
 };
 
 export type Novel = {
-    id: string,
+    sharedId: string;
     authorId: string;
     title: string;
-    content: string;
-    createdAt: Date;
-    updatedAt: Date;
 };
