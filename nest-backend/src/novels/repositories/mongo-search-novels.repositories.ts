@@ -4,7 +4,7 @@ import { NovelDocument } from 'src/mongo/schema/novel.schema';
 import { Model } from 'mongoose';
 
 @Injectable()
-export class SearchNovelRepository {
+export class MongoSearchNovelRepository {
   constructor(@InjectModel('Novel') private novelModel: Model<NovelDocument>) {}
 
   async searchByKeyword(

@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { SearchNovelRepository } from '../repositories/mongo-search-novels.repositories';
+import { MongoSearchNovelRepository } from '../repositories/mongo-search-novels.repositories';
 import { Novel } from '../types/novel.types';
 import { PostgresNovelRepository } from '../repositories/postgres-search-novels.repositories';
 
 @Injectable()
 export class SearchNovelsService {
   constructor(
-    private readonly novelRepository: SearchNovelRepository,
+    private readonly novelRepository: MongoSearchNovelRepository,
     private readonly postgresNovelRepository: PostgresNovelRepository,
   ) {}
 

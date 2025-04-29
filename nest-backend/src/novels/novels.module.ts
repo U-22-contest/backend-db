@@ -17,7 +17,7 @@ import { SearchNovelsService } from './services/search-novels.service';
 // import { CommentsService } from '../comments/comments.service';
 import { GetCommentsByNovelIdService } from '../comments/service/get-comments-by-novelid.service';
 import { DeleteCommentsService } from '../comments/service/delete-comments.service';
-import { SearchNovelRepository } from './repositories/mongo-search-novels.repositories';
+import { MongoSearchNovelRepository } from './repositories/mongo-search-novels.repositories';
 import { PostgresNovelRepository } from './repositories/postgres-search-novels.repositories';
 
 @Module({
@@ -38,7 +38,7 @@ import { PostgresNovelRepository } from './repositories/postgres-search-novels.r
     GetCommentsByNovelIdService,
     DeleteCommentsService,
     SearchNovelsService,
-    SearchNovelRepository,
+    MongoSearchNovelRepository,
     PostgresNovelRepository,
   ],
   controllers: [NovelsController],
