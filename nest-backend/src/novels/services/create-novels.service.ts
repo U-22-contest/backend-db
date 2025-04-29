@@ -4,14 +4,9 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { CreateNovelDto } from '../dto/create-novel.dto';
 import { v4 as uuidv4 } from 'uuid';
 import { Model } from 'mongoose';
-import { Novel, NovelDocument } from '../../mongo/schema/novel.schema';
 import { Comment, CommentDocument } from '../../mongo/schema/comment.schema';
-import { Novel as PrismaNovel } from '../../../generated/postgresql';
-
-export type CreateNovelResponse = {
-  postgresNovel: PrismaNovel;
-  mongoNovel: NovelDocument;
-};
+import { CreateNovelResponse } from '../types/novel.types';
+import { Novel, NovelDocument } from "../../mongo/schema/novel.schema";
 
 @Injectable()
 export class CreateNovelsService {
@@ -22,11 +17,13 @@ export class CreateNovelsService {
   ) {}
 
   //小説投稿
-  async createNovel(createNovelDto: CreateNovelDto) : Promise<CreateNovelResponse> {
+  async createNovel(
+    createNovelDto: CreateNovelDto,
+  ): Promise<CreateNovelResponse> {
     const sharedId = uuidv4();
 
     // PostgreSQLに保存
-    const postgresNovel  = await this.prisma.novel.create({
+    const postgresNovel = await this.prisma.novel.create({
       data: {
         sharedId: sharedId,
         authorId: createNovelDto.authorId,

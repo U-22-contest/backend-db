@@ -12,10 +12,13 @@ import { CreateNovelsService } from './services/create-novels.service';
 import { GetAllNovelsService } from './services/get-all-novels.service';
 import { GetNovelsByIdService } from './services/get-novel-by-id.service';
 import { DeleteNovelsService } from './services/delete-novels.service';
+import { SearchNovelsService } from './services/search-novels.service';
 
 // import { CommentsService } from '../comments/comments.service';
 import { GetCommentsByNovelIdService } from '../comments/service/get-comments-by-novelid.service';
 import { DeleteCommentsService } from '../comments/service/delete-comments.service';
+import { MongoSearchNovelRepository } from './repositories/mongo-search-novels.repositories';
+import { PostgresNovelRepository } from './repositories/postgres-search-novels.repositories';
 
 @Module({
   imports: [
@@ -32,9 +35,11 @@ import { DeleteCommentsService } from '../comments/service/delete-comments.servi
     GetAllNovelsService,
     GetNovelsByIdService,
     DeleteNovelsService,
-
     GetCommentsByNovelIdService,
     DeleteCommentsService,
+    SearchNovelsService,
+    MongoSearchNovelRepository,
+    PostgresNovelRepository,
   ],
   controllers: [NovelsController],
 })

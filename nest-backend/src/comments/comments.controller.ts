@@ -1,21 +1,36 @@
-import { Controller, Post, Body, Request, Get, Delete, Param, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Request,
+  Get,
+  Delete,
+  Param,
+  UseGuards,
+} from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { JWTPayload } from "../auth/interface/jwt-payload.interface";
+import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 
 // service
 // import { CommentsService } from './service/comments.service';
-import { CreateCommentsService, CreateCommentResponse } from './service/create-comments.service';
-import { GetCommentsByNovelIdService, GetCommentsByNovelIdResponse } from './service/get-comments-by-novelid.service';
+import {
+  CreateCommentsService,
+  CreateCommentResponse,
+} from './service/create-comments.service';
+import {
+  GetCommentsByNovelIdService,
+  GetCommentsByNovelIdResponse,
+} from './service/get-comments-by-novelid.service';
 import { DeleteCommentsService } from './service/delete-comments.service';
 
 @Controller('comments')
 export class CommentsController {
   constructor(
-      // private readonly commentsService: CommentsService,
-      private readonly createCommentsService: CreateCommentsService,
-      private readonly getCommentsByNovelIdService: GetCommentsByNovelIdService,
-      private readonly deleteCommentsService: DeleteCommentsService,
+    // private readonly commentsService: CommentsService,
+    private readonly createCommentsService: CreateCommentsService,
+    private readonly getCommentsByNovelIdService: GetCommentsByNovelIdService,
+    private readonly deleteCommentsService: DeleteCommentsService,
   ) {}
 
   // 小説のコメント投稿
@@ -25,7 +40,7 @@ export class CommentsController {
     @Param('novelId') novelId: string,
     @Body() createCommentDto: CreateCommentDto,
     @Request() req: { user: JWTPayload },
-  ) : Promise<CreateCommentResponse> {
+  ): Promise<CreateCommentResponse> {
     // JWT認証からuserIdの取得
     createCommentDto.userId = req.user.userId;
     createCommentDto.novelId = novelId;
@@ -33,13 +48,13 @@ export class CommentsController {
     return this.createCommentsService.createComment(createCommentDto);
   }
 
-
   // コメント取得
   @Get(':novelId')
-  async findAll(@Param('novelId') novelId: string) : Promise<GetCommentsByNovelIdResponse> {
+  async findAll(
+    @Param('novelId') novelId: string,
+  ): Promise<GetCommentsByNovelIdResponse> {
     return this.getCommentsByNovelIdService.getCommentsByNovelId(novelId);
   }
-
 
   // コメント削除（comment.idで削除）
   @Delete(':commentId')
