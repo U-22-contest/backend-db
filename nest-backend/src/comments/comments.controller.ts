@@ -52,7 +52,7 @@ export class CommentsController {
   @Get(':novelId')
   async findAll(
     @Param('novelId') novelId: string,
-  ): Promise<GetCommentsByNovelIdResponse> {
+  ): Promise<GetCommentsByNovelIdResponse[]> {
     return this.getCommentsByNovelIdService.getCommentsByNovelId(novelId);
   }
 

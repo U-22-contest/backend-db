@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
 import { CreateCommentDto } from '../dto/create-comment.dto';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import { Comment as PrismaComment } from "../../../generated/postgresql";
-import { Comment, CommentDocument } from '../../mongo/schema/comment.schema';
+import { CommentDocument } from '../../mongo/schema/comment.schema';
+import { PostgresCreateCommentRepository } from '../repositories/create-comments/postgres';
+import { MongoCreateCommentRepository } from '../repositories/create-comments/mongo';
 
 export type CreateCommentResponse = {
   postgresComment: PrismaComment;
@@ -15,32 +14,29 @@ export type CreateCommentResponse = {
 @Injectable()
 export class CreateCommentsService {
   constructor(
-    @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
-    private prisma: PrismaService,
-  ) {}
+    private readonly postgresCreateComment : PostgresCreateCommentRepository,
+    private readonly mongoCreateComment : MongoCreateCommentRepository,
 
+  ) {}
   // コメント投稿
   async createComment(createCommentDto: CreateCommentDto) : Promise<CreateCommentResponse> {
     // PostgresqlとMongoの共通ID
     const sharedId = uuidv4();
 
     // PostgreSQL
-    const postgresComment = await this.prisma.comment.create({
-      data: {
-        sharedId: sharedId,
-        userId: createCommentDto.userId,
-        novelId: createCommentDto.novelId,
-        startIndex: createCommentDto.startIndex,
-        endIndex: createCommentDto.endIndex,
-      },
-    });
+    const postgresComment = await this.postgresCreateComment.createComment(
+        sharedId,
+        createCommentDto.userId,
+        createCommentDto.novelId,
+        createCommentDto.startIndex,
+        createCommentDto.endIndex,
+    );
 
     // MongoDB
-    const mongoComment = new this.commentModel({
-      sharedId: sharedId,
-      comment: createCommentDto.comment,
-    });
-    await mongoComment.save();
+    const mongoComment = await this.mongoCreateComment.createComment(
+        sharedId,
+        createCommentDto.comment
+    );
 
     return { postgresComment, mongoComment };
   }

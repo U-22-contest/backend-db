@@ -1,29 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-import { InjectModel } from '@nestjs/mongoose';
-import { Comment, CommentDocument } from '../../mongo/schema/comment.schema';
-import { Error, Model } from 'mongoose';
+import { Error } from 'mongoose';
+import { PostgresDeleteCommentRepository } from '../repositories/delete-comments/postgres';
+import { MongoDeleteCommentRepository } from '../repositories/delete-comments/mongo';
 
 @Injectable()
 export class DeleteCommentsService {
   constructor(
-    @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
-    private prisma: PrismaService,
+    private readonly postgresDeleteComment: PostgresDeleteCommentRepository,
+    private readonly mongoDeleteComment: MongoDeleteCommentRepository,
   ) {}
 
   //コメント削除
   async deleteComment(id: string, userId: string) : Promise<{message: string}> {
-    const comment = await this.prisma.comment.findUnique({
-      where: { id },
-    });
+    const comment = await this.postgresDeleteComment.findComentById(id);
 
     //コメントの有無の判断と、投稿者のみ削除
     if (!comment) throw new Error('コメントが見つかりません');
     if (comment.userId !== userId) throw new Error('権限がありません');
 
     //postgresql mongo 各削除
-    await this.prisma.comment.delete({ where: { id } });
-    await this.commentModel.deleteOne({ sharedId: comment.sharedId });
+    await this.postgresDeleteComment.deleteCommentById(id);
+    await this.mongoDeleteComment.deleteCommentBySharedId(comment.sharedId);
 
     return { message: 'コメント削除' };
   }

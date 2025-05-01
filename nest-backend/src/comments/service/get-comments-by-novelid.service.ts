@@ -1,34 +1,45 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-import { InjectModel } from '@nestjs/mongoose';
-import { Comment, CommentDocument } from '../../mongo/schema/comment.schema';
-import { Model } from 'mongoose';
-import { Comment as PrismaComment } from "../../../generated/postgresql";
+import { PostgresGetCommentsByNovelIdRepository } from '../repositories/get-comments-by-novelid/postgres'
+import { MongoGetCommentsByNovelIdRepository } from '../repositories/get-comments-by-novelid/mongo'
 
 export type GetCommentsByNovelIdResponse = {
-  psqlComments: PrismaComment[];
-  mongoComments: CommentDocument[];
+  id: string,
+  sharedId: string,
+  userId: string,
+  novelId: string,
+  startIndex: number,
+  endIndex: number,
+  createdAt: Date,
+  updatedAt: Date,
+  comment: string,
 };
 
 @Injectable()
 export class GetCommentsByNovelIdService {
   constructor(
-    @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
-    private prisma: PrismaService,
+    private readonly postgresGetCommentsByNovelId: PostgresGetCommentsByNovelIdRepository,
+    private readonly mongoGetCommentsByNovelId: MongoGetCommentsByNovelIdRepository
   ) {}
 
   //コメント取得
-  async getCommentsByNovelId(novelId: string) : Promise<GetCommentsByNovelIdResponse> {
-    const psqlComments = await this.prisma.comment.findMany({
-      where: { novelId },
-      orderBy: { createdAt: 'desc' },
-    })
+  async getCommentsByNovelId(novelId: string) : Promise<GetCommentsByNovelIdResponse[]> {
+    const psqlComments = await this.postgresGetCommentsByNovelId.getCommentsByNovelId(novelId);
 
     //psqlCommentsのsharedIdからコメントを取得
     const sharedIds = psqlComments.map((comment) => comment.sharedId);
+    const mongoComments = await this.mongoGetCommentsByNovelId.getCommentsByNovelId(sharedIds);
 
-    const mongoComments = await this.commentModel.find({ sharedId: { $in: sharedIds } }).cursor().toArray();
-    return { psqlComments, mongoComments }
+    const comments = psqlComments.map((psqlComment) => {
+      // Mongoのコメントを対応するsharedIdで取得
+      const mongoComment = mongoComments.find(
+          (mongo) => mongo.sharedId === psqlComment.sharedId,
+      );
+      return {
+        ...psqlComment,
+        comment: mongoComment?.comment ?? '',
+      };
+    });
 
+    return comments;
   }
 }
