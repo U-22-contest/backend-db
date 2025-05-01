@@ -23,6 +23,24 @@ model User {
   comments  Comment[] @relation("UserComments")
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+
+  // 自分をフォローしているユーザー（フォロワー）
+  followers Follow[] @relation("FolloweeRelation")
+  // 自分がフォローしているユーザー
+  followees Follow[] @relation("FollowerRelation")
+}
+
+model Follow {
+  id         String   @id @default(cuid())
+  // フォローする人（フォロワー）のID
+  followerId String
+  follower   User     @relation("FollowerRelation", fields: [followerId], references: [id], onDelete: Cascade)
+  // フォローされる人のID
+  followeeId String
+  followee   User     @relation("FolloweeRelation", fields: [followeeId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([followerId, followeeId])
 }
 
 model Novel {

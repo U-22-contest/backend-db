@@ -126,6 +126,13 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.FollowScalarFieldEnum = {
+  id: 'id',
+  followerId: 'followerId',
+  followeeId: 'followeeId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.NovelScalarFieldEnum = {
   id: 'id',
   sharedId: 'sharedId',
@@ -158,6 +165,7 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Follow: 'Follow',
   Novel: 'Novel',
   Comment: 'Comment'
 };
