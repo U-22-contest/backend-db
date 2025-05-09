@@ -1,33 +1,47 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { PrismaService } from '../../prisma/prisma.service';
-import { Error, Model } from 'mongoose';
-import { Novel, NovelDocument } from '../../mongo/schema/novel.schema';
-import { Comment, CommentDocument } from '../../mongo/schema/comment.schema';
-import { Novel as PrismaNovel } from '../../../generated/postgresql';
+import { Error } from 'mongoose';
+import { PostgresGetAllNovelRepository } from '../repositories/get-all-novels/postgres';
+import { MongoGetAllNovelRepository } from '../repositories/get-all-novels/mongo';
 
 export type GetAllNovelsResponse = {
-  psqlNovels: PrismaNovel[];
-  mongoNovels: NovelDocument[];
+  id: string;
+  sharedId: string;
+  authorId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  title: string;
+  content: string;
 };
 
 @Injectable()
 export class GetAllNovelsService {
   constructor(
-    @InjectModel(Novel.name) private novelModel: Model<NovelDocument>,
-    @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
-    private prisma: PrismaService,
+    private readonly postgresGetAllNovel: PostgresGetAllNovelRepository,
+    private readonly mongoGetAllNovel: MongoGetAllNovelRepository,
   ) {}
 
   //全小説の取得
-  async getAllNovel(): Promise<GetAllNovelsResponse> {
-    const psqlNovels = await this.prisma.novel.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
+  async getAllNovel(): Promise<GetAllNovelsResponse[]> {
+    const psqlNovels = await this.postgresGetAllNovel.findAllNovel();
     if (!psqlNovels) throw new Error('小説が投稿されていません');
 
-    //内容取得
-    const mongoNovels = await this.novelModel.find();
-    return { psqlNovels, mongoNovels };
+    const mongoNovels = await this.mongoGetAllNovel.findAllNovel();
+
+    // MongoDBのデータをMapに変換（sharedIdをキーにする）
+    const mongoMap = new Map(
+        mongoNovels.map((novel) => [novel.sharedId, novel])
+    );
+
+    // sharedIdをキーに結合
+    const Novels = psqlNovels.map((psqlNovel) => {
+      const mongo = mongoMap.get(psqlNovel.sharedId);
+      return {
+        ...psqlNovel,
+        title: mongo?.title ?? '',
+        content: mongo?.content ?? '',
+      };
+    });
+
+    return Novels;
   }
 }

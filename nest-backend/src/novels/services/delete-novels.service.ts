@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { PrismaService } from '../../prisma/prisma.service';
-import { Error, Model } from 'mongoose';
-import { Novel, NovelDocument } from '../../mongo/schema/novel.schema';
-import { Comment, CommentDocument } from '../../mongo/schema/comment.schema';
+import { Error } from 'mongoose';
+import { PostgresDeleteNovelRepository } from '../repositories/delete-novels/postgres';
+import { MongoDeleteNovelRepository } from '../repositories/delete-novels/mongo';
 
 import { GetCommentsByNovelIdService } from '../../comments/service/get-comments-by-novelid.service';
 import { DeleteCommentsService } from '../../comments/service/delete-comments.service';
@@ -11,24 +9,21 @@ import { DeleteCommentsService } from '../../comments/service/delete-comments.se
 @Injectable()
 export class DeleteNovelsService {
   constructor(
-    @InjectModel(Novel.name) private novelModel: Model<NovelDocument>,
-    @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
-    private prisma: PrismaService,
-    private getCommentsByNovelIdService: GetCommentsByNovelIdService,
-    private deleteCommentsService: DeleteCommentsService,
+    private readonly postgresDeleteNovel: PostgresDeleteNovelRepository,
+    private readonly mongoDeleteNovel: MongoDeleteNovelRepository,
+
+    private readonly getCommentsByNovelIdService: GetCommentsByNovelIdService,
+    private readonly deleteCommentsService: DeleteCommentsService,
   ) {}
 
   //小説の削除
   async deleteNovel(id: string, userId: string) : Promise<{ message: string }> {
-    const psqlNovelDelete = await this.prisma.novel.findUnique({
-      where: { id },
-    });
+    const psqlNovelDelete = await this.postgresDeleteNovel.findNovelById(id);
     if (!psqlNovelDelete) throw new Error('該当小説がありません');
-    if (psqlNovelDelete.authorId !== userId)
-      throw new Error('権限がありません');
+    if (psqlNovelDelete.authorId !== userId) throw new Error('権限がありません');
 
     const deleteComments = await this.getCommentsByNovelIdService.getCommentsByNovelId(id);
-    const commentsId = deleteComments.psqlComments.map((comment) => comment.id);
+    const commentsId = deleteComments.map((comment) => comment.id);
 
     await Promise.all(
       commentsId.map(async (commentId) => {
@@ -36,9 +31,8 @@ export class DeleteNovelsService {
       }),
     );
 
-    await this.prisma.novel.delete({ where: { id } });
-    const sharedId = psqlNovelDelete.sharedId;
-    await this.novelModel.deleteOne({ sharedId });
+    await this.postgresDeleteNovel.deleteNovelById(id);
+    await this.mongoDeleteNovel.deleteNovelBySharedId(psqlNovelDelete.sharedId);
 
     return { message: 'successfully deleted novel' };
   }

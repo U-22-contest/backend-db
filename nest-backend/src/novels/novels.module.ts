@@ -7,7 +7,6 @@ import { CommentsModule } from '../comments/comments.module';
 import { Comment, CommentSchema } from '../mongo/schema/comment.schema';
 
 // service
-// import { NovelsService } from './services/novels.service';
 import { CreateNovelsService } from './services/create-novels.service';
 import { GetAllNovelsService } from './services/get-all-novels.service';
 import { GetNovelsByIdService } from './services/get-novel-by-id.service';
@@ -17,8 +16,19 @@ import { SearchNovelsService } from './services/search-novels.service';
 // import { CommentsService } from '../comments/comments.service';
 import { GetCommentsByNovelIdService } from '../comments/service/get-comments-by-novelid.service';
 import { DeleteCommentsService } from '../comments/service/delete-comments.service';
-import { MongoSearchNovelRepository } from './repositories/mongo-search-novels.repositories';
-import { PostgresNovelRepository } from './repositories/postgres-search-novels.repositories';
+
+// repository
+import { MongoCreateNovelRepository } from './repositories/create-novels/mongo';
+import { PostgresCreateNovelRepository } from './repositories/create-novels/postgres';
+import { MongoDeleteNovelRepository } from './repositories/delete-novels/mongo';
+import { PostgresDeleteNovelRepository } from './repositories/delete-novels/postgres';
+import { MongoGetNovelByIdRepository } from './repositories/get-novel-by-id/mongo';
+import { PostgresGetNovelByIdRepository } from './repositories/get-novel-by-id/postgres';
+import { MongoGetAllNovelRepository } from './repositories/get-all-novels/mongo';
+import { PostgresGetAllNovelRepository } from './repositories/get-all-novels/postgres';
+import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
+import { PostgresNovelRepository } from './repositories/search-novels/postgres';
+
 
 @Module({
   imports: [
@@ -35,9 +45,18 @@ import { PostgresNovelRepository } from './repositories/postgres-search-novels.r
     GetAllNovelsService,
     GetNovelsByIdService,
     DeleteNovelsService,
+    SearchNovelsService,
     GetCommentsByNovelIdService,
     DeleteCommentsService,
-    SearchNovelsService,
+
+    MongoCreateNovelRepository,
+    PostgresCreateNovelRepository,
+    MongoDeleteNovelRepository,
+    PostgresDeleteNovelRepository,
+    MongoGetNovelByIdRepository,
+    PostgresGetNovelByIdRepository,
+    MongoGetAllNovelRepository,
+    PostgresGetAllNovelRepository,
     MongoSearchNovelRepository,
     PostgresNovelRepository,
   ],

@@ -9,6 +9,14 @@ import { CreateCommentsService } from './service/create-comments.service';
 import { GetCommentsByNovelIdService } from './service/get-comments-by-novelid.service';
 import { DeleteCommentsService } from './service/delete-comments.service';
 
+// repositories
+import { MongoCreateCommentRepository } from './repositories/create-comments/mongo';
+import { PostgresCreateCommentRepository } from './repositories/create-comments/postgres';
+import { MongoDeleteCommentRepository } from './repositories/delete-comments/mongo';
+import { PostgresDeleteCommentRepository } from './repositories/delete-comments/postgres';
+import { MongoGetCommentsByNovelIdRepository } from './repositories/get-comments-by-novelid/mongo';
+import { PostgresGetCommentsByNovelIdRepository } from './repositories/get-comments-by-novelid/postgres';
+
 @Module({
   imports: [
     PrismaModule,
@@ -19,8 +27,21 @@ import { DeleteCommentsService } from './service/delete-comments.service';
     CreateCommentsService,
     GetCommentsByNovelIdService,
     DeleteCommentsService,
+
+    MongoCreateCommentRepository,
+    PostgresCreateCommentRepository,
+    MongoDeleteCommentRepository,
+    PostgresDeleteCommentRepository,
+    MongoGetCommentsByNovelIdRepository,
+    PostgresGetCommentsByNovelIdRepository,
   ],
   controllers: [CommentsController],
-  exports: [DeleteCommentsService],
+  exports: [
+    MongoGetCommentsByNovelIdRepository,
+    PostgresGetCommentsByNovelIdRepository,
+    DeleteCommentsService,
+    PostgresDeleteCommentRepository,
+    MongoDeleteCommentRepository,
+  ],
 })
 export class CommentsModule {}

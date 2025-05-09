@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { MongoSearchNovelRepository } from '../repositories/mongo-search-novels.repositories';
+import { MongoSearchNovelRepository } from '../repositories/search-novels/mongo';
 import { Novel } from '../types/novel.types';
-import { PostgresNovelRepository } from '../repositories/postgres-search-novels.repositories';
+import { PostgresNovelRepository } from '../repositories/search-novels/postgres';
 
 @Injectable()
 export class SearchNovelsService {

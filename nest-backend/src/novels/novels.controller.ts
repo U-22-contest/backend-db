@@ -13,7 +13,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 import { SearchNovelsDto } from './dto/search-novels.dto';
 
-// import { NovelsService } from './services/novels.service';
 import {
   CreateNovelsService,
 } from './services/create-novels.service';
@@ -34,7 +33,6 @@ import { Novel } from './types/novel.types';
 @Controller('novels')
 export class NovelsController {
   constructor(
-    // private readonly novelsService: NovelsService,
     private readonly createNovelsService: CreateNovelsService,
     private readonly getAllNovelsService: GetAllNovelsService,
     private readonly getNovelsByIdService: GetNovelsByIdService,
@@ -55,7 +53,7 @@ export class NovelsController {
 
   //全小説の取得
   @Get()
-  async findAll(): Promise<GetAllNovelsResponse> {
+  async findAll(): Promise<GetAllNovelsResponse[]> {
     return this.getAllNovelsService.getAllNovel();
   }
 
