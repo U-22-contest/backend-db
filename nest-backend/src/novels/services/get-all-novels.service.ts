@@ -37,7 +37,6 @@ export class GetAllNovelsService {
       const mongo = mongoMap.get(psqlNovel.sharedId);
       return {
         ...psqlNovel,
-        title: mongo?.title ?? '',
         content: mongo?.content ?? '',
       };
     });

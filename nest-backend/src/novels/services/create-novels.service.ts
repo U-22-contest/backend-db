@@ -22,12 +22,12 @@ export class CreateNovelsService {
     const postgresNovel = await this.postgresCreateNovel.createNovel(
       sharedId,
       createNovelDto.authorId,
+      createNovelDto.title,
     );
 
     // MongoDBに保存
     const mongoNovel = await this.mongoCreateNovel.createNovel(
       sharedId,
-      createNovelDto.title,
       createNovelDto.content,
     );
     await mongoNovel.save();

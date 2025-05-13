@@ -6,11 +6,12 @@ import { Novel as PrismaNovel } from '../../../../generated/postgresql';
 export class PostgresCreateNovelRepository {
     constructor(private readonly prisma: PrismaService) {}
 
-    async createNovel(sharedId: string, authorId: string) : Promise<PrismaNovel> {
+    async createNovel(sharedId: string, authorId: string, title: string) : Promise<PrismaNovel> {
         return this.prisma.novel.create({
             data: {
                 sharedId,
                 authorId,
+                title
             },
         });
     }

@@ -31,7 +31,6 @@ export class GetNovelsByIdService {
 
     return {
       ...psqlNovel,
-      title: mongoNovel.title ?? '',
       content: mongoNovel.content ?? '',
     };
   }

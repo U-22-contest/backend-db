@@ -26,7 +26,7 @@ import { MongoGetNovelByIdRepository } from './repositories/get-novel-by-id/mong
 import { PostgresGetNovelByIdRepository } from './repositories/get-novel-by-id/postgres';
 import { MongoGetAllNovelRepository } from './repositories/get-all-novels/mongo';
 import { PostgresGetAllNovelRepository } from './repositories/get-all-novels/postgres';
-import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
+// import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
 import { PostgresNovelRepository } from './repositories/search-novels/postgres';
 
 
@@ -57,7 +57,7 @@ import { PostgresNovelRepository } from './repositories/search-novels/postgres';
     PostgresGetNovelByIdRepository,
     MongoGetAllNovelRepository,
     PostgresGetAllNovelRepository,
-    MongoSearchNovelRepository,
+    // MongoSearchNovelRepository,
     PostgresNovelRepository,
   ],
   controllers: [NovelsController],

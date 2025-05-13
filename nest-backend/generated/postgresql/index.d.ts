@@ -3463,6 +3463,7 @@ export namespace Prisma {
   export type NovelMinAggregateOutputType = {
     id: string | null
     sharedId: string | null
+    title: string | null
     authorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3471,6 +3472,7 @@ export namespace Prisma {
   export type NovelMaxAggregateOutputType = {
     id: string | null
     sharedId: string | null
+    title: string | null
     authorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3479,6 +3481,7 @@ export namespace Prisma {
   export type NovelCountAggregateOutputType = {
     id: number
     sharedId: number
+    title: number
     authorId: number
     createdAt: number
     updatedAt: number
@@ -3489,6 +3492,7 @@ export namespace Prisma {
   export type NovelMinAggregateInputType = {
     id?: true
     sharedId?: true
+    title?: true
     authorId?: true
     createdAt?: true
     updatedAt?: true
@@ -3497,6 +3501,7 @@ export namespace Prisma {
   export type NovelMaxAggregateInputType = {
     id?: true
     sharedId?: true
+    title?: true
     authorId?: true
     createdAt?: true
     updatedAt?: true
@@ -3505,6 +3510,7 @@ export namespace Prisma {
   export type NovelCountAggregateInputType = {
     id?: true
     sharedId?: true
+    title?: true
     authorId?: true
     createdAt?: true
     updatedAt?: true
@@ -3586,6 +3592,7 @@ export namespace Prisma {
   export type NovelGroupByOutputType = {
     id: string
     sharedId: string
+    title: string
     authorId: string
     createdAt: Date
     updatedAt: Date
@@ -3611,6 +3618,7 @@ export namespace Prisma {
   export type NovelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sharedId?: boolean
+    title?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3622,6 +3630,7 @@ export namespace Prisma {
   export type NovelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sharedId?: boolean
+    title?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3631,6 +3640,7 @@ export namespace Prisma {
   export type NovelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sharedId?: boolean
+    title?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3640,12 +3650,13 @@ export namespace Prisma {
   export type NovelSelectScalar = {
     id?: boolean
     sharedId?: boolean
+    title?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type NovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sharedId" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["novel"]>
+  export type NovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sharedId" | "title" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["novel"]>
   export type NovelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     comments?: boolean | Novel$commentsArgs<ExtArgs>
@@ -3667,6 +3678,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       sharedId: string
+      title: string
       authorId: string
       createdAt: Date
       updatedAt: Date
@@ -4097,6 +4109,7 @@ export namespace Prisma {
   interface NovelFieldRefs {
     readonly id: FieldRef<"Novel", 'String'>
     readonly sharedId: FieldRef<"Novel", 'String'>
+    readonly title: FieldRef<"Novel", 'String'>
     readonly authorId: FieldRef<"Novel", 'String'>
     readonly createdAt: FieldRef<"Novel", 'DateTime'>
     readonly updatedAt: FieldRef<"Novel", 'DateTime'>
@@ -5720,6 +5733,7 @@ export namespace Prisma {
   export const NovelScalarFieldEnum: {
     id: 'id',
     sharedId: 'sharedId',
+    title: 'title',
     authorId: 'authorId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -5951,6 +5965,7 @@ export namespace Prisma {
     NOT?: NovelWhereInput | NovelWhereInput[]
     id?: StringFilter<"Novel"> | string
     sharedId?: StringFilter<"Novel"> | string
+    title?: StringFilter<"Novel"> | string
     authorId?: StringFilter<"Novel"> | string
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
@@ -5961,6 +5976,7 @@ export namespace Prisma {
   export type NovelOrderByWithRelationInput = {
     id?: SortOrder
     sharedId?: SortOrder
+    title?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5974,6 +5990,7 @@ export namespace Prisma {
     AND?: NovelWhereInput | NovelWhereInput[]
     OR?: NovelWhereInput[]
     NOT?: NovelWhereInput | NovelWhereInput[]
+    title?: StringFilter<"Novel"> | string
     authorId?: StringFilter<"Novel"> | string
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
@@ -5984,6 +6001,7 @@ export namespace Prisma {
   export type NovelOrderByWithAggregationInput = {
     id?: SortOrder
     sharedId?: SortOrder
+    title?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5998,6 +6016,7 @@ export namespace Prisma {
     NOT?: NovelScalarWhereWithAggregatesInput | NovelScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Novel"> | string
     sharedId?: StringWithAggregatesFilter<"Novel"> | string
+    title?: StringWithAggregatesFilter<"Novel"> | string
     authorId?: StringWithAggregatesFilter<"Novel"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
@@ -6207,6 +6226,7 @@ export namespace Prisma {
   export type NovelCreateInput = {
     id?: string
     sharedId: string
+    title: string
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutNovelsInput
@@ -6216,6 +6236,7 @@ export namespace Prisma {
   export type NovelUncheckedCreateInput = {
     id?: string
     sharedId: string
+    title: string
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6225,6 +6246,7 @@ export namespace Prisma {
   export type NovelUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutNovelsNestedInput
@@ -6234,6 +6256,7 @@ export namespace Prisma {
   export type NovelUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6243,6 +6266,7 @@ export namespace Prisma {
   export type NovelCreateManyInput = {
     id?: string
     sharedId: string
+    title: string
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6251,6 +6275,7 @@ export namespace Prisma {
   export type NovelUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6258,6 +6283,7 @@ export namespace Prisma {
   export type NovelUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6487,6 +6513,7 @@ export namespace Prisma {
   export type NovelCountOrderByAggregateInput = {
     id?: SortOrder
     sharedId?: SortOrder
+    title?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6495,6 +6522,7 @@ export namespace Prisma {
   export type NovelMaxOrderByAggregateInput = {
     id?: SortOrder
     sharedId?: SortOrder
+    title?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6503,6 +6531,7 @@ export namespace Prisma {
   export type NovelMinOrderByAggregateInput = {
     id?: SortOrder
     sharedId?: SortOrder
+    title?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6976,6 +7005,7 @@ export namespace Prisma {
   export type NovelCreateWithoutAuthorInput = {
     id?: string
     sharedId: string
+    title: string
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentCreateNestedManyWithoutNovelInput
@@ -6984,6 +7014,7 @@ export namespace Prisma {
   export type NovelUncheckedCreateWithoutAuthorInput = {
     id?: string
     sharedId: string
+    title: string
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
@@ -7095,6 +7126,7 @@ export namespace Prisma {
     NOT?: NovelScalarWhereInput | NovelScalarWhereInput[]
     id?: StringFilter<"Novel"> | string
     sharedId?: StringFilter<"Novel"> | string
+    title?: StringFilter<"Novel"> | string
     authorId?: StringFilter<"Novel"> | string
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
@@ -7442,6 +7474,7 @@ export namespace Prisma {
   export type NovelCreateWithoutCommentsInput = {
     id?: string
     sharedId: string
+    title: string
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutNovelsInput
@@ -7450,6 +7483,7 @@ export namespace Prisma {
   export type NovelUncheckedCreateWithoutCommentsInput = {
     id?: string
     sharedId: string
+    title: string
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7509,6 +7543,7 @@ export namespace Prisma {
   export type NovelUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutNovelsNestedInput
@@ -7517,6 +7552,7 @@ export namespace Prisma {
   export type NovelUncheckedUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7525,6 +7561,7 @@ export namespace Prisma {
   export type NovelCreateManyAuthorInput = {
     id?: string
     sharedId: string
+    title: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7554,6 +7591,7 @@ export namespace Prisma {
   export type NovelUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUpdateManyWithoutNovelNestedInput
@@ -7562,6 +7600,7 @@ export namespace Prisma {
   export type NovelUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
@@ -7570,6 +7609,7 @@ export namespace Prisma {
   export type NovelUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
