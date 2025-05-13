@@ -7,7 +7,7 @@ import { Model } from 'mongoose';
 export class MongoSearchNovelRepository {
   constructor(@InjectModel('Novel') private novelModel: Model<NovelDocument>) {}
 
-  async searchByKeyword(
+  async searchByTitle(
     keyword: string,
   ): Promise<{ sharedId: string; title: string }[]> {
     const result = await this.novelModel

@@ -10,8 +10,8 @@ export class SearchNovelsService {
     private readonly postgresNovelRepository: PostgresNovelRepository,
   ) {}
 
-  async searchNovel(keyword: string): Promise<{ novels: Novel[] }> {
-    const mongoNovels = await this.novelRepository.searchByKeyword(keyword);
+  async searchNovel(title: string): Promise<{ novels: Novel[] }> {
+    const mongoNovels = await this.novelRepository.searchByTitle(title);
 
     const novels: Novel[] = [];
 

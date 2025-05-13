@@ -57,11 +57,18 @@ export class NovelsController {
     return this.getAllNovelsService.getAllNovel();
   }
 
+  // 小説検索
+  @Get('search')
+  async search(@Query() query: SearchNovelsDto): Promise<{ novels: Novel[] }> {
+    return this.searchNovelsService.searchNovel(query.title);
+  }
+
   //idによる小説の取得
   @Get(':novelid')
   async findOne(
     @Param('novelid') novelid: string,
   ): Promise<GetNovelByIdResponse> {
+    console.log(`通っている`);
     return this.getNovelsByIdService.getNovelById(novelid);
   }
 
@@ -74,11 +81,4 @@ export class NovelsController {
   ): Promise<{ message: string }> {
     return this.deleteNovelsService.deleteNovel(novelid, req.user.userId);
   }
-
-  // 小説検索
-  @Get('search')
-  async search(@Query() query: SearchNovelsDto): Promise<{ novels: Novel[] }> {
-    return this.searchNovelsService.searchNovel(query.keyword);
-  }
 }
-
