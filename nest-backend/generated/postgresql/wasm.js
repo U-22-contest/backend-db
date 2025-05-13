@@ -136,6 +136,7 @@ exports.Prisma.FollowScalarFieldEnum = {
 exports.Prisma.NovelScalarFieldEnum = {
   id: 'id',
   sharedId: 'sharedId',
+  title: 'title',
   authorId: 'authorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

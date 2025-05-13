@@ -40,6 +40,14 @@ export class NovelsController {
     private readonly searchNovelsService: SearchNovelsService,
   ) {}
 
+
+  // 小説検索
+  @Get('search')
+  async search(@Query() query: SearchNovelsDto): Promise<{ novels: Novel[] }> {
+    return this.searchNovelsService.searchNovel(query.keyword);
+  }
+
+
   //小説投稿
   @Post()
   @UseGuards(AuthGuard('jwt'))
@@ -75,10 +83,5 @@ export class NovelsController {
     return this.deleteNovelsService.deleteNovel(novelid, req.user.userId);
   }
 
-  // 小説検索
-  @Get('search')
-  async search(@Query() query: SearchNovelsDto): Promise<{ novels: Novel[] }> {
-    return this.searchNovelsService.searchNovel(query.keyword);
-  }
 }
 
