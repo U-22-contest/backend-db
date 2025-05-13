@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { MongoSearchNovelRepository } from '../repositories/mongo-search-novels.repositories';
+import { MongoSearchNovelRepository } from '../repositories/search-novels/mongo-search-novels.repositories';
 import { Novel } from '../types/novel.types';
-import { PostgresNovelRepository } from '../repositories/postgres-search-novels.repositories';
+import { PostgresNovelRepository } from '../repositories/search-novels/postgres-search-novels.repositories';
 
 @Injectable()
 export class SearchNovelsService {
@@ -10,8 +10,8 @@ export class SearchNovelsService {
     private readonly postgresNovelRepository: PostgresNovelRepository,
   ) {}
 
-  async searchNovel(keyword: string): Promise<{ novels: Novel[] }> {
-    const mongoNovels = await this.novelRepository.searchByKeyword(keyword);
+  async searchNovel(title: string): Promise<{ novels: Novel[] }> {
+    const mongoNovels = await this.novelRepository.searchByTitle(title);
 
     const novels: Novel[] = [];
 
