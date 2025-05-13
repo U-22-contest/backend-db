@@ -44,7 +44,7 @@ export class NovelsController {
   // 小説検索
   @Get('search')
   async search(@Query() query: SearchNovelsDto): Promise<{ novels: Novel[] }> {
-    return this.searchNovelsService.searchNovel(query.keyword);
+    return this.searchNovelsService.searchNovel(query.title);
   }
 
 
