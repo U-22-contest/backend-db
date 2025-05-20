@@ -46,6 +46,7 @@ model Follow {
 model Novel {
   id        String    @id @default(uuid())
   sharedId  String    @unique
+  title     String
   authorId  String
   author    User      @relation("UserNovels", fields: [authorId], references: [id], onDelete: Cascade)
   createdAt DateTime  @default(now())

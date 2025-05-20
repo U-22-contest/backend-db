@@ -7,10 +7,9 @@ import { Novel, NovelDocument } from '../../../mongo/schema/novel.schema';
 export class MongoCreateNovelRepository {
     constructor(@InjectModel(Novel.name) private readonly novelModel: Model<NovelDocument>) {}
 
-    async createNovel(sharedId: string, title: string, content: string) : Promise<NovelDocument> {
+    async createNovel(sharedId: string, content: string) : Promise<NovelDocument> {
         const novel = new this.novelModel({
             sharedId,
-            title,
             content,
         });
         return novel.save();
