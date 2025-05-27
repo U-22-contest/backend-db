@@ -10,6 +10,7 @@ import { Comment, CommentSchema } from '../mongo/schema/comment.schema';
 import { CreateNovelsService } from './services/create-novels.service';
 import { GetAllNovelsService } from './services/get-all-novels.service';
 import { GetNovelsByIdService } from './services/get-novel-by-id.service';
+import { GetPreviewByIdService } from './services/get-preview-by-id.service';
 import { DeleteNovelsService } from './services/delete-novels.service';
 import { SearchNovelsService } from './services/search-novels.service';
 
@@ -26,6 +27,8 @@ import { MongoGetNovelByIdRepository } from './repositories/get-novel-by-id/mong
 import { PostgresGetNovelByIdRepository } from './repositories/get-novel-by-id/postgres';
 import { MongoGetAllNovelRepository } from './repositories/get-all-novels/mongo';
 import { PostgresGetAllNovelRepository } from './repositories/get-all-novels/postgres';
+import { MongoGetPreviewByIdRepository } from './repositories/get-preview-by-id/mongo';
+import { PostgresGetPreviewByIdRepository } from './repositories/get-preview-by-id/postgres';
 // import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
 import { PostgresNovelRepository } from './repositories/search-novels/postgres';
 
@@ -44,6 +47,7 @@ import { PostgresNovelRepository } from './repositories/search-novels/postgres';
     CreateNovelsService,
     GetAllNovelsService,
     GetNovelsByIdService,
+    GetPreviewByIdService,
     DeleteNovelsService,
     SearchNovelsService,
     GetCommentsByNovelIdService,
@@ -57,6 +61,8 @@ import { PostgresNovelRepository } from './repositories/search-novels/postgres';
     PostgresGetNovelByIdRepository,
     MongoGetAllNovelRepository,
     PostgresGetAllNovelRepository,
+    MongoGetPreviewByIdRepository,
+    PostgresGetPreviewByIdRepository,
     // MongoSearchNovelRepository,
     PostgresNovelRepository,
   ],

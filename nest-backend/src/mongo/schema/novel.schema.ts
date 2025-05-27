@@ -6,13 +6,10 @@ export type NovelDocument = Novel & Document;
 @Schema()
 export class Novel {
   @Prop({ required: true, unique: true })
-  sharedId: string;
-
-  // @Prop({ required: true })
-  // title: string;
+  sharedId: string; // PostgresのauthorIdをそのまま保存
 
   @Prop({ required: true })
-  content: string; // PostgresのauthorIdをそのまま保存
+  content: string;
 }
 
 export const NovelSchema = SchemaFactory.createForClass(Novel);

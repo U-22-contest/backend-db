@@ -24,6 +24,10 @@ import {
   GetNovelsByIdService,
   GetNovelByIdResponse,
 } from './services/get-novel-by-id.service';
+import {
+  GetPreviewByIdService,
+  GetPreviewByIdResponse,
+} from "./services/get-preview-by-id.service";
 import { DeleteNovelsService } from './services/delete-novels.service';
 import { SearchNovelsService } from './services/search-novels.service';
 import { CreateNovelResponse } from './types/novel.types';
@@ -36,6 +40,7 @@ export class NovelsController {
     private readonly createNovelsService: CreateNovelsService,
     private readonly getAllNovelsService: GetAllNovelsService,
     private readonly getNovelsByIdService: GetNovelsByIdService,
+    private readonly getPreviewByIdService: GetPreviewByIdService,
     private readonly deleteNovelsService: DeleteNovelsService,
     private readonly searchNovelsService: SearchNovelsService,
   ) {}
@@ -71,6 +76,14 @@ export class NovelsController {
     @Param('novelid') novelid: string,
   ): Promise<GetNovelByIdResponse> {
     return this.getNovelsByIdService.getNovelById(novelid);
+  }
+
+  //プレビュー
+  @Get('preview/:novelId')
+  async getPreview(
+      @Param('novelId') novelId: string,
+  ): Promise<GetPreviewByIdResponse> {
+    return this.getPreviewByIdService.getPreviewById(novelId);
   }
 
   //小説の削除
