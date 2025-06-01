@@ -28,6 +28,7 @@ import { MongoGetAllNovelRepository } from './repositories/get-all-novels/mongo'
 import { PostgresGetAllNovelRepository } from './repositories/get-all-novels/postgres';
 import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
 import { PostgresNovelRepository } from './repositories/search-novels/postgres';
+import { CategoriesModule } from 'src/categories/categories.module';
 // import { SearchAuthor } from './repositories';
 
 @Module({
@@ -38,6 +39,7 @@ import { PostgresNovelRepository } from './repositories/search-novels/postgres';
       { name: Novel.name, schema: NovelSchema },
       { name: Comment.name, schema: CommentSchema },
     ]),
+    CategoriesModule,
   ],
   providers: [
     // NovelsService,
