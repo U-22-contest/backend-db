@@ -11,7 +11,7 @@ import { CreateNovelsService } from './services/create-novels.service';
 import { GetAllNovelsService } from './services/get-all-novels.service';
 import { GetNovelsByIdService } from './services/get-novel-by-id.service';
 import { DeleteNovelsService } from './services/delete-novels.service';
-import { SearchNovelsService } from './services/search-novels.service';
+import { SearchNovelsService } from './services/search-novels';
 
 // import { CommentsService } from '../comments/comments.service';
 import { GetCommentsByNovelIdService } from '../comments/service/get-comments-by-novelid.service';
@@ -26,9 +26,9 @@ import { MongoGetNovelByIdRepository } from './repositories/get-novel-by-id/mong
 import { PostgresGetNovelByIdRepository } from './repositories/get-novel-by-id/postgres';
 import { MongoGetAllNovelRepository } from './repositories/get-all-novels/mongo';
 import { PostgresGetAllNovelRepository } from './repositories/get-all-novels/postgres';
-// import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
+import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
 import { PostgresNovelRepository } from './repositories/search-novels/postgres';
-
+// import { SearchAuthor } from './repositories';
 
 @Module({
   imports: [
@@ -57,7 +57,7 @@ import { PostgresNovelRepository } from './repositories/search-novels/postgres';
     PostgresGetNovelByIdRepository,
     MongoGetAllNovelRepository,
     PostgresGetAllNovelRepository,
-    // MongoSearchNovelRepository,
+    MongoSearchNovelRepository,
     PostgresNovelRepository,
   ],
   controllers: [NovelsController],

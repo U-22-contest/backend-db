@@ -29,7 +29,7 @@ export class GetAllNovelsService {
 
     // MongoDBのデータをMapに変換（sharedIdをキーにする）
     const mongoMap = new Map(
-        mongoNovels.map((novel) => [novel.sharedId, novel])
+      mongoNovels.map((novel) => [novel.sharedId, novel]),
     );
 
     // sharedIdをキーに結合

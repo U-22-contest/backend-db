@@ -14,6 +14,7 @@ export class CreateNovelsService {
 
   //小説投稿
   async createNovel(
+    authorId: string,
     createNovelDto: CreateNovelDto,
   ): Promise<CreateNovelResponse> {
     const sharedId = uuidv4();
@@ -21,8 +22,9 @@ export class CreateNovelsService {
     // PostgreSQLに保存
     const postgresNovel = await this.postgresCreateNovel.createNovel(
       sharedId,
-      createNovelDto.authorId,
+      authorId,
       createNovelDto.title,
+      createNovelDto.categoryNames ?? [],
     );
 
     // MongoDBに保存

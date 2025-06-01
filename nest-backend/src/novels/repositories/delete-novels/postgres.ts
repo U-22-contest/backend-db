@@ -4,13 +4,13 @@ import { Novel as PrismaNovel } from '../../../../generated/postgresql';
 
 @Injectable()
 export class PostgresDeleteNovelRepository {
-    constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-    async findNovelById(id: string): Promise<PrismaNovel | null> {
-        return this.prisma.novel.findUnique({ where: { id } });
-    }
+  async findNovelById(id: string): Promise<PrismaNovel | null> {
+    return this.prisma.novel.findUnique({ where: { id } });
+  }
 
-    async deleteNovelById(id: string): Promise<void> {
-        await this.prisma.novel.delete({ where: { id } });
-    }
+  async deleteNovelById(id: string): Promise<void> {
+    await this.prisma.novel.delete({ where: { id } });
+  }
 }
