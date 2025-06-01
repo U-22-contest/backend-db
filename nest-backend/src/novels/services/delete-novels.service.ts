@@ -17,12 +17,14 @@ export class DeleteNovelsService {
   ) {}
 
   //小説の削除
-  async deleteNovel(id: string, userId: string) : Promise<{ message: string }> {
+  async deleteNovel(id: string, userId: string): Promise<{ message: string }> {
     const psqlNovelDelete = await this.postgresDeleteNovel.findNovelById(id);
     if (!psqlNovelDelete) throw new Error('該当小説がありません');
-    if (psqlNovelDelete.authorId !== userId) throw new Error('権限がありません');
+    if (psqlNovelDelete.authorId !== userId)
+      throw new Error('権限がありません');
 
-    const deleteComments = await this.getCommentsByNovelIdService.getCommentsByNovelId(id);
+    const deleteComments =
+      await this.getCommentsByNovelIdService.getCommentsByNovelId(id);
     const commentsId = deleteComments.map((comment) => comment.id);
 
     await Promise.all(

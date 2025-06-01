@@ -1,3 +1,5 @@
 export class SearchNovelsDto {
-  title: string;
+  title?: string;
+  author?: string;
+  category?: string;
 }

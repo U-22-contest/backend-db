@@ -33,11 +33,11 @@ import { UnfollowUserDto } from './dto/unfollow-user.dto';
 @Controller('users')
 export class UsersController {
   constructor(
-      private readonly createUsersService: CreateUsersService,
-      private readonly followUserService: FollowUserService,
-      private readonly unfollowUserService: UnfollowUserService,
-      private readonly getFollowersService: GetFollowersService,
-      private readonly getFolloweesService: GetFolloweesService,
+    private readonly createUsersService: CreateUsersService,
+    private readonly followUserService: FollowUserService,
+    private readonly unfollowUserService: UnfollowUserService,
+    private readonly getFollowersService: GetFollowersService,
+    private readonly getFolloweesService: GetFolloweesService,
   ) {}
 
   @Post('signup')
@@ -51,8 +51,8 @@ export class UsersController {
   @UseGuards(AuthGuard('jwt'))
   async followUser(
     @Param('userid') followeeId: string,
-    @Request() req: { user: JWTPayload }
-  ) : Promise<Follow> {
+    @Request() req: { user: JWTPayload },
+  ): Promise<Follow> {
     const followUserDto: FollowUserDto = {
       followerId: req.user.userId,
       followeeId: followeeId,
@@ -63,9 +63,9 @@ export class UsersController {
   @Delete('unfollow/:userid')
   @UseGuards(AuthGuard('jwt'))
   async unfollowUser(
-      @Param('userid') followeeId: string,
-      @Request() req: { user: JWTPayload }
-  ) : Promise<{ message: string }> {
+    @Param('userid') followeeId: string,
+    @Request() req: { user: JWTPayload },
+  ): Promise<{ message: string }> {
     const unfollowUserDto: UnfollowUserDto = {
       followerId: req.user.userId,
       followeeId: followeeId,
@@ -75,16 +75,15 @@ export class UsersController {
 
   @Get('followers/:userid')
   async getFollowers(
-      @Param('userid') userid: string,
-  ) : Promise<GetFollowersResponse[]>{
+    @Param('userid') userid: string,
+  ): Promise<GetFollowersResponse[]> {
     return this.getFollowersService.getFollowers(userid);
   }
 
   @Get('followees/:userId')
   async getFollowees(
-      @Param('userid') userid: string,
-  ) : Promise<GetFolloweesResponse[]> {
+    @Param('userid') userid: string,
+  ): Promise<GetFolloweesResponse[]> {
     return this.getFolloweesService.getFollowees(userid);
   }
-
 }

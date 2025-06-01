@@ -1,6 +1,6 @@
 // import { User } from '../../../generated/postgresql';
-//
+
 // export type CreateUserResponse = {
-//     message: string;
-//     user: User;
+//   message: string;
+//   user: User;
 // };
