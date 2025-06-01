@@ -9,10 +9,11 @@ export class PostgresNovelRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async searchByQuery(query: SearchNovelsDto): Promise<Novel[]> {
-    const { title, author, category } = query;
+    const { title, author, categories } = query;
 
     const where: Prisma.NovelWhereInput = {};
 
+    // タイトル検索
     if (title) {
       where.title = {
         contains: title,
@@ -20,6 +21,7 @@ export class PostgresNovelRepository {
       };
     }
 
+    // 著者検索
     if (author) {
       where.author = {
         is: {
@@ -31,18 +33,27 @@ export class PostgresNovelRepository {
       };
     }
 
-    if (category) {
+    // カテゴリリストの準備
+    const categoryList = Array.isArray(categories)
+      ? categories
+      : categories
+        ? [categories]
+        : [];
+
+    // カテゴリがある場合のみ、OR 条件で初期フィルタ
+    if (categoryList.length > 0) {
       where.categories = {
         some: {
           categoryName: {
-            contains: category,
+            in: categoryList,
             mode: 'insensitive',
           },
         },
       };
     }
 
-    const results = await this.prisma.novel.findMany({
+    // 一度すべて取得（カテゴリでORフィルタされたもの含む）
+    const rowResults = await this.prisma.novel.findMany({
       where,
       select: {
         sharedId: true,
@@ -63,13 +74,37 @@ export class PostgresNovelRepository {
       },
     });
 
-    return results.map((result) => ({
-      sharedId: result.sharedId,
-      title: result.title,
-      authorId: result.author.id,
-      username: result.author.username,
-      categories: result.categories.map((cat) => cat.categoryName),
-      createdAt: result.createdAt,
-    }));
+    // カテゴリがない場合、そのまま返す
+    if (categoryList.length === 0) {
+      return rowResults.map((result) => ({
+        sharedId: result.sharedId,
+        title: result.title,
+        authorId: result.author.id,
+        username: result.author.username,
+        categories: result.categories.map((cat) => cat.categoryName),
+        createdAt: result.createdAt,
+      }));
+    }
+
+    // AND 条件を満たすものだけに絞る
+    const filtered = rowResults
+      .filter((novel) => {
+        const lowerNames = novel.categories.map((c) =>
+          c.categoryName.toLowerCase(),
+        );
+        return categoryList.every((cat) =>
+          lowerNames.includes(cat.toLowerCase()),
+        );
+      })
+      .map((result) => ({
+        sharedId: result.sharedId,
+        title: result.title,
+        authorId: result.author.id,
+        username: result.author.username,
+        categories: result.categories.map((cat) => cat.categoryName),
+        createdAt: result.createdAt,
+      }));
+
+    return filtered;
   }
 }
