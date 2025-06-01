@@ -57,7 +57,7 @@ model Novel {
 
 model Category {
   categoryId   String  @id @default(uuid())
-  categoryName String
+  categoryName String  @unique
   novel        Novel[] @relation("NovelCategories")
 }
 
