@@ -7,7 +7,7 @@ export type CreateNovelResponse = {
 };
 
 export type Novel = {
-    sharedId: string;
-    authorId: string;
-    title: string;
+  sharedId: string;
+  authorId: string;
+  title: string;
 };

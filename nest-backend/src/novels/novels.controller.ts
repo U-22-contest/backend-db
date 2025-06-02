@@ -13,9 +13,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 import { SearchNovelsDto } from './dto/search-novels.dto';
 
-import {
-  CreateNovelsService,
-} from './services/create-novels.service';
+import { CreateNovelsService } from './services/create-novels.service';
 import {
   GetAllNovelsService,
   GetAllNovelsResponse,
@@ -29,7 +27,7 @@ import {
   GetPreviewByIdResponse,
 } from "./services/get-preview-by-id.service";
 import { DeleteNovelsService } from './services/delete-novels.service';
-import { SearchNovelsService } from './services/search-novels.service';
+import { SearchNovelsService } from './services/search-novels';
 import { CreateNovelResponse } from './types/novel.types';
 import { Query } from '@nestjs/common';
 import { Novel } from './types/novel.types';
@@ -45,13 +43,13 @@ export class NovelsController {
     private readonly searchNovelsService: SearchNovelsService,
   ) {}
 
-
   // 小説検索
   @Get('search')
-  async search(@Query() query: SearchNovelsDto): Promise<{ novels: Novel[] }> {
-    return this.searchNovelsService.searchNovel(query.title);
+  async searchNovels(
+    @Query() query: SearchNovelsDto,
+  ): Promise<{ novels: Novel[] }> {
+    return this.searchNovelsService.searchNovel(query);
   }
-
 
   //小説投稿
   @Post()
@@ -60,8 +58,10 @@ export class NovelsController {
     @Body() createNovelDto: CreateNovelDto,
     @Request() req: { user: JWTPayload },
   ): Promise<CreateNovelResponse> {
-    createNovelDto.authorId = req.user.userId;
-    return this.createNovelsService.createNovel(createNovelDto);
+    return this.createNovelsService.createNovel(
+      req.user.userId,
+      createNovelDto,
+    );
   }
 
   //全小説の取得
@@ -87,6 +87,4 @@ export class NovelsController {
   ): Promise<{ message: string }> {
     return this.deleteNovelsService.deleteNovel(novelid, req.user.userId);
   }
-
 }
-

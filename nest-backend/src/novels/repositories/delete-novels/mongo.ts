@@ -5,11 +5,11 @@ import { Novel, NovelDocument } from '../../../mongo/schema/novel.schema';
 
 @Injectable()
 export class MongoDeleteNovelRepository {
-    constructor(
-        @InjectModel(Novel.name) private readonly novelModel: Model<NovelDocument>,
-    ) {}
+  constructor(
+    @InjectModel(Novel.name) private readonly novelModel: Model<NovelDocument>,
+  ) {}
 
-    async deleteNovelBySharedId(sharedId: string): Promise<void> {
-        await this.novelModel.deleteOne({ sharedId });
-    }
+  async deleteNovelBySharedId(sharedId: string): Promise<void> {
+    await this.novelModel.deleteOne({ sharedId });
+  }
 }

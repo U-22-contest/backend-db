@@ -5,9 +5,11 @@ import { Novel, NovelDocument } from '../../../mongo/schema/novel.schema';
 
 @Injectable()
 export class MongoGetNovelByIdRepository {
-    constructor(@InjectModel(Novel.name) private readonly novelModel: Model<NovelDocument>) {}
+  constructor(
+    @InjectModel(Novel.name) private readonly novelModel: Model<NovelDocument>,
+  ) {}
 
-    async findBySharedId(sharedId: string) : Promise<NovelDocument | null> {
-        return this.novelModel.findOne({ sharedId }).lean();
-    }
+  async findBySharedId(sharedId: string): Promise<NovelDocument | null> {
+    return this.novelModel.findOne({ sharedId }).lean();
+  }
 }

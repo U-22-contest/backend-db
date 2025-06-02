@@ -5,13 +5,15 @@ import { Novel, NovelDocument } from '../../../mongo/schema/novel.schema';
 
 @Injectable()
 export class MongoCreateNovelRepository {
-    constructor(@InjectModel(Novel.name) private readonly novelModel: Model<NovelDocument>) {}
+  constructor(
+    @InjectModel(Novel.name) private readonly novelModel: Model<NovelDocument>,
+  ) {}
 
-    async createNovel(sharedId: string, content: string) : Promise<NovelDocument> {
-        const novel = new this.novelModel({
-            sharedId,
-            content,
-        });
-        return novel.save();
-    }
+  async createNovel(sharedId: string, content: string): Promise<NovelDocument> {
+    const novel = new this.novelModel({
+      sharedId,
+      content,
+    });
+    return novel.save();
+  }
 }
