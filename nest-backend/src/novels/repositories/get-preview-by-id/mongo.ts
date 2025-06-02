@@ -8,7 +8,6 @@ export class MongoGetPreviewByIdRepository {
     constructor(@InjectModel(Novel.name) private readonly novelModel: Model<NovelDocument>) {}
 
     async findBySharedId(sharedId: string) : Promise<NovelDocument | null> {
-        // return this.novelModel.findOne({ sharedId }).lean();
         const result = await this.novelModel
             .aggregate([
                 {
@@ -17,7 +16,7 @@ export class MongoGetPreviewByIdRepository {
                 {
                     $project: {
                         sharedId: 1,
-                        content: { $substr: ['$content', 0, 50] }, // 最初50文字を取得
+                        content: { $substr: ['$content', 0, 30] }, // 最初50文字を取得
                         _id: 0
                     }
                 }

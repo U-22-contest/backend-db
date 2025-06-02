@@ -28,7 +28,6 @@ import { PostgresGetNovelByIdRepository } from './repositories/get-novel-by-id/p
 import { MongoGetAllNovelRepository } from './repositories/get-all-novels/mongo';
 import { PostgresGetAllNovelRepository } from './repositories/get-all-novels/postgres';
 import { MongoGetPreviewByIdRepository } from './repositories/get-preview-by-id/mongo';
-import { PostgresGetPreviewByIdRepository } from './repositories/get-preview-by-id/postgres';
 // import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
 import { PostgresNovelRepository } from './repositories/search-novels/postgres';
 
@@ -62,7 +61,6 @@ import { PostgresNovelRepository } from './repositories/search-novels/postgres';
     MongoGetAllNovelRepository,
     PostgresGetAllNovelRepository,
     MongoGetPreviewByIdRepository,
-    PostgresGetPreviewByIdRepository,
     // MongoSearchNovelRepository,
     PostgresNovelRepository,
   ],

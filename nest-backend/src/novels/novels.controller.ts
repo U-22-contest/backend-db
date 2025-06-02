@@ -78,14 +78,6 @@ export class NovelsController {
     return this.getNovelsByIdService.getNovelById(novelid);
   }
 
-  //プレビュー
-  @Get('preview/:novelId')
-  async getPreview(
-      @Param('novelId') novelId: string,
-  ): Promise<GetPreviewByIdResponse> {
-    return this.getPreviewByIdService.getPreviewById(novelId);
-  }
-
   //小説の削除
   @Delete(':novelId')
   @UseGuards(AuthGuard('jwt'))

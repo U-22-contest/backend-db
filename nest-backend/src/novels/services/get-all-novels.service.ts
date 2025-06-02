@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Error } from 'mongoose';
 import { PostgresGetAllNovelRepository } from '../repositories/get-all-novels/postgres';
 import { MongoGetAllNovelRepository } from '../repositories/get-all-novels/mongo';
+import { GetPreviewByIdService } from './get-preview-by-id.service';
 
 export type GetAllNovelsResponse = {
   id: string;
@@ -18,6 +19,8 @@ export class GetAllNovelsService {
   constructor(
     private readonly postgresGetAllNovel: PostgresGetAllNovelRepository,
     private readonly mongoGetAllNovel: MongoGetAllNovelRepository,
+
+    private readonly getPreviewByIdService: GetPreviewByIdService,
   ) {}
 
   //全小説の取得
@@ -25,7 +28,17 @@ export class GetAllNovelsService {
     const psqlNovels = await this.postgresGetAllNovel.findAllNovel();
     if (!psqlNovels) throw new Error('小説が投稿されていません');
 
-    const mongoNovels = await this.mongoGetAllNovel.findAllNovel();
+    // ----------------------------------------
+    // 内容をすべて取得
+    // const mongoNovels = await this.mongoGetAllNovel.findAllNovel();
+    // ----------------------------------------
+    // sharedIdを使用してPreviewを取得
+    const mongoNovels = await Promise.all(
+        psqlNovels.map((novel) =>
+            this.getPreviewByIdService.getPreviewById(novel.sharedId)
+        )
+    );
+    // ----------------------------------------
 
     // MongoDBのデータをMapに変換（sharedIdをキーにする）
     const mongoMap = new Map(
