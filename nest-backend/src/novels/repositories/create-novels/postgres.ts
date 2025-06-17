@@ -9,6 +9,7 @@ export class PostgresCreateNovelRepository {
   async createNovel(
     sharedId: string,
     authorId: string,
+    coverImagePath: string | null,
     title: string,
     categories: string[], // Add categoryId as a parameter
   ): Promise<PrismaNovel> {
@@ -16,6 +17,7 @@ export class PostgresCreateNovelRepository {
       data: {
         sharedId,
         authorId,
+        coverImagePath,
         title,
         categories: {
           connect: categories.map((categoryId) => ({ categoryId })),

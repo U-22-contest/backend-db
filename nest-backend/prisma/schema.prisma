@@ -45,15 +45,16 @@ model Follow {
 }
 
 model Novel {
-  id         String      @id @default(uuid())
-  sharedId   String      @unique
+  id         String     @id @default(uuid())
+  sharedId   String     @unique
   title      String
   authorId   String
-  author     User        @relation("UserNovels", fields: [authorId], references: [id], onDelete: Cascade)
-  categories Category[]  @relation("NovelCategories")
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  comments   Comment[]   @relation("NovelComments")
+  coverImagePath String?
+  author     User       @relation("UserNovels", fields: [authorId], references: [id], onDelete: Cascade)
+  categories Category[] @relation("NovelCategories")
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  comments   Comment[]  @relation("NovelComments")
   likes      LikeNovel[] @relation("NovelLikes")
 }
 

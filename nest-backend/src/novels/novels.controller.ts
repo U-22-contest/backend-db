@@ -7,6 +7,8 @@ import {
   UseGuards,
   Param,
   Delete,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
@@ -31,6 +33,7 @@ import { SearchNovelsService } from './services/search-novels';
 import { CreateNovelResponse } from './types/novel.types';
 import { Query } from '@nestjs/common';
 import { Novel } from './types/novel.types';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('novels')
 export class NovelsController {
@@ -54,10 +57,15 @@ export class NovelsController {
   //小説投稿
   @Post()
   @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(FileInterceptor('file'))
   async create(
     @Body() createNovelDto: CreateNovelDto,
-    @Request() req: { user: JWTPayload },
+    @UploadedFile() file: Express.Multer.File,
+    @Request()
+    req: { user: JWTPayload },
   ): Promise<CreateNovelResponse> {
+    const imagePath = file ? `./../../img/cover/${file.filename}` : null;
+    createNovelDto.coverImagePath = imagePath;
     return this.createNovelsService.createNovel(
       req.user.userId,
       createNovelDto,
