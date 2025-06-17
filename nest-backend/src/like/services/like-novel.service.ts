@@ -3,7 +3,7 @@ import {
     ConflictException,
     NotFoundException,
 } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PostgresLikeNovelRepository } from "../repositories/like-novel/postgres";
 import { LikeNovelDto } from '../dto/like-novel.dto'
 
 export interface LikeNovelResponse {
@@ -15,47 +15,24 @@ export interface LikeNovelResponse {
 
 @Injectable()
 export class LikeNovelService {
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(
+        private readonly postgresLikeNovel: PostgresLikeNovelRepository,
+    ) {}
 
     // 小説全体にいいね
     async likeNovel({ userId, novelId }: LikeNovelDto) : Promise<LikeNovelResponse> {
-        try {
-            // 小説が存在するかチェック
-            const novel = await this.prisma.novel.findUnique({
-                where: { id: novelId },
-            });
-            if (!novel) throw new NotFoundException('Novel not found');
 
-            const existingLike = await this.prisma.likeNovel.findFirst({
-                where: {
-                    userId,
-                    novelId,
-                },
-            });
-            if (existingLike) throw new ConflictException('You have already liked this novel');
+        // 小説が存在するかチェック
+        const novel = await this.postgresLikeNovel.findNovelById(novelId);
+        if (!novel) throw new NotFoundException('Novel not found');
 
-            const like = await this.prisma.likeNovel.create({
-                data: {
-                    userId,
-                    novelId,
-                },
-                include: {
-                    user: {
-                        select: {
-                            id: true,
-                            username: true,
-                        },
-                    },
-                },
-            });
+        // すでにいいねしていないか
+        const existingLike = await this.postgresLikeNovel.findLikeNovelRelation(userId, novelId);
+        if (existingLike) throw new ConflictException('You have already liked this novel');
 
-            return like;
+        const like = await this.postgresLikeNovel.createLikeNovel(userId, novelId);
 
-        } catch (error) {
-            if (error.code === 'P2002') {
-                throw new ConflictException('You have already liked this novel');
-            }
-            throw error;
-        }
+        return like;
+
     }
 }
