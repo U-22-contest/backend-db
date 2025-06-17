@@ -29,6 +29,7 @@ import { PostgresGetAllNovelRepository } from './repositories/get-all-novels/pos
 import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
 import { PostgresNovelRepository } from './repositories/search-novels/postgres';
 import { CategoriesModule } from 'src/categories/categories.module';
+import { MulterModule } from '@nestjs/platform-express';
 // import { SearchAuthor } from './repositories';
 
 @Module({
@@ -40,6 +41,9 @@ import { CategoriesModule } from 'src/categories/categories.module';
       { name: Comment.name, schema: CommentSchema },
     ]),
     CategoriesModule,
+    MulterModule.register({
+      dest: './uploads/covers', // プロジェクトのルートディレクトリからの相対パス
+    }),
   ],
   providers: [
     // NovelsService,

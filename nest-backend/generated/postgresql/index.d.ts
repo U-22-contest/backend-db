@@ -271,8 +271,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.9.0
+   * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
    */
   export type PrismaVersion = {
     client: string
@@ -3596,6 +3596,7 @@ export namespace Prisma {
     sharedId: string | null
     title: string | null
     authorId: string | null
+    coverImagePath: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3605,6 +3606,7 @@ export namespace Prisma {
     sharedId: string | null
     title: string | null
     authorId: string | null
+    coverImagePath: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3614,6 +3616,7 @@ export namespace Prisma {
     sharedId: number
     title: number
     authorId: number
+    coverImagePath: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3625,6 +3628,7 @@ export namespace Prisma {
     sharedId?: true
     title?: true
     authorId?: true
+    coverImagePath?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3634,6 +3638,7 @@ export namespace Prisma {
     sharedId?: true
     title?: true
     authorId?: true
+    coverImagePath?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3643,6 +3648,7 @@ export namespace Prisma {
     sharedId?: true
     title?: true
     authorId?: true
+    coverImagePath?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3725,6 +3731,7 @@ export namespace Prisma {
     sharedId: string
     title: string
     authorId: string
+    coverImagePath: string | null
     createdAt: Date
     updatedAt: Date
     _count: NovelCountAggregateOutputType | null
@@ -3751,6 +3758,7 @@ export namespace Prisma {
     sharedId?: boolean
     title?: boolean
     authorId?: boolean
+    coverImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -3764,6 +3772,7 @@ export namespace Prisma {
     sharedId?: boolean
     title?: boolean
     authorId?: boolean
+    coverImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -3774,6 +3783,7 @@ export namespace Prisma {
     sharedId?: boolean
     title?: boolean
     authorId?: boolean
+    coverImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     author?: boolean | UserDefaultArgs<ExtArgs>
@@ -3784,11 +3794,12 @@ export namespace Prisma {
     sharedId?: boolean
     title?: boolean
     authorId?: boolean
+    coverImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type NovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sharedId" | "title" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["novel"]>
+  export type NovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sharedId" | "title" | "authorId" | "coverImagePath" | "createdAt" | "updatedAt", ExtArgs["result"]["novel"]>
   export type NovelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     categories?: boolean | Novel$categoriesArgs<ExtArgs>
@@ -3814,6 +3825,7 @@ export namespace Prisma {
       sharedId: string
       title: string
       authorId: string
+      coverImagePath: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["novel"]>
@@ -4246,6 +4258,7 @@ export namespace Prisma {
     readonly sharedId: FieldRef<"Novel", 'String'>
     readonly title: FieldRef<"Novel", 'String'>
     readonly authorId: FieldRef<"Novel", 'String'>
+    readonly coverImagePath: FieldRef<"Novel", 'String'>
     readonly createdAt: FieldRef<"Novel", 'DateTime'>
     readonly updatedAt: FieldRef<"Novel", 'DateTime'>
   }
@@ -6925,6 +6938,7 @@ export namespace Prisma {
     sharedId: 'sharedId',
     title: 'title',
     authorId: 'authorId',
+    coverImagePath: 'coverImagePath',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -6968,6 +6982,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -7165,6 +7187,7 @@ export namespace Prisma {
     sharedId?: StringFilter<"Novel"> | string
     title?: StringFilter<"Novel"> | string
     authorId?: StringFilter<"Novel"> | string
+    coverImagePath?: StringNullableFilter<"Novel"> | string | null
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -7177,6 +7200,7 @@ export namespace Prisma {
     sharedId?: SortOrder
     title?: SortOrder
     authorId?: SortOrder
+    coverImagePath?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     author?: UserOrderByWithRelationInput
@@ -7192,6 +7216,7 @@ export namespace Prisma {
     NOT?: NovelWhereInput | NovelWhereInput[]
     title?: StringFilter<"Novel"> | string
     authorId?: StringFilter<"Novel"> | string
+    coverImagePath?: StringNullableFilter<"Novel"> | string | null
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -7204,6 +7229,7 @@ export namespace Prisma {
     sharedId?: SortOrder
     title?: SortOrder
     authorId?: SortOrder
+    coverImagePath?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: NovelCountOrderByAggregateInput
@@ -7219,6 +7245,7 @@ export namespace Prisma {
     sharedId?: StringWithAggregatesFilter<"Novel"> | string
     title?: StringWithAggregatesFilter<"Novel"> | string
     authorId?: StringWithAggregatesFilter<"Novel"> | string
+    coverImagePath?: StringNullableWithAggregatesFilter<"Novel"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
   }
@@ -7468,6 +7495,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
+    coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutNovelsInput
@@ -7480,6 +7508,7 @@ export namespace Prisma {
     sharedId: string
     title: string
     authorId: string
+    coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
@@ -7490,6 +7519,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutNovelsNestedInput
@@ -7502,6 +7532,7 @@ export namespace Prisma {
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
@@ -7513,6 +7544,7 @@ export namespace Prisma {
     sharedId: string
     title: string
     authorId: string
+    coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7521,6 +7553,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7530,6 +7563,7 @@ export namespace Prisma {
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7794,10 +7828,30 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type CategoryListRelationFilter = {
     every?: CategoryWhereInput
     some?: CategoryWhereInput
     none?: CategoryWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type CategoryOrderByRelationAggregateInput = {
@@ -7809,6 +7863,7 @@ export namespace Prisma {
     sharedId?: SortOrder
     title?: SortOrder
     authorId?: SortOrder
+    coverImagePath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7818,6 +7873,7 @@ export namespace Prisma {
     sharedId?: SortOrder
     title?: SortOrder
     authorId?: SortOrder
+    coverImagePath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7827,8 +7883,27 @@ export namespace Prisma {
     sharedId?: SortOrder
     title?: SortOrder
     authorId?: SortOrder
+    coverImagePath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type CategoryCountOrderByAggregateInput = {
@@ -8157,6 +8232,10 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type UserUpdateOneRequiredWithoutNovelsNestedInput = {
     create?: XOR<UserCreateWithoutNovelsInput, UserUncheckedCreateWithoutNovelsInput>
     connectOrCreate?: UserCreateOrConnectWithoutNovelsInput
@@ -8360,6 +8439,48 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8391,6 +8512,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
+    coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     categories?: CategoryCreateNestedManyWithoutNovelInput
@@ -8401,6 +8523,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
+    coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
@@ -8515,6 +8638,7 @@ export namespace Prisma {
     sharedId?: StringFilter<"Novel"> | string
     title?: StringFilter<"Novel"> | string
     authorId?: StringFilter<"Novel"> | string
+    coverImagePath?: StringNullableFilter<"Novel"> | string | null
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
   }
@@ -8872,6 +8996,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
+    coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutNovelsInput
@@ -8883,6 +9008,7 @@ export namespace Prisma {
     sharedId: string
     title: string
     authorId: string
+    coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
@@ -8942,6 +9068,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
+    coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutNovelsInput
@@ -8953,6 +9080,7 @@ export namespace Prisma {
     sharedId: string
     title: string
     authorId: string
+    coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
@@ -9013,6 +9141,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutNovelsNestedInput
@@ -9024,6 +9153,7 @@ export namespace Prisma {
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
@@ -9033,6 +9163,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
+    coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9063,6 +9194,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUpdateManyWithoutNovelNestedInput
@@ -9073,6 +9205,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
@@ -9083,6 +9216,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9212,6 +9346,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutNovelsNestedInput
@@ -9223,6 +9358,7 @@ export namespace Prisma {
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
@@ -9233,6 +9369,7 @@ export namespace Prisma {
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

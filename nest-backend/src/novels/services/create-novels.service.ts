@@ -21,8 +21,12 @@ export class CreateNovelsService {
   ): Promise<CreateNovelResponse> {
     const sharedId = uuidv4();
 
+    const categoryName = Array.isArray(createNovelDto.categoryNames)
+      ? createNovelDto.categoryNames
+      : [createNovelDto.categoryNames].filter(Boolean);
+
     const categoryIds: string[] = await Promise.all(
-      (createNovelDto.categoryNames ?? []).map(async (name) => {
+      categoryName.map(async (name) => {
         const category = await this.createCategoryService.execute({
           categoryName: name,
         });
@@ -34,6 +38,7 @@ export class CreateNovelsService {
     const postgresNovel = await this.postgresCreateNovel.createNovel(
       sharedId,
       authorId,
+      createNovelDto.coverImagePath ?? null,
       createNovelDto.title,
       categoryIds,
     );
