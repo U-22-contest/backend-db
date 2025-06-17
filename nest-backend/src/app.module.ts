@@ -10,6 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { CategoriesModule } from './categories/categories.module';
+import { LikeModule } from './like/like.module';
 
 const mongoUrl = process.env.MONGO_URL;
 if (!mongoUrl) throw new Error('MONGO_URL environment variable is not defined');
@@ -24,6 +25,7 @@ if (!mongoUrl) throw new Error('MONGO_URL environment variable is not defined');
     NovelsModule,
     CommentsModule,
     CategoriesModule,
+    LikeModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

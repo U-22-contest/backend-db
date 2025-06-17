@@ -158,6 +158,13 @@ exports.Prisma.CommentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.LikeNovelScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  novelId: 'novelId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -174,7 +181,8 @@ exports.Prisma.ModelName = {
   Follow: 'Follow',
   Novel: 'Novel',
   Category: 'Category',
-  Comment: 'Comment'
+  Comment: 'Comment',
+  LikeNovel: 'LikeNovel'
 };
 
 /**

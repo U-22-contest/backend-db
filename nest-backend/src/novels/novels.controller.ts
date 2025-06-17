@@ -8,9 +8,9 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CreateNovelDto } from './dto/create-novel.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
+import { CreateNovelDto } from './dto/create-novel.dto';
 import { SearchNovelsDto } from './dto/search-novels.dto';
 
 import { CreateNovelsService } from './services/create-novels.service';
