@@ -10,9 +10,9 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
-import { CreateNovelDto } from './dto/create-novel.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
+import { CreateNovelDto } from './dto/create-novel.dto';
 import { SearchNovelsDto } from './dto/search-novels.dto';
 
 import { CreateNovelsService } from './services/create-novels.service';
@@ -24,6 +24,10 @@ import {
   GetNovelsByIdService,
   GetNovelByIdResponse,
 } from './services/get-novel-by-id.service';
+import {
+  GetPreviewByIdService,
+  GetPreviewByIdResponse,
+} from "./services/get-preview-by-id.service";
 import { DeleteNovelsService } from './services/delete-novels.service';
 import { SearchNovelsService } from './services/search-novels';
 import { CreateNovelResponse } from './types/novel.types';
@@ -37,6 +41,7 @@ export class NovelsController {
     private readonly createNovelsService: CreateNovelsService,
     private readonly getAllNovelsService: GetAllNovelsService,
     private readonly getNovelsByIdService: GetNovelsByIdService,
+    private readonly getPreviewByIdService: GetPreviewByIdService,
     private readonly deleteNovelsService: DeleteNovelsService,
     private readonly searchNovelsService: SearchNovelsService,
   ) {}

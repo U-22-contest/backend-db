@@ -38,6 +38,11 @@ export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
  * 
  */
 export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
+/**
+ * Model LikeNovel
+ * 
+ */
+export type LikeNovel = $Result.DefaultSelection<Prisma.$LikeNovelPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -213,6 +218,16 @@ export class PrismaClient<
     * ```
     */
   get comment(): Prisma.CommentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.likeNovel`: Exposes CRUD operations for the **LikeNovel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LikeNovels
+    * const likeNovels = await prisma.likeNovel.findMany()
+    * ```
+    */
+  get likeNovel(): Prisma.LikeNovelDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -271,8 +286,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.9.0
-   * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
+   * Prisma Client JS version: 6.5.0
+   * Query Engine version: 173f8d54f8d52e692c7e27e72a88314ec7aeff60
    */
   export type PrismaVersion = {
     client: string
@@ -657,7 +672,8 @@ export namespace Prisma {
     Follow: 'Follow',
     Novel: 'Novel',
     Category: 'Category',
-    Comment: 'Comment'
+    Comment: 'Comment',
+    LikeNovel: 'LikeNovel'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -676,7 +692,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "follow" | "novel" | "category" | "comment"
+      modelProps: "user" | "follow" | "novel" | "category" | "comment" | "likeNovel"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1050,6 +1066,80 @@ export namespace Prisma {
           }
         }
       }
+      LikeNovel: {
+        payload: Prisma.$LikeNovelPayload<ExtArgs>
+        fields: Prisma.LikeNovelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LikeNovelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LikeNovelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload>
+          }
+          findFirst: {
+            args: Prisma.LikeNovelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LikeNovelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload>
+          }
+          findMany: {
+            args: Prisma.LikeNovelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload>[]
+          }
+          create: {
+            args: Prisma.LikeNovelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload>
+          }
+          createMany: {
+            args: Prisma.LikeNovelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LikeNovelCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload>[]
+          }
+          delete: {
+            args: Prisma.LikeNovelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload>
+          }
+          update: {
+            args: Prisma.LikeNovelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload>
+          }
+          deleteMany: {
+            args: Prisma.LikeNovelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LikeNovelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LikeNovelUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload>[]
+          }
+          upsert: {
+            args: Prisma.LikeNovelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LikeNovelPayload>
+          }
+          aggregate: {
+            args: Prisma.LikeNovelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLikeNovel>
+          }
+          groupBy: {
+            args: Prisma.LikeNovelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LikeNovelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LikeNovelCountArgs<ExtArgs>
+            result: $Utils.Optional<LikeNovelCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1139,6 +1229,7 @@ export namespace Prisma {
     novel?: NovelOmit
     category?: CategoryOmit
     comment?: CommentOmit
+    likeNovel?: LikeNovelOmit
   }
 
   /* Types for Logging */
@@ -1235,6 +1326,7 @@ export namespace Prisma {
   export type UserCountOutputType = {
     novels: number
     comments: number
+    likeNovels: number
     followers: number
     followees: number
   }
@@ -1242,6 +1334,7 @@ export namespace Prisma {
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     novels?: boolean | UserCountOutputTypeCountNovelsArgs
     comments?: boolean | UserCountOutputTypeCountCommentsArgs
+    likeNovels?: boolean | UserCountOutputTypeCountLikeNovelsArgs
     followers?: boolean | UserCountOutputTypeCountFollowersArgs
     followees?: boolean | UserCountOutputTypeCountFolloweesArgs
   }
@@ -1274,6 +1367,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountLikeNovelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LikeNovelWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountFollowersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FollowWhereInput
   }
@@ -1293,11 +1393,13 @@ export namespace Prisma {
   export type NovelCountOutputType = {
     categories: number
     comments: number
+    likes: number
   }
 
   export type NovelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categories?: boolean | NovelCountOutputTypeCountCategoriesArgs
     comments?: boolean | NovelCountOutputTypeCountCommentsArgs
+    likes?: boolean | NovelCountOutputTypeCountLikesArgs
   }
 
   // Custom InputTypes
@@ -1323,6 +1425,13 @@ export namespace Prisma {
    */
   export type NovelCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommentWhereInput
+  }
+
+  /**
+   * NovelCountOutputType without action
+   */
+  export type NovelCountOutputTypeCountLikesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LikeNovelWhereInput
   }
 
 
@@ -1535,6 +1644,7 @@ export namespace Prisma {
     updatedAt?: boolean
     novels?: boolean | User$novelsArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
+    likeNovels?: boolean | User$likeNovelsArgs<ExtArgs>
     followers?: boolean | User$followersArgs<ExtArgs>
     followees?: boolean | User$followeesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1571,6 +1681,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     novels?: boolean | User$novelsArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
+    likeNovels?: boolean | User$likeNovelsArgs<ExtArgs>
     followers?: boolean | User$followersArgs<ExtArgs>
     followees?: boolean | User$followeesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1583,6 +1694,7 @@ export namespace Prisma {
     objects: {
       novels: Prisma.$NovelPayload<ExtArgs>[]
       comments: Prisma.$CommentPayload<ExtArgs>[]
+      likeNovels: Prisma.$LikeNovelPayload<ExtArgs>[]
       followers: Prisma.$FollowPayload<ExtArgs>[]
       followees: Prisma.$FollowPayload<ExtArgs>[]
     }
@@ -1989,6 +2101,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     novels<T extends User$novelsArgs<ExtArgs> = {}>(args?: Subset<T, User$novelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    likeNovels<T extends User$likeNovelsArgs<ExtArgs> = {}>(args?: Subset<T, User$likeNovelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     followers<T extends User$followersArgs<ExtArgs> = {}>(args?: Subset<T, User$followersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     followees<T extends User$followeesArgs<ExtArgs> = {}>(args?: Subset<T, User$followeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -2018,7 +2131,7 @@ export namespace Prisma {
 
   /**
    * Fields of the User model
-   */
+   */ 
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
     readonly username: FieldRef<"User", 'String'>
@@ -2459,6 +2572,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * User.likeNovels
+   */
+  export type User$likeNovelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    where?: LikeNovelWhereInput
+    orderBy?: LikeNovelOrderByWithRelationInput | LikeNovelOrderByWithRelationInput[]
+    cursor?: LikeNovelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LikeNovelScalarFieldEnum | LikeNovelScalarFieldEnum[]
   }
 
   /**
@@ -3161,7 +3298,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Follow model
-   */
+   */ 
   interface FollowFieldRefs {
     readonly id: FieldRef<"Follow", 'String'>
     readonly followerId: FieldRef<"Follow", 'String'>
@@ -3764,6 +3901,7 @@ export namespace Prisma {
     author?: boolean | UserDefaultArgs<ExtArgs>
     categories?: boolean | Novel$categoriesArgs<ExtArgs>
     comments?: boolean | Novel$commentsArgs<ExtArgs>
+    likes?: boolean | Novel$likesArgs<ExtArgs>
     _count?: boolean | NovelCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["novel"]>
 
@@ -3804,6 +3942,7 @@ export namespace Prisma {
     author?: boolean | UserDefaultArgs<ExtArgs>
     categories?: boolean | Novel$categoriesArgs<ExtArgs>
     comments?: boolean | Novel$commentsArgs<ExtArgs>
+    likes?: boolean | Novel$likesArgs<ExtArgs>
     _count?: boolean | NovelCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type NovelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3819,6 +3958,7 @@ export namespace Prisma {
       author: Prisma.$UserPayload<ExtArgs>
       categories: Prisma.$CategoryPayload<ExtArgs>[]
       comments: Prisma.$CommentPayload<ExtArgs>[]
+      likes: Prisma.$LikeNovelPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4225,6 +4365,7 @@ export namespace Prisma {
     author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     categories<T extends Novel$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Novel$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends Novel$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Novel$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    likes<T extends Novel$likesArgs<ExtArgs> = {}>(args?: Subset<T, Novel$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4252,7 +4393,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Novel model
-   */
+   */ 
   interface NovelFieldRefs {
     readonly id: FieldRef<"Novel", 'String'>
     readonly sharedId: FieldRef<"Novel", 'String'>
@@ -4702,6 +4843,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * Novel.likes
+   */
+  export type Novel$likesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    where?: LikeNovelWhereInput
+    orderBy?: LikeNovelOrderByWithRelationInput | LikeNovelOrderByWithRelationInput[]
+    cursor?: LikeNovelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LikeNovelScalarFieldEnum | LikeNovelScalarFieldEnum[]
   }
 
   /**
@@ -5320,7 +5485,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Category model
-   */
+   */ 
   interface CategoryFieldRefs {
     readonly categoryId: FieldRef<"Category", 'String'>
     readonly categoryName: FieldRef<"Category", 'String'>
@@ -6473,7 +6638,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Comment model
-   */
+   */ 
   interface CommentFieldRefs {
     readonly id: FieldRef<"Comment", 'String'>
     readonly sharedId: FieldRef<"Comment", 'String'>
@@ -6898,6 +7063,1059 @@ export namespace Prisma {
 
 
   /**
+   * Model LikeNovel
+   */
+
+  export type AggregateLikeNovel = {
+    _count: LikeNovelCountAggregateOutputType | null
+    _min: LikeNovelMinAggregateOutputType | null
+    _max: LikeNovelMaxAggregateOutputType | null
+  }
+
+  export type LikeNovelMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    novelId: string | null
+    createdAt: Date | null
+  }
+
+  export type LikeNovelMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    novelId: string | null
+    createdAt: Date | null
+  }
+
+  export type LikeNovelCountAggregateOutputType = {
+    id: number
+    userId: number
+    novelId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type LikeNovelMinAggregateInputType = {
+    id?: true
+    userId?: true
+    novelId?: true
+    createdAt?: true
+  }
+
+  export type LikeNovelMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    novelId?: true
+    createdAt?: true
+  }
+
+  export type LikeNovelCountAggregateInputType = {
+    id?: true
+    userId?: true
+    novelId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type LikeNovelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LikeNovel to aggregate.
+     */
+    where?: LikeNovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LikeNovels to fetch.
+     */
+    orderBy?: LikeNovelOrderByWithRelationInput | LikeNovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LikeNovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LikeNovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LikeNovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LikeNovels
+    **/
+    _count?: true | LikeNovelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LikeNovelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LikeNovelMaxAggregateInputType
+  }
+
+  export type GetLikeNovelAggregateType<T extends LikeNovelAggregateArgs> = {
+        [P in keyof T & keyof AggregateLikeNovel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLikeNovel[P]>
+      : GetScalarType<T[P], AggregateLikeNovel[P]>
+  }
+
+
+
+
+  export type LikeNovelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LikeNovelWhereInput
+    orderBy?: LikeNovelOrderByWithAggregationInput | LikeNovelOrderByWithAggregationInput[]
+    by: LikeNovelScalarFieldEnum[] | LikeNovelScalarFieldEnum
+    having?: LikeNovelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LikeNovelCountAggregateInputType | true
+    _min?: LikeNovelMinAggregateInputType
+    _max?: LikeNovelMaxAggregateInputType
+  }
+
+  export type LikeNovelGroupByOutputType = {
+    id: string
+    userId: string
+    novelId: string
+    createdAt: Date
+    _count: LikeNovelCountAggregateOutputType | null
+    _min: LikeNovelMinAggregateOutputType | null
+    _max: LikeNovelMaxAggregateOutputType | null
+  }
+
+  type GetLikeNovelGroupByPayload<T extends LikeNovelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LikeNovelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LikeNovelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LikeNovelGroupByOutputType[P]>
+            : GetScalarType<T[P], LikeNovelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LikeNovelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    novelId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["likeNovel"]>
+
+  export type LikeNovelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    novelId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["likeNovel"]>
+
+  export type LikeNovelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    novelId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["likeNovel"]>
+
+  export type LikeNovelSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    novelId?: boolean
+    createdAt?: boolean
+  }
+
+  export type LikeNovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "novelId" | "createdAt", ExtArgs["result"]["likeNovel"]>
+  export type LikeNovelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }
+  export type LikeNovelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }
+  export type LikeNovelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }
+
+  export type $LikeNovelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LikeNovel"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      novel: Prisma.$NovelPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      novelId: string
+      createdAt: Date
+    }, ExtArgs["result"]["likeNovel"]>
+    composites: {}
+  }
+
+  type LikeNovelGetPayload<S extends boolean | null | undefined | LikeNovelDefaultArgs> = $Result.GetResult<Prisma.$LikeNovelPayload, S>
+
+  type LikeNovelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LikeNovelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LikeNovelCountAggregateInputType | true
+    }
+
+  export interface LikeNovelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LikeNovel'], meta: { name: 'LikeNovel' } }
+    /**
+     * Find zero or one LikeNovel that matches the filter.
+     * @param {LikeNovelFindUniqueArgs} args - Arguments to find a LikeNovel
+     * @example
+     * // Get one LikeNovel
+     * const likeNovel = await prisma.likeNovel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LikeNovelFindUniqueArgs>(args: SelectSubset<T, LikeNovelFindUniqueArgs<ExtArgs>>): Prisma__LikeNovelClient<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LikeNovel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LikeNovelFindUniqueOrThrowArgs} args - Arguments to find a LikeNovel
+     * @example
+     * // Get one LikeNovel
+     * const likeNovel = await prisma.likeNovel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LikeNovelFindUniqueOrThrowArgs>(args: SelectSubset<T, LikeNovelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LikeNovelClient<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LikeNovel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LikeNovelFindFirstArgs} args - Arguments to find a LikeNovel
+     * @example
+     * // Get one LikeNovel
+     * const likeNovel = await prisma.likeNovel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LikeNovelFindFirstArgs>(args?: SelectSubset<T, LikeNovelFindFirstArgs<ExtArgs>>): Prisma__LikeNovelClient<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LikeNovel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LikeNovelFindFirstOrThrowArgs} args - Arguments to find a LikeNovel
+     * @example
+     * // Get one LikeNovel
+     * const likeNovel = await prisma.likeNovel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LikeNovelFindFirstOrThrowArgs>(args?: SelectSubset<T, LikeNovelFindFirstOrThrowArgs<ExtArgs>>): Prisma__LikeNovelClient<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LikeNovels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LikeNovelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LikeNovels
+     * const likeNovels = await prisma.likeNovel.findMany()
+     * 
+     * // Get first 10 LikeNovels
+     * const likeNovels = await prisma.likeNovel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const likeNovelWithIdOnly = await prisma.likeNovel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LikeNovelFindManyArgs>(args?: SelectSubset<T, LikeNovelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LikeNovel.
+     * @param {LikeNovelCreateArgs} args - Arguments to create a LikeNovel.
+     * @example
+     * // Create one LikeNovel
+     * const LikeNovel = await prisma.likeNovel.create({
+     *   data: {
+     *     // ... data to create a LikeNovel
+     *   }
+     * })
+     * 
+     */
+    create<T extends LikeNovelCreateArgs>(args: SelectSubset<T, LikeNovelCreateArgs<ExtArgs>>): Prisma__LikeNovelClient<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LikeNovels.
+     * @param {LikeNovelCreateManyArgs} args - Arguments to create many LikeNovels.
+     * @example
+     * // Create many LikeNovels
+     * const likeNovel = await prisma.likeNovel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LikeNovelCreateManyArgs>(args?: SelectSubset<T, LikeNovelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LikeNovels and returns the data saved in the database.
+     * @param {LikeNovelCreateManyAndReturnArgs} args - Arguments to create many LikeNovels.
+     * @example
+     * // Create many LikeNovels
+     * const likeNovel = await prisma.likeNovel.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LikeNovels and only return the `id`
+     * const likeNovelWithIdOnly = await prisma.likeNovel.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LikeNovelCreateManyAndReturnArgs>(args?: SelectSubset<T, LikeNovelCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LikeNovel.
+     * @param {LikeNovelDeleteArgs} args - Arguments to delete one LikeNovel.
+     * @example
+     * // Delete one LikeNovel
+     * const LikeNovel = await prisma.likeNovel.delete({
+     *   where: {
+     *     // ... filter to delete one LikeNovel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LikeNovelDeleteArgs>(args: SelectSubset<T, LikeNovelDeleteArgs<ExtArgs>>): Prisma__LikeNovelClient<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LikeNovel.
+     * @param {LikeNovelUpdateArgs} args - Arguments to update one LikeNovel.
+     * @example
+     * // Update one LikeNovel
+     * const likeNovel = await prisma.likeNovel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LikeNovelUpdateArgs>(args: SelectSubset<T, LikeNovelUpdateArgs<ExtArgs>>): Prisma__LikeNovelClient<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LikeNovels.
+     * @param {LikeNovelDeleteManyArgs} args - Arguments to filter LikeNovels to delete.
+     * @example
+     * // Delete a few LikeNovels
+     * const { count } = await prisma.likeNovel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LikeNovelDeleteManyArgs>(args?: SelectSubset<T, LikeNovelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LikeNovels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LikeNovelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LikeNovels
+     * const likeNovel = await prisma.likeNovel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LikeNovelUpdateManyArgs>(args: SelectSubset<T, LikeNovelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LikeNovels and returns the data updated in the database.
+     * @param {LikeNovelUpdateManyAndReturnArgs} args - Arguments to update many LikeNovels.
+     * @example
+     * // Update many LikeNovels
+     * const likeNovel = await prisma.likeNovel.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LikeNovels and only return the `id`
+     * const likeNovelWithIdOnly = await prisma.likeNovel.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LikeNovelUpdateManyAndReturnArgs>(args: SelectSubset<T, LikeNovelUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LikeNovel.
+     * @param {LikeNovelUpsertArgs} args - Arguments to update or create a LikeNovel.
+     * @example
+     * // Update or create a LikeNovel
+     * const likeNovel = await prisma.likeNovel.upsert({
+     *   create: {
+     *     // ... data to create a LikeNovel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LikeNovel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LikeNovelUpsertArgs>(args: SelectSubset<T, LikeNovelUpsertArgs<ExtArgs>>): Prisma__LikeNovelClient<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LikeNovels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LikeNovelCountArgs} args - Arguments to filter LikeNovels to count.
+     * @example
+     * // Count the number of LikeNovels
+     * const count = await prisma.likeNovel.count({
+     *   where: {
+     *     // ... the filter for the LikeNovels we want to count
+     *   }
+     * })
+    **/
+    count<T extends LikeNovelCountArgs>(
+      args?: Subset<T, LikeNovelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LikeNovelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LikeNovel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LikeNovelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LikeNovelAggregateArgs>(args: Subset<T, LikeNovelAggregateArgs>): Prisma.PrismaPromise<GetLikeNovelAggregateType<T>>
+
+    /**
+     * Group by LikeNovel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LikeNovelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LikeNovelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LikeNovelGroupByArgs['orderBy'] }
+        : { orderBy?: LikeNovelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LikeNovelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLikeNovelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LikeNovel model
+   */
+  readonly fields: LikeNovelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LikeNovel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LikeNovelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    novel<T extends NovelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NovelDefaultArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LikeNovel model
+   */ 
+  interface LikeNovelFieldRefs {
+    readonly id: FieldRef<"LikeNovel", 'String'>
+    readonly userId: FieldRef<"LikeNovel", 'String'>
+    readonly novelId: FieldRef<"LikeNovel", 'String'>
+    readonly createdAt: FieldRef<"LikeNovel", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LikeNovel findUnique
+   */
+  export type LikeNovelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    /**
+     * Filter, which LikeNovel to fetch.
+     */
+    where: LikeNovelWhereUniqueInput
+  }
+
+  /**
+   * LikeNovel findUniqueOrThrow
+   */
+  export type LikeNovelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    /**
+     * Filter, which LikeNovel to fetch.
+     */
+    where: LikeNovelWhereUniqueInput
+  }
+
+  /**
+   * LikeNovel findFirst
+   */
+  export type LikeNovelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    /**
+     * Filter, which LikeNovel to fetch.
+     */
+    where?: LikeNovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LikeNovels to fetch.
+     */
+    orderBy?: LikeNovelOrderByWithRelationInput | LikeNovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LikeNovels.
+     */
+    cursor?: LikeNovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LikeNovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LikeNovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LikeNovels.
+     */
+    distinct?: LikeNovelScalarFieldEnum | LikeNovelScalarFieldEnum[]
+  }
+
+  /**
+   * LikeNovel findFirstOrThrow
+   */
+  export type LikeNovelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    /**
+     * Filter, which LikeNovel to fetch.
+     */
+    where?: LikeNovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LikeNovels to fetch.
+     */
+    orderBy?: LikeNovelOrderByWithRelationInput | LikeNovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LikeNovels.
+     */
+    cursor?: LikeNovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LikeNovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LikeNovels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LikeNovels.
+     */
+    distinct?: LikeNovelScalarFieldEnum | LikeNovelScalarFieldEnum[]
+  }
+
+  /**
+   * LikeNovel findMany
+   */
+  export type LikeNovelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    /**
+     * Filter, which LikeNovels to fetch.
+     */
+    where?: LikeNovelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LikeNovels to fetch.
+     */
+    orderBy?: LikeNovelOrderByWithRelationInput | LikeNovelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LikeNovels.
+     */
+    cursor?: LikeNovelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LikeNovels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LikeNovels.
+     */
+    skip?: number
+    distinct?: LikeNovelScalarFieldEnum | LikeNovelScalarFieldEnum[]
+  }
+
+  /**
+   * LikeNovel create
+   */
+  export type LikeNovelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LikeNovel.
+     */
+    data: XOR<LikeNovelCreateInput, LikeNovelUncheckedCreateInput>
+  }
+
+  /**
+   * LikeNovel createMany
+   */
+  export type LikeNovelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LikeNovels.
+     */
+    data: LikeNovelCreateManyInput | LikeNovelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LikeNovel createManyAndReturn
+   */
+  export type LikeNovelCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * The data used to create many LikeNovels.
+     */
+    data: LikeNovelCreateManyInput | LikeNovelCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LikeNovel update
+   */
+  export type LikeNovelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LikeNovel.
+     */
+    data: XOR<LikeNovelUpdateInput, LikeNovelUncheckedUpdateInput>
+    /**
+     * Choose, which LikeNovel to update.
+     */
+    where: LikeNovelWhereUniqueInput
+  }
+
+  /**
+   * LikeNovel updateMany
+   */
+  export type LikeNovelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LikeNovels.
+     */
+    data: XOR<LikeNovelUpdateManyMutationInput, LikeNovelUncheckedUpdateManyInput>
+    /**
+     * Filter which LikeNovels to update
+     */
+    where?: LikeNovelWhereInput
+    /**
+     * Limit how many LikeNovels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LikeNovel updateManyAndReturn
+   */
+  export type LikeNovelUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * The data used to update LikeNovels.
+     */
+    data: XOR<LikeNovelUpdateManyMutationInput, LikeNovelUncheckedUpdateManyInput>
+    /**
+     * Filter which LikeNovels to update
+     */
+    where?: LikeNovelWhereInput
+    /**
+     * Limit how many LikeNovels to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LikeNovel upsert
+   */
+  export type LikeNovelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LikeNovel to update in case it exists.
+     */
+    where: LikeNovelWhereUniqueInput
+    /**
+     * In case the LikeNovel found by the `where` argument doesn't exist, create a new LikeNovel with this data.
+     */
+    create: XOR<LikeNovelCreateInput, LikeNovelUncheckedCreateInput>
+    /**
+     * In case the LikeNovel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LikeNovelUpdateInput, LikeNovelUncheckedUpdateInput>
+  }
+
+  /**
+   * LikeNovel delete
+   */
+  export type LikeNovelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+    /**
+     * Filter which LikeNovel to delete.
+     */
+    where: LikeNovelWhereUniqueInput
+  }
+
+  /**
+   * LikeNovel deleteMany
+   */
+  export type LikeNovelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LikeNovels to delete
+     */
+    where?: LikeNovelWhereInput
+    /**
+     * Limit how many LikeNovels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LikeNovel without action
+   */
+  export type LikeNovelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LikeNovel
+     */
+    select?: LikeNovelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LikeNovel
+     */
+    omit?: LikeNovelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LikeNovelInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6968,6 +8186,16 @@ export namespace Prisma {
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
+  export const LikeNovelScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    novelId: 'novelId',
+    createdAt: 'createdAt'
+  };
+
+  export type LikeNovelScalarFieldEnum = (typeof LikeNovelScalarFieldEnum)[keyof typeof LikeNovelScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -6993,7 +8221,7 @@ export namespace Prisma {
 
 
   /**
-   * Field references
+   * Field references 
    */
 
 
@@ -7068,6 +8296,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     novels?: NovelListRelationFilter
     comments?: CommentListRelationFilter
+    likeNovels?: LikeNovelListRelationFilter
     followers?: FollowListRelationFilter
     followees?: FollowListRelationFilter
   }
@@ -7081,6 +8310,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     novels?: NovelOrderByRelationAggregateInput
     comments?: CommentOrderByRelationAggregateInput
+    likeNovels?: LikeNovelOrderByRelationAggregateInput
     followers?: FollowOrderByRelationAggregateInput
     followees?: FollowOrderByRelationAggregateInput
   }
@@ -7097,6 +8327,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     novels?: NovelListRelationFilter
     comments?: CommentListRelationFilter
+    likeNovels?: LikeNovelListRelationFilter
     followers?: FollowListRelationFilter
     followees?: FollowListRelationFilter
   }, "id" | "username" | "email">
@@ -7193,6 +8424,7 @@ export namespace Prisma {
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     categories?: CategoryListRelationFilter
     comments?: CommentListRelationFilter
+    likes?: LikeNovelListRelationFilter
   }
 
   export type NovelOrderByWithRelationInput = {
@@ -7206,6 +8438,7 @@ export namespace Prisma {
     author?: UserOrderByWithRelationInput
     categories?: CategoryOrderByRelationAggregateInput
     comments?: CommentOrderByRelationAggregateInput
+    likes?: LikeNovelOrderByRelationAggregateInput
   }
 
   export type NovelWhereUniqueInput = Prisma.AtLeast<{
@@ -7222,6 +8455,7 @@ export namespace Prisma {
     author?: XOR<UserScalarRelationFilter, UserWhereInput>
     categories?: CategoryListRelationFilter
     comments?: CommentListRelationFilter
+    likes?: LikeNovelListRelationFilter
   }, "id" | "sharedId">
 
   export type NovelOrderByWithAggregationInput = {
@@ -7365,6 +8599,60 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
   }
 
+  export type LikeNovelWhereInput = {
+    AND?: LikeNovelWhereInput | LikeNovelWhereInput[]
+    OR?: LikeNovelWhereInput[]
+    NOT?: LikeNovelWhereInput | LikeNovelWhereInput[]
+    id?: StringFilter<"LikeNovel"> | string
+    userId?: StringFilter<"LikeNovel"> | string
+    novelId?: StringFilter<"LikeNovel"> | string
+    createdAt?: DateTimeFilter<"LikeNovel"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    novel?: XOR<NovelScalarRelationFilter, NovelWhereInput>
+  }
+
+  export type LikeNovelOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    novelId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    novel?: NovelOrderByWithRelationInput
+  }
+
+  export type LikeNovelWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_novelId?: LikeNovelUserIdNovelIdCompoundUniqueInput
+    AND?: LikeNovelWhereInput | LikeNovelWhereInput[]
+    OR?: LikeNovelWhereInput[]
+    NOT?: LikeNovelWhereInput | LikeNovelWhereInput[]
+    userId?: StringFilter<"LikeNovel"> | string
+    novelId?: StringFilter<"LikeNovel"> | string
+    createdAt?: DateTimeFilter<"LikeNovel"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    novel?: XOR<NovelScalarRelationFilter, NovelWhereInput>
+  }, "id" | "userId_novelId">
+
+  export type LikeNovelOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    novelId?: SortOrder
+    createdAt?: SortOrder
+    _count?: LikeNovelCountOrderByAggregateInput
+    _max?: LikeNovelMaxOrderByAggregateInput
+    _min?: LikeNovelMinOrderByAggregateInput
+  }
+
+  export type LikeNovelScalarWhereWithAggregatesInput = {
+    AND?: LikeNovelScalarWhereWithAggregatesInput | LikeNovelScalarWhereWithAggregatesInput[]
+    OR?: LikeNovelScalarWhereWithAggregatesInput[]
+    NOT?: LikeNovelScalarWhereWithAggregatesInput | LikeNovelScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LikeNovel"> | string
+    userId?: StringWithAggregatesFilter<"LikeNovel"> | string
+    novelId?: StringWithAggregatesFilter<"LikeNovel"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"LikeNovel"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     username: string
@@ -7374,6 +8662,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFolloweeInput
     followees?: FollowCreateNestedManyWithoutFollowerInput
   }
@@ -7387,6 +8676,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
     followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
   }
@@ -7400,6 +8690,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUpdateManyWithoutFollowerNestedInput
   }
@@ -7413,6 +8704,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
   }
@@ -7501,6 +8793,7 @@ export namespace Prisma {
     author: UserCreateNestedOneWithoutNovelsInput
     categories?: CategoryCreateNestedManyWithoutNovelInput
     comments?: CommentCreateNestedManyWithoutNovelInput
+    likes?: LikeNovelCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUncheckedCreateInput = {
@@ -7513,6 +8806,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
     comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
+    likes?: LikeNovelUncheckedCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUpdateInput = {
@@ -7525,6 +8819,7 @@ export namespace Prisma {
     author?: UserUpdateOneRequiredWithoutNovelsNestedInput
     categories?: CategoryUpdateManyWithoutNovelNestedInput
     comments?: CommentUpdateManyWithoutNovelNestedInput
+    likes?: LikeNovelUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateInput = {
@@ -7537,6 +8832,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
     comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
+    likes?: LikeNovelUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelCreateManyInput = {
@@ -7682,6 +8978,53 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LikeNovelCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutLikeNovelsInput
+    novel: NovelCreateNestedOneWithoutLikesInput
+  }
+
+  export type LikeNovelUncheckedCreateInput = {
+    id?: string
+    userId: string
+    novelId: string
+    createdAt?: Date | string
+  }
+
+  export type LikeNovelUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutLikeNovelsNestedInput
+    novel?: NovelUpdateOneRequiredWithoutLikesNestedInput
+  }
+
+  export type LikeNovelUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    novelId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LikeNovelCreateManyInput = {
+    id?: string
+    userId: string
+    novelId: string
+    createdAt?: Date | string
+  }
+
+  export type LikeNovelUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LikeNovelUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    novelId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7720,6 +9063,12 @@ export namespace Prisma {
     none?: CommentWhereInput
   }
 
+  export type LikeNovelListRelationFilter = {
+    every?: LikeNovelWhereInput
+    some?: LikeNovelWhereInput
+    none?: LikeNovelWhereInput
+  }
+
   export type FollowListRelationFilter = {
     every?: FollowWhereInput
     some?: FollowWhereInput
@@ -7731,6 +9080,10 @@ export namespace Prisma {
   }
 
   export type CommentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LikeNovelOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7996,6 +9349,32 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type LikeNovelUserIdNovelIdCompoundUniqueInput = {
+    userId: string
+    novelId: string
+  }
+
+  export type LikeNovelCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    novelId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type LikeNovelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    novelId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type LikeNovelMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    novelId?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type NovelCreateNestedManyWithoutAuthorInput = {
     create?: XOR<NovelCreateWithoutAuthorInput, NovelUncheckedCreateWithoutAuthorInput> | NovelCreateWithoutAuthorInput[] | NovelUncheckedCreateWithoutAuthorInput[]
     connectOrCreate?: NovelCreateOrConnectWithoutAuthorInput | NovelCreateOrConnectWithoutAuthorInput[]
@@ -8008,6 +9387,13 @@ export namespace Prisma {
     connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
     createMany?: CommentCreateManyUserInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type LikeNovelCreateNestedManyWithoutUserInput = {
+    create?: XOR<LikeNovelCreateWithoutUserInput, LikeNovelUncheckedCreateWithoutUserInput> | LikeNovelCreateWithoutUserInput[] | LikeNovelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LikeNovelCreateOrConnectWithoutUserInput | LikeNovelCreateOrConnectWithoutUserInput[]
+    createMany?: LikeNovelCreateManyUserInputEnvelope
+    connect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
   }
 
   export type FollowCreateNestedManyWithoutFolloweeInput = {
@@ -8036,6 +9422,13 @@ export namespace Prisma {
     connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
     createMany?: CommentCreateManyUserInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type LikeNovelUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<LikeNovelCreateWithoutUserInput, LikeNovelUncheckedCreateWithoutUserInput> | LikeNovelCreateWithoutUserInput[] | LikeNovelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LikeNovelCreateOrConnectWithoutUserInput | LikeNovelCreateOrConnectWithoutUserInput[]
+    createMany?: LikeNovelCreateManyUserInputEnvelope
+    connect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
   }
 
   export type FollowUncheckedCreateNestedManyWithoutFolloweeInput = {
@@ -8086,6 +9479,20 @@ export namespace Prisma {
     update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type LikeNovelUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LikeNovelCreateWithoutUserInput, LikeNovelUncheckedCreateWithoutUserInput> | LikeNovelCreateWithoutUserInput[] | LikeNovelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LikeNovelCreateOrConnectWithoutUserInput | LikeNovelCreateOrConnectWithoutUserInput[]
+    upsert?: LikeNovelUpsertWithWhereUniqueWithoutUserInput | LikeNovelUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LikeNovelCreateManyUserInputEnvelope
+    set?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    disconnect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    delete?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    connect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    update?: LikeNovelUpdateWithWhereUniqueWithoutUserInput | LikeNovelUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LikeNovelUpdateManyWithWhereWithoutUserInput | LikeNovelUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LikeNovelScalarWhereInput | LikeNovelScalarWhereInput[]
   }
 
   export type FollowUpdateManyWithoutFolloweeNestedInput = {
@@ -8142,6 +9549,20 @@ export namespace Prisma {
     update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type LikeNovelUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<LikeNovelCreateWithoutUserInput, LikeNovelUncheckedCreateWithoutUserInput> | LikeNovelCreateWithoutUserInput[] | LikeNovelUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: LikeNovelCreateOrConnectWithoutUserInput | LikeNovelCreateOrConnectWithoutUserInput[]
+    upsert?: LikeNovelUpsertWithWhereUniqueWithoutUserInput | LikeNovelUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: LikeNovelCreateManyUserInputEnvelope
+    set?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    disconnect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    delete?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    connect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    update?: LikeNovelUpdateWithWhereUniqueWithoutUserInput | LikeNovelUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: LikeNovelUpdateManyWithWhereWithoutUserInput | LikeNovelUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: LikeNovelScalarWhereInput | LikeNovelScalarWhereInput[]
   }
 
   export type FollowUncheckedUpdateManyWithoutFolloweeNestedInput = {
@@ -8219,6 +9640,13 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
+  export type LikeNovelCreateNestedManyWithoutNovelInput = {
+    create?: XOR<LikeNovelCreateWithoutNovelInput, LikeNovelUncheckedCreateWithoutNovelInput> | LikeNovelCreateWithoutNovelInput[] | LikeNovelUncheckedCreateWithoutNovelInput[]
+    connectOrCreate?: LikeNovelCreateOrConnectWithoutNovelInput | LikeNovelCreateOrConnectWithoutNovelInput[]
+    createMany?: LikeNovelCreateManyNovelInputEnvelope
+    connect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+  }
+
   export type CategoryUncheckedCreateNestedManyWithoutNovelInput = {
     create?: XOR<CategoryCreateWithoutNovelInput, CategoryUncheckedCreateWithoutNovelInput> | CategoryCreateWithoutNovelInput[] | CategoryUncheckedCreateWithoutNovelInput[]
     connectOrCreate?: CategoryCreateOrConnectWithoutNovelInput | CategoryCreateOrConnectWithoutNovelInput[]
@@ -8230,6 +9658,13 @@ export namespace Prisma {
     connectOrCreate?: CommentCreateOrConnectWithoutNovelInput | CommentCreateOrConnectWithoutNovelInput[]
     createMany?: CommentCreateManyNovelInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type LikeNovelUncheckedCreateNestedManyWithoutNovelInput = {
+    create?: XOR<LikeNovelCreateWithoutNovelInput, LikeNovelUncheckedCreateWithoutNovelInput> | LikeNovelCreateWithoutNovelInput[] | LikeNovelUncheckedCreateWithoutNovelInput[]
+    connectOrCreate?: LikeNovelCreateOrConnectWithoutNovelInput | LikeNovelCreateOrConnectWithoutNovelInput[]
+    createMany?: LikeNovelCreateManyNovelInputEnvelope
+    connect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -8271,6 +9706,20 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
+  export type LikeNovelUpdateManyWithoutNovelNestedInput = {
+    create?: XOR<LikeNovelCreateWithoutNovelInput, LikeNovelUncheckedCreateWithoutNovelInput> | LikeNovelCreateWithoutNovelInput[] | LikeNovelUncheckedCreateWithoutNovelInput[]
+    connectOrCreate?: LikeNovelCreateOrConnectWithoutNovelInput | LikeNovelCreateOrConnectWithoutNovelInput[]
+    upsert?: LikeNovelUpsertWithWhereUniqueWithoutNovelInput | LikeNovelUpsertWithWhereUniqueWithoutNovelInput[]
+    createMany?: LikeNovelCreateManyNovelInputEnvelope
+    set?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    disconnect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    delete?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    connect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    update?: LikeNovelUpdateWithWhereUniqueWithoutNovelInput | LikeNovelUpdateWithWhereUniqueWithoutNovelInput[]
+    updateMany?: LikeNovelUpdateManyWithWhereWithoutNovelInput | LikeNovelUpdateManyWithWhereWithoutNovelInput[]
+    deleteMany?: LikeNovelScalarWhereInput | LikeNovelScalarWhereInput[]
+  }
+
   export type CategoryUncheckedUpdateManyWithoutNovelNestedInput = {
     create?: XOR<CategoryCreateWithoutNovelInput, CategoryUncheckedCreateWithoutNovelInput> | CategoryCreateWithoutNovelInput[] | CategoryUncheckedCreateWithoutNovelInput[]
     connectOrCreate?: CategoryCreateOrConnectWithoutNovelInput | CategoryCreateOrConnectWithoutNovelInput[]
@@ -8296,6 +9745,20 @@ export namespace Prisma {
     update?: CommentUpdateWithWhereUniqueWithoutNovelInput | CommentUpdateWithWhereUniqueWithoutNovelInput[]
     updateMany?: CommentUpdateManyWithWhereWithoutNovelInput | CommentUpdateManyWithWhereWithoutNovelInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type LikeNovelUncheckedUpdateManyWithoutNovelNestedInput = {
+    create?: XOR<LikeNovelCreateWithoutNovelInput, LikeNovelUncheckedCreateWithoutNovelInput> | LikeNovelCreateWithoutNovelInput[] | LikeNovelUncheckedCreateWithoutNovelInput[]
+    connectOrCreate?: LikeNovelCreateOrConnectWithoutNovelInput | LikeNovelCreateOrConnectWithoutNovelInput[]
+    upsert?: LikeNovelUpsertWithWhereUniqueWithoutNovelInput | LikeNovelUpsertWithWhereUniqueWithoutNovelInput[]
+    createMany?: LikeNovelCreateManyNovelInputEnvelope
+    set?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    disconnect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    delete?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    connect?: LikeNovelWhereUniqueInput | LikeNovelWhereUniqueInput[]
+    update?: LikeNovelUpdateWithWhereUniqueWithoutNovelInput | LikeNovelUpdateWithWhereUniqueWithoutNovelInput[]
+    updateMany?: LikeNovelUpdateManyWithWhereWithoutNovelInput | LikeNovelUpdateManyWithWhereWithoutNovelInput[]
+    deleteMany?: LikeNovelScalarWhereInput | LikeNovelScalarWhereInput[]
   }
 
   export type NovelCreateNestedManyWithoutCategoriesInput = {
@@ -8370,6 +9833,34 @@ export namespace Prisma {
     upsert?: NovelUpsertWithoutCommentsInput
     connect?: NovelWhereUniqueInput
     update?: XOR<XOR<NovelUpdateToOneWithWhereWithoutCommentsInput, NovelUpdateWithoutCommentsInput>, NovelUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type UserCreateNestedOneWithoutLikeNovelsInput = {
+    create?: XOR<UserCreateWithoutLikeNovelsInput, UserUncheckedCreateWithoutLikeNovelsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLikeNovelsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type NovelCreateNestedOneWithoutLikesInput = {
+    create?: XOR<NovelCreateWithoutLikesInput, NovelUncheckedCreateWithoutLikesInput>
+    connectOrCreate?: NovelCreateOrConnectWithoutLikesInput
+    connect?: NovelWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutLikeNovelsNestedInput = {
+    create?: XOR<UserCreateWithoutLikeNovelsInput, UserUncheckedCreateWithoutLikeNovelsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLikeNovelsInput
+    upsert?: UserUpsertWithoutLikeNovelsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLikeNovelsInput, UserUpdateWithoutLikeNovelsInput>, UserUncheckedUpdateWithoutLikeNovelsInput>
+  }
+
+  export type NovelUpdateOneRequiredWithoutLikesNestedInput = {
+    create?: XOR<NovelCreateWithoutLikesInput, NovelUncheckedCreateWithoutLikesInput>
+    connectOrCreate?: NovelCreateOrConnectWithoutLikesInput
+    upsert?: NovelUpsertWithoutLikesInput
+    connect?: NovelWhereUniqueInput
+    update?: XOR<XOR<NovelUpdateToOneWithWhereWithoutLikesInput, NovelUpdateWithoutLikesInput>, NovelUncheckedUpdateWithoutLikesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8517,6 +10008,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     categories?: CategoryCreateNestedManyWithoutNovelInput
     comments?: CommentCreateNestedManyWithoutNovelInput
+    likes?: LikeNovelCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUncheckedCreateWithoutAuthorInput = {
@@ -8528,6 +10020,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
     comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
+    likes?: LikeNovelUncheckedCreateNestedManyWithoutNovelInput
   }
 
   export type NovelCreateOrConnectWithoutAuthorInput = {
@@ -8567,6 +10060,28 @@ export namespace Prisma {
 
   export type CommentCreateManyUserInputEnvelope = {
     data: CommentCreateManyUserInput | CommentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LikeNovelCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    novel: NovelCreateNestedOneWithoutLikesInput
+  }
+
+  export type LikeNovelUncheckedCreateWithoutUserInput = {
+    id?: string
+    novelId: string
+    createdAt?: Date | string
+  }
+
+  export type LikeNovelCreateOrConnectWithoutUserInput = {
+    where: LikeNovelWhereUniqueInput
+    create: XOR<LikeNovelCreateWithoutUserInput, LikeNovelUncheckedCreateWithoutUserInput>
+  }
+
+  export type LikeNovelCreateManyUserInputEnvelope = {
+    data: LikeNovelCreateManyUserInput | LikeNovelCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -8673,6 +10188,32 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
   }
 
+  export type LikeNovelUpsertWithWhereUniqueWithoutUserInput = {
+    where: LikeNovelWhereUniqueInput
+    update: XOR<LikeNovelUpdateWithoutUserInput, LikeNovelUncheckedUpdateWithoutUserInput>
+    create: XOR<LikeNovelCreateWithoutUserInput, LikeNovelUncheckedCreateWithoutUserInput>
+  }
+
+  export type LikeNovelUpdateWithWhereUniqueWithoutUserInput = {
+    where: LikeNovelWhereUniqueInput
+    data: XOR<LikeNovelUpdateWithoutUserInput, LikeNovelUncheckedUpdateWithoutUserInput>
+  }
+
+  export type LikeNovelUpdateManyWithWhereWithoutUserInput = {
+    where: LikeNovelScalarWhereInput
+    data: XOR<LikeNovelUpdateManyMutationInput, LikeNovelUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type LikeNovelScalarWhereInput = {
+    AND?: LikeNovelScalarWhereInput | LikeNovelScalarWhereInput[]
+    OR?: LikeNovelScalarWhereInput[]
+    NOT?: LikeNovelScalarWhereInput | LikeNovelScalarWhereInput[]
+    id?: StringFilter<"LikeNovel"> | string
+    userId?: StringFilter<"LikeNovel"> | string
+    novelId?: StringFilter<"LikeNovel"> | string
+    createdAt?: DateTimeFilter<"LikeNovel"> | Date | string
+  }
+
   export type FollowUpsertWithWhereUniqueWithoutFolloweeInput = {
     where: FollowWhereUniqueInput
     update: XOR<FollowUpdateWithoutFolloweeInput, FollowUncheckedUpdateWithoutFolloweeInput>
@@ -8724,6 +10265,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFolloweeInput
   }
 
@@ -8736,6 +10278,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
   }
 
@@ -8753,6 +10296,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutUserInput
+    likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
     followees?: FollowCreateNestedManyWithoutFollowerInput
   }
 
@@ -8765,6 +10309,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
     followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
   }
 
@@ -8793,6 +10338,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFolloweeNestedInput
   }
 
@@ -8805,6 +10351,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
   }
 
@@ -8828,6 +10375,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
+    likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
     followees?: FollowUpdateManyWithoutFollowerNestedInput
   }
 
@@ -8840,6 +10388,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
     followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
   }
 
@@ -8851,6 +10400,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentCreateNestedManyWithoutUserInput
+    likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFolloweeInput
     followees?: FollowCreateNestedManyWithoutFollowerInput
   }
@@ -8863,6 +10413,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
     followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
   }
@@ -8917,6 +10468,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type LikeNovelCreateWithoutNovelInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutLikeNovelsInput
+  }
+
+  export type LikeNovelUncheckedCreateWithoutNovelInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type LikeNovelCreateOrConnectWithoutNovelInput = {
+    where: LikeNovelWhereUniqueInput
+    create: XOR<LikeNovelCreateWithoutNovelInput, LikeNovelUncheckedCreateWithoutNovelInput>
+  }
+
+  export type LikeNovelCreateManyNovelInputEnvelope = {
+    data: LikeNovelCreateManyNovelInput | LikeNovelCreateManyNovelInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutNovelsInput = {
     update: XOR<UserUpdateWithoutNovelsInput, UserUncheckedUpdateWithoutNovelsInput>
     create: XOR<UserCreateWithoutNovelsInput, UserUncheckedCreateWithoutNovelsInput>
@@ -8936,6 +10509,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUpdateManyWithoutUserNestedInput
+    likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUpdateManyWithoutFollowerNestedInput
   }
@@ -8948,6 +10522,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
   }
@@ -8992,6 +10567,22 @@ export namespace Prisma {
     data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutNovelInput>
   }
 
+  export type LikeNovelUpsertWithWhereUniqueWithoutNovelInput = {
+    where: LikeNovelWhereUniqueInput
+    update: XOR<LikeNovelUpdateWithoutNovelInput, LikeNovelUncheckedUpdateWithoutNovelInput>
+    create: XOR<LikeNovelCreateWithoutNovelInput, LikeNovelUncheckedCreateWithoutNovelInput>
+  }
+
+  export type LikeNovelUpdateWithWhereUniqueWithoutNovelInput = {
+    where: LikeNovelWhereUniqueInput
+    data: XOR<LikeNovelUpdateWithoutNovelInput, LikeNovelUncheckedUpdateWithoutNovelInput>
+  }
+
+  export type LikeNovelUpdateManyWithWhereWithoutNovelInput = {
+    where: LikeNovelScalarWhereInput
+    data: XOR<LikeNovelUpdateManyMutationInput, LikeNovelUncheckedUpdateManyWithoutNovelInput>
+  }
+
   export type NovelCreateWithoutCategoriesInput = {
     id?: string
     sharedId: string
@@ -9001,6 +10592,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutNovelsInput
     comments?: CommentCreateNestedManyWithoutNovelInput
+    likes?: LikeNovelCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUncheckedCreateWithoutCategoriesInput = {
@@ -9012,6 +10604,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
+    likes?: LikeNovelUncheckedCreateNestedManyWithoutNovelInput
   }
 
   export type NovelCreateOrConnectWithoutCategoriesInput = {
@@ -9043,6 +10636,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
+    likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFolloweeInput
     followees?: FollowCreateNestedManyWithoutFollowerInput
   }
@@ -9055,6 +10649,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
+    likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
     followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
   }
@@ -9073,6 +10668,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutNovelsInput
     categories?: CategoryCreateNestedManyWithoutNovelInput
+    likes?: LikeNovelCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUncheckedCreateWithoutCommentsInput = {
@@ -9084,6 +10680,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
+    likes?: LikeNovelUncheckedCreateNestedManyWithoutNovelInput
   }
 
   export type NovelCreateOrConnectWithoutCommentsInput = {
@@ -9110,6 +10707,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
+    likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUpdateManyWithoutFollowerNestedInput
   }
@@ -9122,6 +10720,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
+    likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
   }
@@ -9146,6 +10745,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutNovelsNestedInput
     categories?: CategoryUpdateManyWithoutNovelNestedInput
+    likes?: LikeNovelUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateWithoutCommentsInput = {
@@ -9157,6 +10757,139 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
+    likes?: LikeNovelUncheckedUpdateManyWithoutNovelNestedInput
+  }
+
+  export type UserCreateWithoutLikeNovelsInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    novels?: NovelCreateNestedManyWithoutAuthorInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    followers?: FollowCreateNestedManyWithoutFolloweeInput
+    followees?: FollowCreateNestedManyWithoutFollowerInput
+  }
+
+  export type UserUncheckedCreateWithoutLikeNovelsInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
+    followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
+  }
+
+  export type UserCreateOrConnectWithoutLikeNovelsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLikeNovelsInput, UserUncheckedCreateWithoutLikeNovelsInput>
+  }
+
+  export type NovelCreateWithoutLikesInput = {
+    id?: string
+    sharedId: string
+    title: string
+    coverImagePath?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutNovelsInput
+    categories?: CategoryCreateNestedManyWithoutNovelInput
+    comments?: CommentCreateNestedManyWithoutNovelInput
+  }
+
+  export type NovelUncheckedCreateWithoutLikesInput = {
+    id?: string
+    sharedId: string
+    title: string
+    authorId: string
+    coverImagePath?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
+    comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
+  }
+
+  export type NovelCreateOrConnectWithoutLikesInput = {
+    where: NovelWhereUniqueInput
+    create: XOR<NovelCreateWithoutLikesInput, NovelUncheckedCreateWithoutLikesInput>
+  }
+
+  export type UserUpsertWithoutLikeNovelsInput = {
+    update: XOR<UserUpdateWithoutLikeNovelsInput, UserUncheckedUpdateWithoutLikeNovelsInput>
+    create: XOR<UserCreateWithoutLikeNovelsInput, UserUncheckedCreateWithoutLikeNovelsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutLikeNovelsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutLikeNovelsInput, UserUncheckedUpdateWithoutLikeNovelsInput>
+  }
+
+  export type UserUpdateWithoutLikeNovelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    novels?: NovelUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    followers?: FollowUpdateManyWithoutFolloweeNestedInput
+    followees?: FollowUpdateManyWithoutFollowerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutLikeNovelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
+    followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  }
+
+  export type NovelUpsertWithoutLikesInput = {
+    update: XOR<NovelUpdateWithoutLikesInput, NovelUncheckedUpdateWithoutLikesInput>
+    create: XOR<NovelCreateWithoutLikesInput, NovelUncheckedCreateWithoutLikesInput>
+    where?: NovelWhereInput
+  }
+
+  export type NovelUpdateToOneWithWhereWithoutLikesInput = {
+    where?: NovelWhereInput
+    data: XOR<NovelUpdateWithoutLikesInput, NovelUncheckedUpdateWithoutLikesInput>
+  }
+
+  export type NovelUpdateWithoutLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutNovelsNestedInput
+    categories?: CategoryUpdateManyWithoutNovelNestedInput
+    comments?: CommentUpdateManyWithoutNovelNestedInput
+  }
+
+  export type NovelUncheckedUpdateWithoutLikesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelCreateManyAuthorInput = {
@@ -9176,6 +10909,12 @@ export namespace Prisma {
     endIndex: number
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type LikeNovelCreateManyUserInput = {
+    id?: string
+    novelId: string
+    createdAt?: Date | string
   }
 
   export type FollowCreateManyFolloweeInput = {
@@ -9199,6 +10938,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUpdateManyWithoutNovelNestedInput
     comments?: CommentUpdateManyWithoutNovelNestedInput
+    likes?: LikeNovelUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateWithoutAuthorInput = {
@@ -9210,6 +10950,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
     comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
+    likes?: LikeNovelUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateManyWithoutAuthorInput = {
@@ -9249,6 +10990,24 @@ export namespace Prisma {
     endIndex?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LikeNovelUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    novel?: NovelUpdateOneRequiredWithoutLikesNestedInput
+  }
+
+  export type LikeNovelUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    novelId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LikeNovelUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    novelId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FollowUpdateWithoutFolloweeInput = {
@@ -9297,6 +11056,12 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type LikeNovelCreateManyNovelInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
   export type CategoryUpdateWithoutNovelInput = {
     categoryId?: StringFieldUpdateOperationsInput | string
     categoryName?: StringFieldUpdateOperationsInput | string
@@ -9342,6 +11107,24 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LikeNovelUpdateWithoutNovelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutLikeNovelsNestedInput
+  }
+
+  export type LikeNovelUncheckedUpdateWithoutNovelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LikeNovelUncheckedUpdateManyWithoutNovelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type NovelUpdateWithoutCategoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
@@ -9351,6 +11134,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutNovelsNestedInput
     comments?: CommentUpdateManyWithoutNovelNestedInput
+    likes?: LikeNovelUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateWithoutCategoriesInput = {
@@ -9362,6 +11146,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
+    likes?: LikeNovelUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateManyWithoutCategoriesInput = {
