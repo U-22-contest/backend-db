@@ -138,6 +138,7 @@ exports.Prisma.NovelScalarFieldEnum = {
   sharedId: 'sharedId',
   title: 'title',
   authorId: 'authorId',
+  coverImagePath: 'coverImagePath',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -173,6 +174,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 
