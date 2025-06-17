@@ -48,6 +48,7 @@ model Novel {
   sharedId   String     @unique
   title      String
   authorId   String
+  coverImagePath String?
   author     User       @relation("UserNovels", fields: [authorId], references: [id], onDelete: Cascade)
   categories Category[] @relation("NovelCategories")
   createdAt  DateTime   @default(now())

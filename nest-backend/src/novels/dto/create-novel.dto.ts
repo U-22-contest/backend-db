@@ -9,4 +9,8 @@ export class CreateNovelDto {
   @IsArray()
   @IsString({ each: true })
   categoryNames?: string[];
+
+  @IsOptional()
+  @IsString()
+  coverImagePath?: string | null;
 }
