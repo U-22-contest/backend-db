@@ -166,6 +166,15 @@ exports.Prisma.LikeNovelScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.LikeSentenceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  novelId: 'novelId',
+  startIndex: 'startIndex',
+  endIndex: 'endIndex',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -188,7 +197,8 @@ exports.Prisma.ModelName = {
   Novel: 'Novel',
   Category: 'Category',
   Comment: 'Comment',
-  LikeNovel: 'LikeNovel'
+  LikeNovel: 'LikeNovel',
+  LikeSentence: 'LikeSentence'
 };
 
 /**
