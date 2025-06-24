@@ -3,6 +3,7 @@ import {
     Post,
     Delete,
     Body,
+    Get,
     Param,
     Request,
     UseGuards,
@@ -10,11 +11,13 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 
+import { UserLikesResponse } from './dto/get-likes.dto'
 import { LikeNovelDto } from './dto/like-novel.dto'
 import { RemoveLikeDto } from './dto/remove-like-novel.dto';
 import { LikeSentenceDto } from './dto/like-sentence.dto'
 import { RemoveLikeSentenceDto } from './dto/remove-like-sentence.dto'
 
+import { GetLikesService } from './services/get-likes.service'
 import { LikeNovelService, LikeNovelResponse } from './services/like-novel.service';
 import { RemoveLikeNovelService } from './services/remove-like-novel.service';
 import { LikeSentenceService, LikeSentenceResponse } from './services/like-sentence.service';
@@ -23,11 +26,22 @@ import { RemoveLikeSentenceService } from './services/remove-like-sentence.servi
 @Controller('likes')
 export class LikeController {
     constructor(
+        private readonly getLikesService: GetLikesService,
         private readonly likeNovelService: LikeNovelService,
         private readonly removeLikeNovelService: RemoveLikeNovelService,
         private readonly likeSentenceService: LikeSentenceService,
         private readonly removeLikeSentenceService: RemoveLikeSentenceService,
     ) {}
+
+
+    @Get()
+    @UseGuards(AuthGuard('jwt'))
+    async getAllUserLikes(
+        @Request() req: { user: JWTPayload },
+    ) : Promise<UserLikesResponse>  {
+        const userId = req.user.userId;
+        return this.getLikesService.getAllLikes(userId);
+    }
 
     // 小説全体にいいね
     @Post('novel')
