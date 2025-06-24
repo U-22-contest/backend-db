@@ -1,4 +1,4 @@
-import {IsString, IsNotEmpty, IsInt, Min} from 'class-validator';
+import { IsString, IsNotEmpty, IsInt, Min } from 'class-validator';
 
 export class LikeSentenceDto {
     @IsString()
@@ -16,4 +16,11 @@ export class LikeSentenceDto {
     @IsInt()
     @Min(0)
     endIndex: number;
+}
+
+export class LikeSentenceResponse {
+    id: string;
+    userId: string;
+    novelId: string;
+    createdAt: Date;
 }

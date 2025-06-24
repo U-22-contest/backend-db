@@ -18,3 +18,5 @@ export class RemoveLikeSentenceDto {
     @Min(0)
     endIndex: number;
 }
+
+// 削除時は { message } が渡される。

@@ -4,14 +4,8 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { PostgresLikeSentenceRepository } from "../repositories/like-sentence/postgres";
-import {LikeSentenceDto} from "../dto/like-sentence.dto";
+import { LikeSentenceDto, LikeSentenceResponse } from "../dto/like-sentence.dto";
 
-export interface LikeSentenceResponse {
-    id: string;
-    userId: string;
-    novelId: string;
-    createdAt: Date;
-}
 
 @Injectable()
 export class LikeSentenceService {
@@ -30,9 +24,9 @@ export class LikeSentenceService {
         const existingLike = await this.postgresLikeSentence.findLikeSentenceRelation(userId, novelId, startIndex, endIndex);
         if (existingLike) throw new ConflictException('You have already liked this novel');
 
-        const like = await this.postgresLikeSentence.createLikeSentence(userId, novelId, startIndex, endIndex);
+        const likeSentenceResponse = await this.postgresLikeSentence.createLikeSentence(userId, novelId, startIndex, endIndex);
 
-        return like;
+        return likeSentenceResponse;
 
     }
 }

@@ -4,14 +4,7 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { PostgresLikeNovelRepository } from "../repositories/like-novel/postgres";
-import { LikeNovelDto } from '../dto/like-novel.dto'
-
-export interface LikeNovelResponse {
-    id: string;
-    userId: string;
-    novelId: string;
-    createdAt: Date;
-}
+import { LikeNovelDto, LikeNovelResponse } from '../dto/like-novel.dto'
 
 @Injectable()
 export class LikeNovelService {
@@ -30,9 +23,9 @@ export class LikeNovelService {
         const existingLike = await this.postgresLikeNovel.findLikeNovelRelation(userId, novelId);
         if (existingLike) throw new ConflictException('You have already liked this novel');
 
-        const like = await this.postgresLikeNovel.createLikeNovel(userId, novelId);
+        const likeNovelResponse = await this.postgresLikeNovel.createLikeNovel(userId, novelId);
 
-        return like;
+        return likeNovelResponse;
 
     }
 }

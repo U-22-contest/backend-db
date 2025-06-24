@@ -4,7 +4,6 @@ import {
     Delete,
     Body,
     Get,
-    Param,
     Request,
     UseGuards,
 } from '@nestjs/common';
@@ -12,15 +11,15 @@ import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 
 import { UserLikesResponse } from './dto/get-likes.dto'
-import { LikeNovelDto } from './dto/like-novel.dto'
+import { LikeNovelDto, LikeNovelResponse } from './dto/like-novel.dto'
 import { RemoveLikeDto } from './dto/remove-like-novel.dto';
-import { LikeSentenceDto } from './dto/like-sentence.dto'
+import { LikeSentenceDto, LikeSentenceResponse } from './dto/like-sentence.dto'
 import { RemoveLikeSentenceDto } from './dto/remove-like-sentence.dto'
 
 import { GetLikesService } from './services/get-likes.service'
-import { LikeNovelService, LikeNovelResponse } from './services/like-novel.service';
+import { LikeNovelService } from './services/like-novel.service';
 import { RemoveLikeNovelService } from './services/remove-like-novel.service';
-import { LikeSentenceService, LikeSentenceResponse } from './services/like-sentence.service';
+import { LikeSentenceService } from './services/like-sentence.service';
 import { RemoveLikeSentenceService } from './services/remove-like-sentence.service';
 
 @Controller('likes')
