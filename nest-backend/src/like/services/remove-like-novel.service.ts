@@ -12,7 +12,7 @@ export class RemoveLikeNovelService {
     ) {}
 
     // いいねを削除
-    async removeLikeNovel({userId, novelId} : RemoveLikeDto) {
+    async removeLikeNovel({userId, novelId} : RemoveLikeDto): Promise<{ message }> {
 
         const existingLike = await this.postgresRemoveLikeNovel.findLikeNovelRelation(userId, novelId);
         if (!existingLike) throw new NotFoundException('Like not found');

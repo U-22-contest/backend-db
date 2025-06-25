@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsInt, Min, IsOptional, IsEnum } from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 
 // いいね削除用DTO
 export class RemoveLikeDto {
@@ -10,3 +10,5 @@ export class RemoveLikeDto {
     @IsNotEmpty()
     novelId: string;
 }
+
+// 削除時は { message } が渡される。
