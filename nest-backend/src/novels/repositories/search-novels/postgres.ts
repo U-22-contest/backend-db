@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { Novel } from '../../types/novel.types';
-import { SearchNovelsDto } from 'src/novels/dto/search-novels.dto';
+import { SearchNovelsDto } from 'src/novels/dto/request/search-novels.dto';
 import { Prisma } from 'generated/postgresql';
 
 @Injectable()
