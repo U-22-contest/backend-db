@@ -36,6 +36,6 @@ export class DeleteNovelsService {
     await this.postgresDeleteNovel.deleteNovelById(id);
     await this.mongoDeleteNovel.deleteNovelBySharedId(psqlNovelDelete.sharedId);
 
-    return { message: 'successfully deleted novel' };
+    return { message: 'novelを削除しました' };
   }
 }
