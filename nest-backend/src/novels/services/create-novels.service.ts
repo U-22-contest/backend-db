@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateNovelDto } from '../dto/create-novel.dto';
+import { CreateNovelDto } from '../dto/request/create-novel.dto';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateNovelResponse } from '../types/novel.types';
 import { PostgresCreateNovelRepository } from '../repositories/create-novels/postgres';

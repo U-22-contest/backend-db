@@ -36,6 +36,9 @@ import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import * as path from 'path';
 import { v4 as uuid4 } from 'uuid';
+import { EditNovelService } from './services/edit-novel-by-id.service';
+import { postgresEditNovelRepository } from './repositories/edit-novel-by-id/postgres';
+import { MongoEditNovelRepository } from './repositories/edit-novel-by-id/mongo';
 @Module({
   imports: [
     CommentsModule,
@@ -66,6 +69,7 @@ import { v4 as uuid4 } from 'uuid';
     SearchNovelsService,
     GetCommentsByNovelIdService,
     DeleteCommentsService,
+    EditNovelService,
 
     MongoCreateNovelRepository,
     PostgresCreateNovelRepository,
@@ -78,6 +82,8 @@ import { v4 as uuid4 } from 'uuid';
     MongoGetPreviewByIdRepository,
     MongoSearchNovelRepository,
     PostgresNovelRepository,
+    postgresEditNovelRepository,
+    MongoEditNovelRepository,
   ],
   controllers: [NovelsController],
 })

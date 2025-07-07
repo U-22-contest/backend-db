@@ -9,11 +9,12 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  Put,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
-import { CreateNovelDto } from './dto/create-novel.dto';
-import { SearchNovelsDto } from './dto/search-novels.dto';
+import { CreateNovelDto } from './dto/request/create-novel.dto';
+import { SearchNovelsDto } from './dto/request/search-novels.dto';
 
 import { CreateNovelsService } from './services/create-novels.service';
 import {
@@ -27,13 +28,16 @@ import {
 import {
   GetPreviewByIdService,
   GetPreviewByIdResponse,
-} from "./services/get-preview-by-id.service";
+} from './services/get-preview-by-id.service';
 import { DeleteNovelsService } from './services/delete-novels.service';
 import { SearchNovelsService } from './services/search-novels';
 import { CreateNovelResponse } from './types/novel.types';
 import { Query } from '@nestjs/common';
 import { Novel } from './types/novel.types';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { EditNovelService } from './services/edit-novel-by-id.service';
+import { EditNovelsDto } from './dto/request/edit-novel.dto';
+import { Express } from 'express';
 
 @Controller('novels')
 export class NovelsController {
@@ -44,6 +48,7 @@ export class NovelsController {
     private readonly getPreviewByIdService: GetPreviewByIdService,
     private readonly deleteNovelsService: DeleteNovelsService,
     private readonly searchNovelsService: SearchNovelsService,
+    private readonly editNovelService: EditNovelService,
   ) {}
 
   // 小説検索
@@ -94,5 +99,20 @@ export class NovelsController {
     @Request() req: { user: JWTPayload },
   ): Promise<{ message: string }> {
     return this.deleteNovelsService.deleteNovel(novelid, req.user.userId);
+  }
+
+  // 小説の編集
+  @Put(':novelId')
+  @UseGuards(AuthGuard('jwt'))
+  async edit(
+    @Param('novelId') novelid: string,
+    @Request() req: { user: JWTPayload },
+    @Body() editDto: EditNovelsDto,
+  ): Promise<{ message: string }> {
+    return this.editNovelService.editNovelById(
+      novelid,
+      req.user.userId,
+      editDto,
+    );
   }
 }
