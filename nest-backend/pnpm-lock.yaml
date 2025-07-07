@@ -35,9 +35,6 @@ importers:
       '@types/bcryptjs':
         specifier: ^3.0.0
         version: 3.0.0
-      '@types/cookie-parser':
-        specifier: ^1.4.8
-        version: 1.4.8(@types/express@5.0.1)
       '@types/multer':
         specifier: ^1.4.13
         version: 1.4.13
@@ -102,6 +99,9 @@ importers:
       '@swc/core':
         specifier: ^1.10.7
         version: 1.11.13
+      '@types/cookie-parser':
+        specifier: ^1.4.8
+        version: 1.4.8(@types/express@5.0.1)
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.1

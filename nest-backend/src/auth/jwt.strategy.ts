@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PrismaService } from '../prisma/prisma.service';
@@ -7,10 +7,9 @@ import { JWTPayload } from './interface/jwt-payload.interface';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly prisma: PrismaService) {
+
     const jwtSecret = process.env.JWT_SECRET;
-    if (!jwtSecret) {
-      throw new Error('JWT_SECRET is not defined');
-    }
+    if (!jwtSecret) throw new Error('JWT_SECRET is not defined');
 
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -23,9 +22,21 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const { userId } = payload;
 
     // ユーザー情報を取得・判定
-    const user = await this.prisma.user.findUnique({ where: { id: userId } });
-    if (!user) throw new Error('User not found');
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId},
+      select: {
+        id: true,
+        email: true,
+        username: true,
+      }
+    });
 
-    return payload;
+    if (!user) throw new UnauthorizedException('User not found');
+
+    return {
+      userId: user.id,
+      email: user.email,
+      username: user.username,
+    };
   }
 }

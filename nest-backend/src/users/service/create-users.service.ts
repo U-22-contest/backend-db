@@ -5,7 +5,11 @@ import { PostgresCreateUserRepository } from '../repositories/create-users/postg
 
 export type CreateUserResponse = {
   message: string;
-  user: User;
+  user: {
+    id: string,
+    username: string,
+    email: string,
+  };
 };
 
 @Injectable()
@@ -20,6 +24,13 @@ export class CreateUsersService {
       createUserDto.email,
       createUserDto.password,
     );
-    return { message: 'User created successfully', user };
+    return {
+      message: 'User created successfully',
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+      }
+    };
   }
 }
