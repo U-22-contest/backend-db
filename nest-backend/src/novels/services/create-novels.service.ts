@@ -47,6 +47,7 @@ export class CreateNovelsService {
     const mongoNovel = await this.mongoCreateNovel.createNovel(
       sharedId,
       createNovelDto.content,
+      createNovelDto.overview,
     );
     await mongoNovel.save();
 
