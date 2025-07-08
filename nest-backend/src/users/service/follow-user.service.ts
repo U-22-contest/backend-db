@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
-import { FollowUserDto } from '../dto/follow-user.dto';
+import { FollowUserDto, FollowUserResponse } from '../dto/follow-user.dto';
 import { Follow } from '../../../generated/postgresql';
 import { PostgresFollowUserRepository } from '../repositories/follow-user/postgres';
 
@@ -9,7 +9,7 @@ export class FollowUserService {
         private readonly postgresFollowUser: PostgresFollowUserRepository,
     ) {}
 
-    async followUser(followUserDto: FollowUserDto) : Promise<Follow> {
+    async followUser(followUserDto: FollowUserDto) : Promise<FollowUserResponse> {
         const { followerId, followeeId } = followUserDto;
 
         // 自分自信をフォローできないよう

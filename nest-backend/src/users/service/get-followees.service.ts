@@ -1,11 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PostgresGetFolloweesRepository } from '../repositories/get-followees/postgres';
-
-export type GetFolloweesResponse = {
-    id: string,
-    username: string,
-    followingSince: Date,
-};
+import { GetFolloweesResponse } from "../dto/get-followees.dto"
 
 @Injectable()
 export class GetFolloweesService {
