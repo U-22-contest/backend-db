@@ -11,24 +11,20 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 import { Follow } from '../../generated/postgresql';
-import {
-  CreateUsersService,
-  CreateUserResponse,
-} from './service/create-users.service';
+import { CreateUsersService } from './service/create-users.service';
 import { FollowUserService } from './service/follow-user.service';
 import { UnfollowUserService } from './service/unfollow-user.service';
-import {
-  GetFollowersService,
-  GetFollowersResponse,
-} from './service/get-followers.service';
-import {
-  GetFolloweesService,
-  GetFolloweesResponse,
-} from './service/get-followees.service';
+import { GetFollowersService } from './service/get-followers.service';
+import { GetFolloweesService } from './service/get-followees.service';
 
-import { CreateUserDto } from './dto/create-user.dto';
+import {
+  CreateUserDto,
+  CreateUserResponse,
+} from './dto/create-user.dto';
 import { FollowUserDto } from './dto/follow-user.dto';
 import { UnfollowUserDto } from './dto/unfollow-user.dto';
+import { GetFolloweesResponse } from './dto/get-followees.dto';
+import { GetFollowersResponse } from './dto/get-followers.dto';
 
 @Controller('users')
 export class UsersController {

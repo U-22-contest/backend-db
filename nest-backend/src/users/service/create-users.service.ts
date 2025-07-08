@@ -1,16 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from '../dto/create-user.dto';
+import { CreateUserDto, CreateUserResponse } from '../dto/create-user.dto';
 import { User } from '../../../generated/postgresql';
 import { PostgresCreateUserRepository } from '../repositories/create-users/postgres';
-
-export type CreateUserResponse = {
-  message: string;
-  user: {
-    id: string,
-    username: string,
-    email: string,
-  };
-};
 
 @Injectable()
 export class CreateUsersService {
