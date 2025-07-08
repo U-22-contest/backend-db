@@ -301,8 +301,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.5.0
-   * Query Engine version: 173f8d54f8d52e692c7e27e72a88314ec7aeff60
+   * Prisma Client JS version: 6.10.1
+   * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
    */
   export type PrismaVersion = {
     client: string
@@ -2244,7 +2244,7 @@ export namespace Prisma {
 
   /**
    * Fields of the User model
-   */ 
+   */
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
     readonly username: FieldRef<"User", 'String'>
@@ -3435,7 +3435,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Follow model
-   */ 
+   */
   interface FollowFieldRefs {
     readonly id: FieldRef<"Follow", 'String'>
     readonly followerId: FieldRef<"Follow", 'String'>
@@ -4534,7 +4534,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Novel model
-   */ 
+   */
   interface NovelFieldRefs {
     readonly id: FieldRef<"Novel", 'String'>
     readonly sharedId: FieldRef<"Novel", 'String'>
@@ -5650,7 +5650,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Category model
-   */ 
+   */
   interface CategoryFieldRefs {
     readonly categoryId: FieldRef<"Category", 'String'>
     readonly categoryName: FieldRef<"Category", 'String'>
@@ -6803,7 +6803,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Comment model
-   */ 
+   */
   interface CommentFieldRefs {
     readonly id: FieldRef<"Comment", 'String'>
     readonly sharedId: FieldRef<"Comment", 'String'>
@@ -7860,7 +7860,7 @@ export namespace Prisma {
 
   /**
    * Fields of the LikeNovel model
-   */ 
+   */
   interface LikeNovelFieldRefs {
     readonly id: FieldRef<"LikeNovel", 'String'>
     readonly userId: FieldRef<"LikeNovel", 'String'>
@@ -8975,7 +8975,7 @@ export namespace Prisma {
 
   /**
    * Fields of the LikeSentence model
-   */ 
+   */
   interface LikeSentenceFieldRefs {
     readonly id: FieldRef<"LikeSentence", 'String'>
     readonly userId: FieldRef<"LikeSentence", 'String'>
@@ -9515,7 +9515,7 @@ export namespace Prisma {
 
 
   /**
-   * Field references 
+   * Field references
    */
 
 

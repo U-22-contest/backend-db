@@ -10,6 +10,9 @@ export class Novel {
 
   @Prop({ required: true })
   content: string;
+
+  @Prop({ required: true })
+  overview: string;
 }
 
 export const NovelSchema = SchemaFactory.createForClass(Novel);

@@ -9,10 +9,15 @@ export class MongoCreateNovelRepository {
     @InjectModel(Novel.name) private readonly novelModel: Model<NovelDocument>,
   ) {}
 
-  async createNovel(sharedId: string, content: string): Promise<NovelDocument> {
+  async createNovel(
+    sharedId: string,
+    content: string,
+    overview: string,
+  ): Promise<NovelDocument> {
     const novel = new this.novelModel({
       sharedId,
       content,
+      overview,
     });
     return novel.save();
   }
