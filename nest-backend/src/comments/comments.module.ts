@@ -8,6 +8,7 @@ import { Comment, CommentSchema } from '../mongo/schema/comment.schema';
 import { CreateCommentsService } from './service/create-comments.service';
 import { GetCommentsByNovelIdService } from './service/get-comments-by-novelid.service';
 import { DeleteCommentsService } from './service/delete-comments.service';
+import { UpdateCommentService } from './service/update-comments.service';
 
 // repositories
 import { MongoCreateCommentRepository } from './repositories/create-comments/mongo';
@@ -16,6 +17,8 @@ import { MongoDeleteCommentRepository } from './repositories/delete-comments/mon
 import { PostgresDeleteCommentRepository } from './repositories/delete-comments/postgres';
 import { MongoGetCommentsByNovelIdRepository } from './repositories/get-comments-by-novelid/mongo';
 import { PostgresGetCommentsByNovelIdRepository } from './repositories/get-comments-by-novelid/postgres';
+import { PostgresUpdateCommentRepository } from './repositories/update-comments/postgres';
+import { MongoUpdateCommentRepository } from './repositories/update-comments/mongo';
 
 @Module({
   imports: [
@@ -27,6 +30,7 @@ import { PostgresGetCommentsByNovelIdRepository } from './repositories/get-comme
     CreateCommentsService,
     GetCommentsByNovelIdService,
     DeleteCommentsService,
+    UpdateCommentService,
 
     MongoCreateCommentRepository,
     PostgresCreateCommentRepository,
@@ -34,6 +38,8 @@ import { PostgresGetCommentsByNovelIdRepository } from './repositories/get-comme
     PostgresDeleteCommentRepository,
     MongoGetCommentsByNovelIdRepository,
     PostgresGetCommentsByNovelIdRepository,
+    MongoUpdateCommentRepository,
+    PostgresUpdateCommentRepository,
   ],
   controllers: [CommentsController],
   exports: [
@@ -42,6 +48,8 @@ import { PostgresGetCommentsByNovelIdRepository } from './repositories/get-comme
     DeleteCommentsService,
     PostgresDeleteCommentRepository,
     MongoDeleteCommentRepository,
+    MongoUpdateCommentRepository,
+    PostgresUpdateCommentRepository,
   ],
 })
 export class CommentsModule {}
