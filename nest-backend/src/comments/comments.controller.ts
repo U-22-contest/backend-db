@@ -5,10 +5,12 @@ import {
   Request,
   Get,
   Delete,
+  Patch,
   Param,
   UseGuards,
 } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
+import { UpdateCommentDto } from './dto/update-comment.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 
@@ -23,6 +25,7 @@ import {
   GetCommentsByNovelIdResponse,
 } from './service/get-comments-by-novelid.service';
 import { DeleteCommentsService } from './service/delete-comments.service';
+import { UpdateCommentService } from './service/update-comments.service';
 
 @Controller('comments')
 export class CommentsController {
@@ -31,6 +34,7 @@ export class CommentsController {
     private readonly createCommentsService: CreateCommentsService,
     private readonly getCommentsByNovelIdService: GetCommentsByNovelIdService,
     private readonly deleteCommentsService: DeleteCommentsService,
+    private readonly updateCommentService: UpdateCommentService,
   ) {}
 
   // 小説のコメント投稿
@@ -64,5 +68,20 @@ export class CommentsController {
     @Request() req: { user: JWTPayload },
   ): Promise<{ message: string }> {
     return this.deleteCommentsService.deleteComment(commentId, req.user.userId);
+  }
+
+
+  @Patch(':commentId')
+  @UseGuards(AuthGuard('jwt'))
+  async update(
+    @Param('commentId') commentId: string,
+    @Body() updateCommentDto: UpdateCommentDto,
+    @Request() req: { user: JWTPayload },
+  ): Promise<{ message: string }> {
+    return this.updateCommentService.updateComment(
+      commentId,
+      req.user.userId,
+      updateCommentDto,
+    );
   }
 }
