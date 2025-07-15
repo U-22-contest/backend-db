@@ -3,24 +3,13 @@ import { Error } from 'mongoose';
 import { PostgresGetAllNovelRepository } from '../repositories/get-all-novels/postgres';
 import { MongoGetAllNovelRepository } from '../repositories/get-all-novels/mongo';
 import { GetPreviewByIdService } from './get-preview-by-id.service';
-
-export type GetAllNovelsResponse = {
-  id: string;
-  sharedId: string;
-  authorId: string;
-  createdAt: Date;
-  updatedAt: Date;
-  title: string;
-  content: string;
-  overview: string;
-};
+import { GetAllNovelsResponse } from '../dto/request/get-all-novels.dto';
 
 @Injectable()
 export class GetAllNovelsService {
   constructor(
     private readonly postgresGetAllNovel: PostgresGetAllNovelRepository,
     private readonly mongoGetAllNovel: MongoGetAllNovelRepository,
-
     private readonly getPreviewByIdService: GetPreviewByIdService,
   ) {}
 

@@ -24,6 +24,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Follow = $Result.DefaultSelection<Prisma.$FollowPayload>
 /**
+ * Model ViewHistory
+ * 
+ */
+export type ViewHistory = $Result.DefaultSelection<Prisma.$ViewHistoryPayload>
+/**
  * Model Novel
  * 
  */
@@ -195,6 +200,16 @@ export class PrismaClient<
   get follow(): Prisma.FollowDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.viewHistory`: Exposes CRUD operations for the **ViewHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ViewHistories
+    * const viewHistories = await prisma.viewHistory.findMany()
+    * ```
+    */
+  get viewHistory(): Prisma.ViewHistoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.novel`: Exposes CRUD operations for the **Novel** model.
     * Example usage:
     * ```ts
@@ -301,8 +316,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.10.1
-   * Query Engine version: 9b628578b3b7cae625e8c927178f15a170e74a9c
+   * Prisma Client JS version: 6.5.0
+   * Query Engine version: 173f8d54f8d52e692c7e27e72a88314ec7aeff60
    */
   export type PrismaVersion = {
     client: string
@@ -685,6 +700,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Follow: 'Follow',
+    ViewHistory: 'ViewHistory',
     Novel: 'Novel',
     Category: 'Category',
     Comment: 'Comment',
@@ -708,7 +724,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "follow" | "novel" | "category" | "comment" | "likeNovel" | "likeSentence"
+      modelProps: "user" | "follow" | "viewHistory" | "novel" | "category" | "comment" | "likeNovel" | "likeSentence"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -857,6 +873,80 @@ export namespace Prisma {
           count: {
             args: Prisma.FollowCountArgs<ExtArgs>
             result: $Utils.Optional<FollowCountAggregateOutputType> | number
+          }
+        }
+      }
+      ViewHistory: {
+        payload: Prisma.$ViewHistoryPayload<ExtArgs>
+        fields: Prisma.ViewHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ViewHistoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ViewHistoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.ViewHistoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ViewHistoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.ViewHistoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.ViewHistoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.ViewHistoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ViewHistoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload>[]
+          }
+          delete: {
+            args: Prisma.ViewHistoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload>
+          }
+          update: {
+            args: Prisma.ViewHistoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.ViewHistoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ViewHistoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ViewHistoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.ViewHistoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ViewHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.ViewHistoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateViewHistory>
+          }
+          groupBy: {
+            args: Prisma.ViewHistoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ViewHistoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ViewHistoryCountArgs<ExtArgs>
+            result: $Utils.Optional<ViewHistoryCountAggregateOutputType> | number
           }
         }
       }
@@ -1316,6 +1406,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     follow?: FollowOmit
+    viewHistory?: ViewHistoryOmit
     novel?: NovelOmit
     category?: CategoryOmit
     comment?: CommentOmit
@@ -1419,6 +1510,7 @@ export namespace Prisma {
     comments: number
     likeNovels: number
     likeSentence: number
+    viewHistory: number
     followers: number
     followees: number
   }
@@ -1428,6 +1520,7 @@ export namespace Prisma {
     comments?: boolean | UserCountOutputTypeCountCommentsArgs
     likeNovels?: boolean | UserCountOutputTypeCountLikeNovelsArgs
     likeSentence?: boolean | UserCountOutputTypeCountLikeSentenceArgs
+    viewHistory?: boolean | UserCountOutputTypeCountViewHistoryArgs
     followers?: boolean | UserCountOutputTypeCountFollowersArgs
     followees?: boolean | UserCountOutputTypeCountFolloweesArgs
   }
@@ -1474,6 +1567,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountViewHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ViewHistoryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountFollowersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FollowWhereInput
   }
@@ -1495,6 +1595,7 @@ export namespace Prisma {
     comments: number
     likes: number
     LikeSentence: number
+    viewHistory: number
   }
 
   export type NovelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1502,6 +1603,7 @@ export namespace Prisma {
     comments?: boolean | NovelCountOutputTypeCountCommentsArgs
     likes?: boolean | NovelCountOutputTypeCountLikesArgs
     LikeSentence?: boolean | NovelCountOutputTypeCountLikeSentenceArgs
+    viewHistory?: boolean | NovelCountOutputTypeCountViewHistoryArgs
   }
 
   // Custom InputTypes
@@ -1541,6 +1643,13 @@ export namespace Prisma {
    */
   export type NovelCountOutputTypeCountLikeSentenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LikeSentenceWhereInput
+  }
+
+  /**
+   * NovelCountOutputType without action
+   */
+  export type NovelCountOutputTypeCountViewHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ViewHistoryWhereInput
   }
 
 
@@ -1755,6 +1864,7 @@ export namespace Prisma {
     comments?: boolean | User$commentsArgs<ExtArgs>
     likeNovels?: boolean | User$likeNovelsArgs<ExtArgs>
     likeSentence?: boolean | User$likeSentenceArgs<ExtArgs>
+    viewHistory?: boolean | User$viewHistoryArgs<ExtArgs>
     followers?: boolean | User$followersArgs<ExtArgs>
     followees?: boolean | User$followeesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1793,6 +1903,7 @@ export namespace Prisma {
     comments?: boolean | User$commentsArgs<ExtArgs>
     likeNovels?: boolean | User$likeNovelsArgs<ExtArgs>
     likeSentence?: boolean | User$likeSentenceArgs<ExtArgs>
+    viewHistory?: boolean | User$viewHistoryArgs<ExtArgs>
     followers?: boolean | User$followersArgs<ExtArgs>
     followees?: boolean | User$followeesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1807,6 +1918,7 @@ export namespace Prisma {
       comments: Prisma.$CommentPayload<ExtArgs>[]
       likeNovels: Prisma.$LikeNovelPayload<ExtArgs>[]
       likeSentence: Prisma.$LikeSentencePayload<ExtArgs>[]
+      viewHistory: Prisma.$ViewHistoryPayload<ExtArgs>[]
       followers: Prisma.$FollowPayload<ExtArgs>[]
       followees: Prisma.$FollowPayload<ExtArgs>[]
     }
@@ -2215,6 +2327,7 @@ export namespace Prisma {
     comments<T extends User$commentsArgs<ExtArgs> = {}>(args?: Subset<T, User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     likeNovels<T extends User$likeNovelsArgs<ExtArgs> = {}>(args?: Subset<T, User$likeNovelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     likeSentence<T extends User$likeSentenceArgs<ExtArgs> = {}>(args?: Subset<T, User$likeSentenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikeSentencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    viewHistory<T extends User$viewHistoryArgs<ExtArgs> = {}>(args?: Subset<T, User$viewHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     followers<T extends User$followersArgs<ExtArgs> = {}>(args?: Subset<T, User$followersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     followees<T extends User$followeesArgs<ExtArgs> = {}>(args?: Subset<T, User$followeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -2244,7 +2357,7 @@ export namespace Prisma {
 
   /**
    * Fields of the User model
-   */
+   */ 
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'String'>
     readonly username: FieldRef<"User", 'String'>
@@ -2733,6 +2846,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LikeSentenceScalarFieldEnum | LikeSentenceScalarFieldEnum[]
+  }
+
+  /**
+   * User.viewHistory
+   */
+  export type User$viewHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    where?: ViewHistoryWhereInput
+    orderBy?: ViewHistoryOrderByWithRelationInput | ViewHistoryOrderByWithRelationInput[]
+    cursor?: ViewHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ViewHistoryScalarFieldEnum | ViewHistoryScalarFieldEnum[]
   }
 
   /**
@@ -3435,7 +3572,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Follow model
-   */
+   */ 
   interface FollowFieldRefs {
     readonly id: FieldRef<"Follow", 'String'>
     readonly followerId: FieldRef<"Follow", 'String'>
@@ -3856,6 +3993,1046 @@ export namespace Prisma {
 
 
   /**
+   * Model ViewHistory
+   */
+
+  export type AggregateViewHistory = {
+    _count: ViewHistoryCountAggregateOutputType | null
+    _min: ViewHistoryMinAggregateOutputType | null
+    _max: ViewHistoryMaxAggregateOutputType | null
+  }
+
+  export type ViewHistoryMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    novelId: string | null
+  }
+
+  export type ViewHistoryMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    novelId: string | null
+  }
+
+  export type ViewHistoryCountAggregateOutputType = {
+    id: number
+    userId: number
+    novelId: number
+    _all: number
+  }
+
+
+  export type ViewHistoryMinAggregateInputType = {
+    id?: true
+    userId?: true
+    novelId?: true
+  }
+
+  export type ViewHistoryMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    novelId?: true
+  }
+
+  export type ViewHistoryCountAggregateInputType = {
+    id?: true
+    userId?: true
+    novelId?: true
+    _all?: true
+  }
+
+  export type ViewHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ViewHistory to aggregate.
+     */
+    where?: ViewHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ViewHistories to fetch.
+     */
+    orderBy?: ViewHistoryOrderByWithRelationInput | ViewHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ViewHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ViewHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ViewHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ViewHistories
+    **/
+    _count?: true | ViewHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ViewHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ViewHistoryMaxAggregateInputType
+  }
+
+  export type GetViewHistoryAggregateType<T extends ViewHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateViewHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateViewHistory[P]>
+      : GetScalarType<T[P], AggregateViewHistory[P]>
+  }
+
+
+
+
+  export type ViewHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ViewHistoryWhereInput
+    orderBy?: ViewHistoryOrderByWithAggregationInput | ViewHistoryOrderByWithAggregationInput[]
+    by: ViewHistoryScalarFieldEnum[] | ViewHistoryScalarFieldEnum
+    having?: ViewHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ViewHistoryCountAggregateInputType | true
+    _min?: ViewHistoryMinAggregateInputType
+    _max?: ViewHistoryMaxAggregateInputType
+  }
+
+  export type ViewHistoryGroupByOutputType = {
+    id: string
+    userId: string
+    novelId: string
+    _count: ViewHistoryCountAggregateOutputType | null
+    _min: ViewHistoryMinAggregateOutputType | null
+    _max: ViewHistoryMaxAggregateOutputType | null
+  }
+
+  type GetViewHistoryGroupByPayload<T extends ViewHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ViewHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ViewHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ViewHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], ViewHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ViewHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    novelId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["viewHistory"]>
+
+  export type ViewHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    novelId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["viewHistory"]>
+
+  export type ViewHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    novelId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["viewHistory"]>
+
+  export type ViewHistorySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    novelId?: boolean
+  }
+
+  export type ViewHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "novelId", ExtArgs["result"]["viewHistory"]>
+  export type ViewHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }
+  export type ViewHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }
+  export type ViewHistoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    novel?: boolean | NovelDefaultArgs<ExtArgs>
+  }
+
+  export type $ViewHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ViewHistory"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      novel: Prisma.$NovelPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      novelId: string
+    }, ExtArgs["result"]["viewHistory"]>
+    composites: {}
+  }
+
+  type ViewHistoryGetPayload<S extends boolean | null | undefined | ViewHistoryDefaultArgs> = $Result.GetResult<Prisma.$ViewHistoryPayload, S>
+
+  type ViewHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ViewHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ViewHistoryCountAggregateInputType | true
+    }
+
+  export interface ViewHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ViewHistory'], meta: { name: 'ViewHistory' } }
+    /**
+     * Find zero or one ViewHistory that matches the filter.
+     * @param {ViewHistoryFindUniqueArgs} args - Arguments to find a ViewHistory
+     * @example
+     * // Get one ViewHistory
+     * const viewHistory = await prisma.viewHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ViewHistoryFindUniqueArgs>(args: SelectSubset<T, ViewHistoryFindUniqueArgs<ExtArgs>>): Prisma__ViewHistoryClient<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ViewHistory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ViewHistoryFindUniqueOrThrowArgs} args - Arguments to find a ViewHistory
+     * @example
+     * // Get one ViewHistory
+     * const viewHistory = await prisma.viewHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ViewHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, ViewHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ViewHistoryClient<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ViewHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewHistoryFindFirstArgs} args - Arguments to find a ViewHistory
+     * @example
+     * // Get one ViewHistory
+     * const viewHistory = await prisma.viewHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ViewHistoryFindFirstArgs>(args?: SelectSubset<T, ViewHistoryFindFirstArgs<ExtArgs>>): Prisma__ViewHistoryClient<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ViewHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewHistoryFindFirstOrThrowArgs} args - Arguments to find a ViewHistory
+     * @example
+     * // Get one ViewHistory
+     * const viewHistory = await prisma.viewHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ViewHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, ViewHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__ViewHistoryClient<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ViewHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ViewHistories
+     * const viewHistories = await prisma.viewHistory.findMany()
+     * 
+     * // Get first 10 ViewHistories
+     * const viewHistories = await prisma.viewHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const viewHistoryWithIdOnly = await prisma.viewHistory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ViewHistoryFindManyArgs>(args?: SelectSubset<T, ViewHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ViewHistory.
+     * @param {ViewHistoryCreateArgs} args - Arguments to create a ViewHistory.
+     * @example
+     * // Create one ViewHistory
+     * const ViewHistory = await prisma.viewHistory.create({
+     *   data: {
+     *     // ... data to create a ViewHistory
+     *   }
+     * })
+     * 
+     */
+    create<T extends ViewHistoryCreateArgs>(args: SelectSubset<T, ViewHistoryCreateArgs<ExtArgs>>): Prisma__ViewHistoryClient<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ViewHistories.
+     * @param {ViewHistoryCreateManyArgs} args - Arguments to create many ViewHistories.
+     * @example
+     * // Create many ViewHistories
+     * const viewHistory = await prisma.viewHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ViewHistoryCreateManyArgs>(args?: SelectSubset<T, ViewHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ViewHistories and returns the data saved in the database.
+     * @param {ViewHistoryCreateManyAndReturnArgs} args - Arguments to create many ViewHistories.
+     * @example
+     * // Create many ViewHistories
+     * const viewHistory = await prisma.viewHistory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ViewHistories and only return the `id`
+     * const viewHistoryWithIdOnly = await prisma.viewHistory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ViewHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, ViewHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ViewHistory.
+     * @param {ViewHistoryDeleteArgs} args - Arguments to delete one ViewHistory.
+     * @example
+     * // Delete one ViewHistory
+     * const ViewHistory = await prisma.viewHistory.delete({
+     *   where: {
+     *     // ... filter to delete one ViewHistory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ViewHistoryDeleteArgs>(args: SelectSubset<T, ViewHistoryDeleteArgs<ExtArgs>>): Prisma__ViewHistoryClient<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ViewHistory.
+     * @param {ViewHistoryUpdateArgs} args - Arguments to update one ViewHistory.
+     * @example
+     * // Update one ViewHistory
+     * const viewHistory = await prisma.viewHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ViewHistoryUpdateArgs>(args: SelectSubset<T, ViewHistoryUpdateArgs<ExtArgs>>): Prisma__ViewHistoryClient<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ViewHistories.
+     * @param {ViewHistoryDeleteManyArgs} args - Arguments to filter ViewHistories to delete.
+     * @example
+     * // Delete a few ViewHistories
+     * const { count } = await prisma.viewHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ViewHistoryDeleteManyArgs>(args?: SelectSubset<T, ViewHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ViewHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ViewHistories
+     * const viewHistory = await prisma.viewHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ViewHistoryUpdateManyArgs>(args: SelectSubset<T, ViewHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ViewHistories and returns the data updated in the database.
+     * @param {ViewHistoryUpdateManyAndReturnArgs} args - Arguments to update many ViewHistories.
+     * @example
+     * // Update many ViewHistories
+     * const viewHistory = await prisma.viewHistory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ViewHistories and only return the `id`
+     * const viewHistoryWithIdOnly = await prisma.viewHistory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ViewHistoryUpdateManyAndReturnArgs>(args: SelectSubset<T, ViewHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ViewHistory.
+     * @param {ViewHistoryUpsertArgs} args - Arguments to update or create a ViewHistory.
+     * @example
+     * // Update or create a ViewHistory
+     * const viewHistory = await prisma.viewHistory.upsert({
+     *   create: {
+     *     // ... data to create a ViewHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ViewHistory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ViewHistoryUpsertArgs>(args: SelectSubset<T, ViewHistoryUpsertArgs<ExtArgs>>): Prisma__ViewHistoryClient<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ViewHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewHistoryCountArgs} args - Arguments to filter ViewHistories to count.
+     * @example
+     * // Count the number of ViewHistories
+     * const count = await prisma.viewHistory.count({
+     *   where: {
+     *     // ... the filter for the ViewHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends ViewHistoryCountArgs>(
+      args?: Subset<T, ViewHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ViewHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ViewHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ViewHistoryAggregateArgs>(args: Subset<T, ViewHistoryAggregateArgs>): Prisma.PrismaPromise<GetViewHistoryAggregateType<T>>
+
+    /**
+     * Group by ViewHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ViewHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ViewHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ViewHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: ViewHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ViewHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetViewHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ViewHistory model
+   */
+  readonly fields: ViewHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ViewHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ViewHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    novel<T extends NovelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NovelDefaultArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ViewHistory model
+   */ 
+  interface ViewHistoryFieldRefs {
+    readonly id: FieldRef<"ViewHistory", 'String'>
+    readonly userId: FieldRef<"ViewHistory", 'String'>
+    readonly novelId: FieldRef<"ViewHistory", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ViewHistory findUnique
+   */
+  export type ViewHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which ViewHistory to fetch.
+     */
+    where: ViewHistoryWhereUniqueInput
+  }
+
+  /**
+   * ViewHistory findUniqueOrThrow
+   */
+  export type ViewHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which ViewHistory to fetch.
+     */
+    where: ViewHistoryWhereUniqueInput
+  }
+
+  /**
+   * ViewHistory findFirst
+   */
+  export type ViewHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which ViewHistory to fetch.
+     */
+    where?: ViewHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ViewHistories to fetch.
+     */
+    orderBy?: ViewHistoryOrderByWithRelationInput | ViewHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ViewHistories.
+     */
+    cursor?: ViewHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ViewHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ViewHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ViewHistories.
+     */
+    distinct?: ViewHistoryScalarFieldEnum | ViewHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * ViewHistory findFirstOrThrow
+   */
+  export type ViewHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which ViewHistory to fetch.
+     */
+    where?: ViewHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ViewHistories to fetch.
+     */
+    orderBy?: ViewHistoryOrderByWithRelationInput | ViewHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ViewHistories.
+     */
+    cursor?: ViewHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ViewHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ViewHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ViewHistories.
+     */
+    distinct?: ViewHistoryScalarFieldEnum | ViewHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * ViewHistory findMany
+   */
+  export type ViewHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which ViewHistories to fetch.
+     */
+    where?: ViewHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ViewHistories to fetch.
+     */
+    orderBy?: ViewHistoryOrderByWithRelationInput | ViewHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ViewHistories.
+     */
+    cursor?: ViewHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ViewHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ViewHistories.
+     */
+    skip?: number
+    distinct?: ViewHistoryScalarFieldEnum | ViewHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * ViewHistory create
+   */
+  export type ViewHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ViewHistory.
+     */
+    data: XOR<ViewHistoryCreateInput, ViewHistoryUncheckedCreateInput>
+  }
+
+  /**
+   * ViewHistory createMany
+   */
+  export type ViewHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ViewHistories.
+     */
+    data: ViewHistoryCreateManyInput | ViewHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ViewHistory createManyAndReturn
+   */
+  export type ViewHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many ViewHistories.
+     */
+    data: ViewHistoryCreateManyInput | ViewHistoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ViewHistory update
+   */
+  export type ViewHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ViewHistory.
+     */
+    data: XOR<ViewHistoryUpdateInput, ViewHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which ViewHistory to update.
+     */
+    where: ViewHistoryWhereUniqueInput
+  }
+
+  /**
+   * ViewHistory updateMany
+   */
+  export type ViewHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ViewHistories.
+     */
+    data: XOR<ViewHistoryUpdateManyMutationInput, ViewHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which ViewHistories to update
+     */
+    where?: ViewHistoryWhereInput
+    /**
+     * Limit how many ViewHistories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ViewHistory updateManyAndReturn
+   */
+  export type ViewHistoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to update ViewHistories.
+     */
+    data: XOR<ViewHistoryUpdateManyMutationInput, ViewHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which ViewHistories to update
+     */
+    where?: ViewHistoryWhereInput
+    /**
+     * Limit how many ViewHistories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ViewHistory upsert
+   */
+  export type ViewHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ViewHistory to update in case it exists.
+     */
+    where: ViewHistoryWhereUniqueInput
+    /**
+     * In case the ViewHistory found by the `where` argument doesn't exist, create a new ViewHistory with this data.
+     */
+    create: XOR<ViewHistoryCreateInput, ViewHistoryUncheckedCreateInput>
+    /**
+     * In case the ViewHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ViewHistoryUpdateInput, ViewHistoryUncheckedUpdateInput>
+  }
+
+  /**
+   * ViewHistory delete
+   */
+  export type ViewHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    /**
+     * Filter which ViewHistory to delete.
+     */
+    where: ViewHistoryWhereUniqueInput
+  }
+
+  /**
+   * ViewHistory deleteMany
+   */
+  export type ViewHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ViewHistories to delete
+     */
+    where?: ViewHistoryWhereInput
+    /**
+     * Limit how many ViewHistories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ViewHistory without action
+   */
+  export type ViewHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Novel
    */
 
@@ -4040,6 +5217,7 @@ export namespace Prisma {
     comments?: boolean | Novel$commentsArgs<ExtArgs>
     likes?: boolean | Novel$likesArgs<ExtArgs>
     LikeSentence?: boolean | Novel$LikeSentenceArgs<ExtArgs>
+    viewHistory?: boolean | Novel$viewHistoryArgs<ExtArgs>
     _count?: boolean | NovelCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["novel"]>
 
@@ -4082,6 +5260,7 @@ export namespace Prisma {
     comments?: boolean | Novel$commentsArgs<ExtArgs>
     likes?: boolean | Novel$likesArgs<ExtArgs>
     LikeSentence?: boolean | Novel$LikeSentenceArgs<ExtArgs>
+    viewHistory?: boolean | Novel$viewHistoryArgs<ExtArgs>
     _count?: boolean | NovelCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type NovelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4099,6 +5278,7 @@ export namespace Prisma {
       comments: Prisma.$CommentPayload<ExtArgs>[]
       likes: Prisma.$LikeNovelPayload<ExtArgs>[]
       LikeSentence: Prisma.$LikeSentencePayload<ExtArgs>[]
+      viewHistory: Prisma.$ViewHistoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4507,6 +5687,7 @@ export namespace Prisma {
     comments<T extends Novel$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Novel$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     likes<T extends Novel$likesArgs<ExtArgs> = {}>(args?: Subset<T, Novel$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     LikeSentence<T extends Novel$LikeSentenceArgs<ExtArgs> = {}>(args?: Subset<T, Novel$LikeSentenceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikeSentencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    viewHistory<T extends Novel$viewHistoryArgs<ExtArgs> = {}>(args?: Subset<T, Novel$viewHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ViewHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4534,7 +5715,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Novel model
-   */
+   */ 
   interface NovelFieldRefs {
     readonly id: FieldRef<"Novel", 'String'>
     readonly sharedId: FieldRef<"Novel", 'String'>
@@ -5032,6 +6213,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LikeSentenceScalarFieldEnum | LikeSentenceScalarFieldEnum[]
+  }
+
+  /**
+   * Novel.viewHistory
+   */
+  export type Novel$viewHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ViewHistory
+     */
+    select?: ViewHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ViewHistory
+     */
+    omit?: ViewHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ViewHistoryInclude<ExtArgs> | null
+    where?: ViewHistoryWhereInput
+    orderBy?: ViewHistoryOrderByWithRelationInput | ViewHistoryOrderByWithRelationInput[]
+    cursor?: ViewHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ViewHistoryScalarFieldEnum | ViewHistoryScalarFieldEnum[]
   }
 
   /**
@@ -5650,7 +6855,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Category model
-   */
+   */ 
   interface CategoryFieldRefs {
     readonly categoryId: FieldRef<"Category", 'String'>
     readonly categoryName: FieldRef<"Category", 'String'>
@@ -6803,7 +8008,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Comment model
-   */
+   */ 
   interface CommentFieldRefs {
     readonly id: FieldRef<"Comment", 'String'>
     readonly sharedId: FieldRef<"Comment", 'String'>
@@ -7860,7 +9065,7 @@ export namespace Prisma {
 
   /**
    * Fields of the LikeNovel model
-   */
+   */ 
   interface LikeNovelFieldRefs {
     readonly id: FieldRef<"LikeNovel", 'String'>
     readonly userId: FieldRef<"LikeNovel", 'String'>
@@ -8975,7 +10180,7 @@ export namespace Prisma {
 
   /**
    * Fields of the LikeSentence model
-   */
+   */ 
   interface LikeSentenceFieldRefs {
     readonly id: FieldRef<"LikeSentence", 'String'>
     readonly userId: FieldRef<"LikeSentence", 'String'>
@@ -9433,6 +10638,15 @@ export namespace Prisma {
   export type FollowScalarFieldEnum = (typeof FollowScalarFieldEnum)[keyof typeof FollowScalarFieldEnum]
 
 
+  export const ViewHistoryScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    novelId: 'novelId'
+  };
+
+  export type ViewHistoryScalarFieldEnum = (typeof ViewHistoryScalarFieldEnum)[keyof typeof ViewHistoryScalarFieldEnum]
+
+
   export const NovelScalarFieldEnum: {
     id: 'id',
     sharedId: 'sharedId',
@@ -9515,7 +10729,7 @@ export namespace Prisma {
 
 
   /**
-   * Field references
+   * Field references 
    */
 
 
@@ -9592,6 +10806,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     likeNovels?: LikeNovelListRelationFilter
     likeSentence?: LikeSentenceListRelationFilter
+    viewHistory?: ViewHistoryListRelationFilter
     followers?: FollowListRelationFilter
     followees?: FollowListRelationFilter
   }
@@ -9607,6 +10822,7 @@ export namespace Prisma {
     comments?: CommentOrderByRelationAggregateInput
     likeNovels?: LikeNovelOrderByRelationAggregateInput
     likeSentence?: LikeSentenceOrderByRelationAggregateInput
+    viewHistory?: ViewHistoryOrderByRelationAggregateInput
     followers?: FollowOrderByRelationAggregateInput
     followees?: FollowOrderByRelationAggregateInput
   }
@@ -9625,6 +10841,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     likeNovels?: LikeNovelListRelationFilter
     likeSentence?: LikeSentenceListRelationFilter
+    viewHistory?: ViewHistoryListRelationFilter
     followers?: FollowListRelationFilter
     followees?: FollowListRelationFilter
   }, "id" | "username" | "email">
@@ -9707,6 +10924,55 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Follow"> | Date | string
   }
 
+  export type ViewHistoryWhereInput = {
+    AND?: ViewHistoryWhereInput | ViewHistoryWhereInput[]
+    OR?: ViewHistoryWhereInput[]
+    NOT?: ViewHistoryWhereInput | ViewHistoryWhereInput[]
+    id?: StringFilter<"ViewHistory"> | string
+    userId?: StringFilter<"ViewHistory"> | string
+    novelId?: StringFilter<"ViewHistory"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    novel?: XOR<NovelScalarRelationFilter, NovelWhereInput>
+  }
+
+  export type ViewHistoryOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    novelId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    novel?: NovelOrderByWithRelationInput
+  }
+
+  export type ViewHistoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_novelId?: ViewHistoryUserIdNovelIdCompoundUniqueInput
+    AND?: ViewHistoryWhereInput | ViewHistoryWhereInput[]
+    OR?: ViewHistoryWhereInput[]
+    NOT?: ViewHistoryWhereInput | ViewHistoryWhereInput[]
+    userId?: StringFilter<"ViewHistory"> | string
+    novelId?: StringFilter<"ViewHistory"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    novel?: XOR<NovelScalarRelationFilter, NovelWhereInput>
+  }, "id" | "userId_novelId">
+
+  export type ViewHistoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    novelId?: SortOrder
+    _count?: ViewHistoryCountOrderByAggregateInput
+    _max?: ViewHistoryMaxOrderByAggregateInput
+    _min?: ViewHistoryMinOrderByAggregateInput
+  }
+
+  export type ViewHistoryScalarWhereWithAggregatesInput = {
+    AND?: ViewHistoryScalarWhereWithAggregatesInput | ViewHistoryScalarWhereWithAggregatesInput[]
+    OR?: ViewHistoryScalarWhereWithAggregatesInput[]
+    NOT?: ViewHistoryScalarWhereWithAggregatesInput | ViewHistoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ViewHistory"> | string
+    userId?: StringWithAggregatesFilter<"ViewHistory"> | string
+    novelId?: StringWithAggregatesFilter<"ViewHistory"> | string
+  }
+
   export type NovelWhereInput = {
     AND?: NovelWhereInput | NovelWhereInput[]
     OR?: NovelWhereInput[]
@@ -9723,6 +10989,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     likes?: LikeNovelListRelationFilter
     LikeSentence?: LikeSentenceListRelationFilter
+    viewHistory?: ViewHistoryListRelationFilter
   }
 
   export type NovelOrderByWithRelationInput = {
@@ -9738,6 +11005,7 @@ export namespace Prisma {
     comments?: CommentOrderByRelationAggregateInput
     likes?: LikeNovelOrderByRelationAggregateInput
     LikeSentence?: LikeSentenceOrderByRelationAggregateInput
+    viewHistory?: ViewHistoryOrderByRelationAggregateInput
   }
 
   export type NovelWhereUniqueInput = Prisma.AtLeast<{
@@ -9756,6 +11024,7 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     likes?: LikeNovelListRelationFilter
     LikeSentence?: LikeSentenceListRelationFilter
+    viewHistory?: ViewHistoryListRelationFilter
   }, "id" | "sharedId">
 
   export type NovelOrderByWithAggregationInput = {
@@ -10030,6 +11299,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutUserInput
     likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFolloweeInput
     followees?: FollowCreateNestedManyWithoutFollowerInput
   }
@@ -10045,6 +11315,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
     followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
   }
@@ -10060,6 +11331,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutUserNestedInput
     likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUpdateManyWithoutFollowerNestedInput
   }
@@ -10075,6 +11347,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUncheckedUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
   }
@@ -10153,6 +11426,46 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ViewHistoryCreateInput = {
+    id?: string
+    user: UserCreateNestedOneWithoutViewHistoryInput
+    novel: NovelCreateNestedOneWithoutViewHistoryInput
+  }
+
+  export type ViewHistoryUncheckedCreateInput = {
+    id?: string
+    userId: string
+    novelId: string
+  }
+
+  export type ViewHistoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutViewHistoryNestedInput
+    novel?: NovelUpdateOneRequiredWithoutViewHistoryNestedInput
+  }
+
+  export type ViewHistoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    novelId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ViewHistoryCreateManyInput = {
+    id?: string
+    userId: string
+    novelId: string
+  }
+
+  export type ViewHistoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ViewHistoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    novelId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type NovelCreateInput = {
     id?: string
     sharedId: string
@@ -10165,6 +11478,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutNovelInput
     likes?: LikeNovelCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUncheckedCreateInput = {
@@ -10179,6 +11493,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
     likes?: LikeNovelUncheckedCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUpdateInput = {
@@ -10193,6 +11508,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateInput = {
@@ -10207,6 +11523,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUncheckedUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUncheckedUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelCreateManyInput = {
@@ -10510,6 +11827,12 @@ export namespace Prisma {
     none?: LikeSentenceWhereInput
   }
 
+  export type ViewHistoryListRelationFilter = {
+    every?: ViewHistoryWhereInput
+    some?: ViewHistoryWhereInput
+    none?: ViewHistoryWhereInput
+  }
+
   export type FollowListRelationFilter = {
     every?: FollowWhereInput
     some?: FollowWhereInput
@@ -10529,6 +11852,10 @@ export namespace Prisma {
   }
 
   export type LikeSentenceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ViewHistoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10624,6 +11951,34 @@ export namespace Prisma {
     followerId?: SortOrder
     followeeId?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type NovelScalarRelationFilter = {
+    is?: NovelWhereInput
+    isNot?: NovelWhereInput
+  }
+
+  export type ViewHistoryUserIdNovelIdCompoundUniqueInput = {
+    userId: string
+    novelId: string
+  }
+
+  export type ViewHistoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    novelId?: SortOrder
+  }
+
+  export type ViewHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    novelId?: SortOrder
+  }
+
+  export type ViewHistoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    novelId?: SortOrder
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -10728,11 +12083,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type NovelScalarRelationFilter = {
-    is?: NovelWhereInput
-    isNot?: NovelWhereInput
   }
 
   export type CommentCountOrderByAggregateInput = {
@@ -10892,6 +12242,13 @@ export namespace Prisma {
     connect?: LikeSentenceWhereUniqueInput | LikeSentenceWhereUniqueInput[]
   }
 
+  export type ViewHistoryCreateNestedManyWithoutUserInput = {
+    create?: XOR<ViewHistoryCreateWithoutUserInput, ViewHistoryUncheckedCreateWithoutUserInput> | ViewHistoryCreateWithoutUserInput[] | ViewHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ViewHistoryCreateOrConnectWithoutUserInput | ViewHistoryCreateOrConnectWithoutUserInput[]
+    createMany?: ViewHistoryCreateManyUserInputEnvelope
+    connect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+  }
+
   export type FollowCreateNestedManyWithoutFolloweeInput = {
     create?: XOR<FollowCreateWithoutFolloweeInput, FollowUncheckedCreateWithoutFolloweeInput> | FollowCreateWithoutFolloweeInput[] | FollowUncheckedCreateWithoutFolloweeInput[]
     connectOrCreate?: FollowCreateOrConnectWithoutFolloweeInput | FollowCreateOrConnectWithoutFolloweeInput[]
@@ -10932,6 +12289,13 @@ export namespace Prisma {
     connectOrCreate?: LikeSentenceCreateOrConnectWithoutUserInput | LikeSentenceCreateOrConnectWithoutUserInput[]
     createMany?: LikeSentenceCreateManyUserInputEnvelope
     connect?: LikeSentenceWhereUniqueInput | LikeSentenceWhereUniqueInput[]
+  }
+
+  export type ViewHistoryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ViewHistoryCreateWithoutUserInput, ViewHistoryUncheckedCreateWithoutUserInput> | ViewHistoryCreateWithoutUserInput[] | ViewHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ViewHistoryCreateOrConnectWithoutUserInput | ViewHistoryCreateOrConnectWithoutUserInput[]
+    createMany?: ViewHistoryCreateManyUserInputEnvelope
+    connect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
   }
 
   export type FollowUncheckedCreateNestedManyWithoutFolloweeInput = {
@@ -11010,6 +12374,20 @@ export namespace Prisma {
     update?: LikeSentenceUpdateWithWhereUniqueWithoutUserInput | LikeSentenceUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: LikeSentenceUpdateManyWithWhereWithoutUserInput | LikeSentenceUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: LikeSentenceScalarWhereInput | LikeSentenceScalarWhereInput[]
+  }
+
+  export type ViewHistoryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ViewHistoryCreateWithoutUserInput, ViewHistoryUncheckedCreateWithoutUserInput> | ViewHistoryCreateWithoutUserInput[] | ViewHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ViewHistoryCreateOrConnectWithoutUserInput | ViewHistoryCreateOrConnectWithoutUserInput[]
+    upsert?: ViewHistoryUpsertWithWhereUniqueWithoutUserInput | ViewHistoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ViewHistoryCreateManyUserInputEnvelope
+    set?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    disconnect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    delete?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    connect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    update?: ViewHistoryUpdateWithWhereUniqueWithoutUserInput | ViewHistoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ViewHistoryUpdateManyWithWhereWithoutUserInput | ViewHistoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ViewHistoryScalarWhereInput | ViewHistoryScalarWhereInput[]
   }
 
   export type FollowUpdateManyWithoutFolloweeNestedInput = {
@@ -11096,6 +12474,20 @@ export namespace Prisma {
     deleteMany?: LikeSentenceScalarWhereInput | LikeSentenceScalarWhereInput[]
   }
 
+  export type ViewHistoryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ViewHistoryCreateWithoutUserInput, ViewHistoryUncheckedCreateWithoutUserInput> | ViewHistoryCreateWithoutUserInput[] | ViewHistoryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ViewHistoryCreateOrConnectWithoutUserInput | ViewHistoryCreateOrConnectWithoutUserInput[]
+    upsert?: ViewHistoryUpsertWithWhereUniqueWithoutUserInput | ViewHistoryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ViewHistoryCreateManyUserInputEnvelope
+    set?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    disconnect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    delete?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    connect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    update?: ViewHistoryUpdateWithWhereUniqueWithoutUserInput | ViewHistoryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ViewHistoryUpdateManyWithWhereWithoutUserInput | ViewHistoryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ViewHistoryScalarWhereInput | ViewHistoryScalarWhereInput[]
+  }
+
   export type FollowUncheckedUpdateManyWithoutFolloweeNestedInput = {
     create?: XOR<FollowCreateWithoutFolloweeInput, FollowUncheckedCreateWithoutFolloweeInput> | FollowCreateWithoutFolloweeInput[] | FollowUncheckedCreateWithoutFolloweeInput[]
     connectOrCreate?: FollowCreateOrConnectWithoutFolloweeInput | FollowCreateOrConnectWithoutFolloweeInput[]
@@ -11152,6 +12544,34 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFollowersInput, UserUpdateWithoutFollowersInput>, UserUncheckedUpdateWithoutFollowersInput>
   }
 
+  export type UserCreateNestedOneWithoutViewHistoryInput = {
+    create?: XOR<UserCreateWithoutViewHistoryInput, UserUncheckedCreateWithoutViewHistoryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutViewHistoryInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type NovelCreateNestedOneWithoutViewHistoryInput = {
+    create?: XOR<NovelCreateWithoutViewHistoryInput, NovelUncheckedCreateWithoutViewHistoryInput>
+    connectOrCreate?: NovelCreateOrConnectWithoutViewHistoryInput
+    connect?: NovelWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutViewHistoryNestedInput = {
+    create?: XOR<UserCreateWithoutViewHistoryInput, UserUncheckedCreateWithoutViewHistoryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutViewHistoryInput
+    upsert?: UserUpsertWithoutViewHistoryInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutViewHistoryInput, UserUpdateWithoutViewHistoryInput>, UserUncheckedUpdateWithoutViewHistoryInput>
+  }
+
+  export type NovelUpdateOneRequiredWithoutViewHistoryNestedInput = {
+    create?: XOR<NovelCreateWithoutViewHistoryInput, NovelUncheckedCreateWithoutViewHistoryInput>
+    connectOrCreate?: NovelCreateOrConnectWithoutViewHistoryInput
+    upsert?: NovelUpsertWithoutViewHistoryInput
+    connect?: NovelWhereUniqueInput
+    update?: XOR<XOR<NovelUpdateToOneWithWhereWithoutViewHistoryInput, NovelUpdateWithoutViewHistoryInput>, NovelUncheckedUpdateWithoutViewHistoryInput>
+  }
+
   export type UserCreateNestedOneWithoutNovelsInput = {
     create?: XOR<UserCreateWithoutNovelsInput, UserUncheckedCreateWithoutNovelsInput>
     connectOrCreate?: UserCreateOrConnectWithoutNovelsInput
@@ -11185,6 +12605,13 @@ export namespace Prisma {
     connect?: LikeSentenceWhereUniqueInput | LikeSentenceWhereUniqueInput[]
   }
 
+  export type ViewHistoryCreateNestedManyWithoutNovelInput = {
+    create?: XOR<ViewHistoryCreateWithoutNovelInput, ViewHistoryUncheckedCreateWithoutNovelInput> | ViewHistoryCreateWithoutNovelInput[] | ViewHistoryUncheckedCreateWithoutNovelInput[]
+    connectOrCreate?: ViewHistoryCreateOrConnectWithoutNovelInput | ViewHistoryCreateOrConnectWithoutNovelInput[]
+    createMany?: ViewHistoryCreateManyNovelInputEnvelope
+    connect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+  }
+
   export type CategoryUncheckedCreateNestedManyWithoutNovelInput = {
     create?: XOR<CategoryCreateWithoutNovelInput, CategoryUncheckedCreateWithoutNovelInput> | CategoryCreateWithoutNovelInput[] | CategoryUncheckedCreateWithoutNovelInput[]
     connectOrCreate?: CategoryCreateOrConnectWithoutNovelInput | CategoryCreateOrConnectWithoutNovelInput[]
@@ -11210,6 +12637,13 @@ export namespace Prisma {
     connectOrCreate?: LikeSentenceCreateOrConnectWithoutNovelInput | LikeSentenceCreateOrConnectWithoutNovelInput[]
     createMany?: LikeSentenceCreateManyNovelInputEnvelope
     connect?: LikeSentenceWhereUniqueInput | LikeSentenceWhereUniqueInput[]
+  }
+
+  export type ViewHistoryUncheckedCreateNestedManyWithoutNovelInput = {
+    create?: XOR<ViewHistoryCreateWithoutNovelInput, ViewHistoryUncheckedCreateWithoutNovelInput> | ViewHistoryCreateWithoutNovelInput[] | ViewHistoryUncheckedCreateWithoutNovelInput[]
+    connectOrCreate?: ViewHistoryCreateOrConnectWithoutNovelInput | ViewHistoryCreateOrConnectWithoutNovelInput[]
+    createMany?: ViewHistoryCreateManyNovelInputEnvelope
+    connect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -11279,6 +12713,20 @@ export namespace Prisma {
     deleteMany?: LikeSentenceScalarWhereInput | LikeSentenceScalarWhereInput[]
   }
 
+  export type ViewHistoryUpdateManyWithoutNovelNestedInput = {
+    create?: XOR<ViewHistoryCreateWithoutNovelInput, ViewHistoryUncheckedCreateWithoutNovelInput> | ViewHistoryCreateWithoutNovelInput[] | ViewHistoryUncheckedCreateWithoutNovelInput[]
+    connectOrCreate?: ViewHistoryCreateOrConnectWithoutNovelInput | ViewHistoryCreateOrConnectWithoutNovelInput[]
+    upsert?: ViewHistoryUpsertWithWhereUniqueWithoutNovelInput | ViewHistoryUpsertWithWhereUniqueWithoutNovelInput[]
+    createMany?: ViewHistoryCreateManyNovelInputEnvelope
+    set?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    disconnect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    delete?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    connect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    update?: ViewHistoryUpdateWithWhereUniqueWithoutNovelInput | ViewHistoryUpdateWithWhereUniqueWithoutNovelInput[]
+    updateMany?: ViewHistoryUpdateManyWithWhereWithoutNovelInput | ViewHistoryUpdateManyWithWhereWithoutNovelInput[]
+    deleteMany?: ViewHistoryScalarWhereInput | ViewHistoryScalarWhereInput[]
+  }
+
   export type CategoryUncheckedUpdateManyWithoutNovelNestedInput = {
     create?: XOR<CategoryCreateWithoutNovelInput, CategoryUncheckedCreateWithoutNovelInput> | CategoryCreateWithoutNovelInput[] | CategoryUncheckedCreateWithoutNovelInput[]
     connectOrCreate?: CategoryCreateOrConnectWithoutNovelInput | CategoryCreateOrConnectWithoutNovelInput[]
@@ -11332,6 +12780,20 @@ export namespace Prisma {
     update?: LikeSentenceUpdateWithWhereUniqueWithoutNovelInput | LikeSentenceUpdateWithWhereUniqueWithoutNovelInput[]
     updateMany?: LikeSentenceUpdateManyWithWhereWithoutNovelInput | LikeSentenceUpdateManyWithWhereWithoutNovelInput[]
     deleteMany?: LikeSentenceScalarWhereInput | LikeSentenceScalarWhereInput[]
+  }
+
+  export type ViewHistoryUncheckedUpdateManyWithoutNovelNestedInput = {
+    create?: XOR<ViewHistoryCreateWithoutNovelInput, ViewHistoryUncheckedCreateWithoutNovelInput> | ViewHistoryCreateWithoutNovelInput[] | ViewHistoryUncheckedCreateWithoutNovelInput[]
+    connectOrCreate?: ViewHistoryCreateOrConnectWithoutNovelInput | ViewHistoryCreateOrConnectWithoutNovelInput[]
+    upsert?: ViewHistoryUpsertWithWhereUniqueWithoutNovelInput | ViewHistoryUpsertWithWhereUniqueWithoutNovelInput[]
+    createMany?: ViewHistoryCreateManyNovelInputEnvelope
+    set?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    disconnect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    delete?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    connect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
+    update?: ViewHistoryUpdateWithWhereUniqueWithoutNovelInput | ViewHistoryUpdateWithWhereUniqueWithoutNovelInput[]
+    updateMany?: ViewHistoryUpdateManyWithWhereWithoutNovelInput | ViewHistoryUpdateManyWithWhereWithoutNovelInput[]
+    deleteMany?: ViewHistoryScalarWhereInput | ViewHistoryScalarWhereInput[]
   }
 
   export type NovelCreateNestedManyWithoutCategoriesInput = {
@@ -11611,6 +13073,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutNovelInput
     likes?: LikeNovelCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUncheckedCreateWithoutAuthorInput = {
@@ -11624,6 +13087,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
     likes?: LikeNovelUncheckedCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutNovelInput
   }
 
   export type NovelCreateOrConnectWithoutAuthorInput = {
@@ -11711,6 +13175,26 @@ export namespace Prisma {
 
   export type LikeSentenceCreateManyUserInputEnvelope = {
     data: LikeSentenceCreateManyUserInput | LikeSentenceCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ViewHistoryCreateWithoutUserInput = {
+    id?: string
+    novel: NovelCreateNestedOneWithoutViewHistoryInput
+  }
+
+  export type ViewHistoryUncheckedCreateWithoutUserInput = {
+    id?: string
+    novelId: string
+  }
+
+  export type ViewHistoryCreateOrConnectWithoutUserInput = {
+    where: ViewHistoryWhereUniqueInput
+    create: XOR<ViewHistoryCreateWithoutUserInput, ViewHistoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type ViewHistoryCreateManyUserInputEnvelope = {
+    data: ViewHistoryCreateManyUserInput | ViewHistoryCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -11871,6 +13355,31 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"LikeSentence"> | Date | string
   }
 
+  export type ViewHistoryUpsertWithWhereUniqueWithoutUserInput = {
+    where: ViewHistoryWhereUniqueInput
+    update: XOR<ViewHistoryUpdateWithoutUserInput, ViewHistoryUncheckedUpdateWithoutUserInput>
+    create: XOR<ViewHistoryCreateWithoutUserInput, ViewHistoryUncheckedCreateWithoutUserInput>
+  }
+
+  export type ViewHistoryUpdateWithWhereUniqueWithoutUserInput = {
+    where: ViewHistoryWhereUniqueInput
+    data: XOR<ViewHistoryUpdateWithoutUserInput, ViewHistoryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ViewHistoryUpdateManyWithWhereWithoutUserInput = {
+    where: ViewHistoryScalarWhereInput
+    data: XOR<ViewHistoryUpdateManyMutationInput, ViewHistoryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ViewHistoryScalarWhereInput = {
+    AND?: ViewHistoryScalarWhereInput | ViewHistoryScalarWhereInput[]
+    OR?: ViewHistoryScalarWhereInput[]
+    NOT?: ViewHistoryScalarWhereInput | ViewHistoryScalarWhereInput[]
+    id?: StringFilter<"ViewHistory"> | string
+    userId?: StringFilter<"ViewHistory"> | string
+    novelId?: StringFilter<"ViewHistory"> | string
+  }
+
   export type FollowUpsertWithWhereUniqueWithoutFolloweeInput = {
     where: FollowWhereUniqueInput
     update: XOR<FollowUpdateWithoutFolloweeInput, FollowUncheckedUpdateWithoutFolloweeInput>
@@ -11924,6 +13433,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutUserInput
     likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFolloweeInput
   }
 
@@ -11938,6 +13448,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
   }
 
@@ -11957,6 +13468,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutUserInput
     likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutUserInput
     followees?: FollowCreateNestedManyWithoutFollowerInput
   }
 
@@ -11971,6 +13483,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutUserInput
     followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
   }
 
@@ -12001,6 +13514,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutUserNestedInput
     likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFolloweeNestedInput
   }
 
@@ -12015,6 +13529,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUncheckedUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
   }
 
@@ -12040,6 +13555,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutUserNestedInput
     likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutUserNestedInput
     followees?: FollowUpdateManyWithoutFollowerNestedInput
   }
 
@@ -12054,7 +13570,156 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUncheckedUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutUserNestedInput
     followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  }
+
+  export type UserCreateWithoutViewHistoryInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    novels?: NovelCreateNestedManyWithoutAuthorInput
+    comments?: CommentCreateNestedManyWithoutUserInput
+    likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
+    likeSentence?: LikeSentenceCreateNestedManyWithoutUserInput
+    followers?: FollowCreateNestedManyWithoutFolloweeInput
+    followees?: FollowCreateNestedManyWithoutFollowerInput
+  }
+
+  export type UserUncheckedCreateWithoutViewHistoryInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
+    comments?: CommentUncheckedCreateNestedManyWithoutUserInput
+    likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
+    likeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutUserInput
+    followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
+    followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
+  }
+
+  export type UserCreateOrConnectWithoutViewHistoryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutViewHistoryInput, UserUncheckedCreateWithoutViewHistoryInput>
+  }
+
+  export type NovelCreateWithoutViewHistoryInput = {
+    id?: string
+    sharedId: string
+    title: string
+    coverImagePath?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutNovelsInput
+    categories?: CategoryCreateNestedManyWithoutNovelInput
+    comments?: CommentCreateNestedManyWithoutNovelInput
+    likes?: LikeNovelCreateNestedManyWithoutNovelInput
+    LikeSentence?: LikeSentenceCreateNestedManyWithoutNovelInput
+  }
+
+  export type NovelUncheckedCreateWithoutViewHistoryInput = {
+    id?: string
+    sharedId: string
+    title: string
+    authorId: string
+    coverImagePath?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
+    comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
+    likes?: LikeNovelUncheckedCreateNestedManyWithoutNovelInput
+    LikeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutNovelInput
+  }
+
+  export type NovelCreateOrConnectWithoutViewHistoryInput = {
+    where: NovelWhereUniqueInput
+    create: XOR<NovelCreateWithoutViewHistoryInput, NovelUncheckedCreateWithoutViewHistoryInput>
+  }
+
+  export type UserUpsertWithoutViewHistoryInput = {
+    update: XOR<UserUpdateWithoutViewHistoryInput, UserUncheckedUpdateWithoutViewHistoryInput>
+    create: XOR<UserCreateWithoutViewHistoryInput, UserUncheckedCreateWithoutViewHistoryInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutViewHistoryInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutViewHistoryInput, UserUncheckedUpdateWithoutViewHistoryInput>
+  }
+
+  export type UserUpdateWithoutViewHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    novels?: NovelUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUpdateManyWithoutUserNestedInput
+    likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
+    likeSentence?: LikeSentenceUpdateManyWithoutUserNestedInput
+    followers?: FollowUpdateManyWithoutFolloweeNestedInput
+    followees?: FollowUpdateManyWithoutFollowerNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutViewHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
+    likeSentence?: LikeSentenceUncheckedUpdateManyWithoutUserNestedInput
+    followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
+    followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  }
+
+  export type NovelUpsertWithoutViewHistoryInput = {
+    update: XOR<NovelUpdateWithoutViewHistoryInput, NovelUncheckedUpdateWithoutViewHistoryInput>
+    create: XOR<NovelCreateWithoutViewHistoryInput, NovelUncheckedCreateWithoutViewHistoryInput>
+    where?: NovelWhereInput
+  }
+
+  export type NovelUpdateToOneWithWhereWithoutViewHistoryInput = {
+    where?: NovelWhereInput
+    data: XOR<NovelUpdateWithoutViewHistoryInput, NovelUncheckedUpdateWithoutViewHistoryInput>
+  }
+
+  export type NovelUpdateWithoutViewHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutNovelsNestedInput
+    categories?: CategoryUpdateManyWithoutNovelNestedInput
+    comments?: CommentUpdateManyWithoutNovelNestedInput
+    likes?: LikeNovelUpdateManyWithoutNovelNestedInput
+    LikeSentence?: LikeSentenceUpdateManyWithoutNovelNestedInput
+  }
+
+  export type NovelUncheckedUpdateWithoutViewHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sharedId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
+    likes?: LikeNovelUncheckedUpdateManyWithoutNovelNestedInput
+    LikeSentence?: LikeSentenceUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type UserCreateWithoutNovelsInput = {
@@ -12067,6 +13732,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutUserInput
     likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFolloweeInput
     followees?: FollowCreateNestedManyWithoutFollowerInput
   }
@@ -12081,6 +13747,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
     followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
   }
@@ -12183,6 +13850,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ViewHistoryCreateWithoutNovelInput = {
+    id?: string
+    user: UserCreateNestedOneWithoutViewHistoryInput
+  }
+
+  export type ViewHistoryUncheckedCreateWithoutNovelInput = {
+    id?: string
+    userId: string
+  }
+
+  export type ViewHistoryCreateOrConnectWithoutNovelInput = {
+    where: ViewHistoryWhereUniqueInput
+    create: XOR<ViewHistoryCreateWithoutNovelInput, ViewHistoryUncheckedCreateWithoutNovelInput>
+  }
+
+  export type ViewHistoryCreateManyNovelInputEnvelope = {
+    data: ViewHistoryCreateManyNovelInput | ViewHistoryCreateManyNovelInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutNovelsInput = {
     update: XOR<UserUpdateWithoutNovelsInput, UserUncheckedUpdateWithoutNovelsInput>
     create: XOR<UserCreateWithoutNovelsInput, UserUncheckedCreateWithoutNovelsInput>
@@ -12204,6 +13891,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutUserNestedInput
     likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUpdateManyWithoutFollowerNestedInput
   }
@@ -12218,6 +13906,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUncheckedUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
   }
@@ -12294,6 +13983,22 @@ export namespace Prisma {
     data: XOR<LikeSentenceUpdateManyMutationInput, LikeSentenceUncheckedUpdateManyWithoutNovelInput>
   }
 
+  export type ViewHistoryUpsertWithWhereUniqueWithoutNovelInput = {
+    where: ViewHistoryWhereUniqueInput
+    update: XOR<ViewHistoryUpdateWithoutNovelInput, ViewHistoryUncheckedUpdateWithoutNovelInput>
+    create: XOR<ViewHistoryCreateWithoutNovelInput, ViewHistoryUncheckedCreateWithoutNovelInput>
+  }
+
+  export type ViewHistoryUpdateWithWhereUniqueWithoutNovelInput = {
+    where: ViewHistoryWhereUniqueInput
+    data: XOR<ViewHistoryUpdateWithoutNovelInput, ViewHistoryUncheckedUpdateWithoutNovelInput>
+  }
+
+  export type ViewHistoryUpdateManyWithWhereWithoutNovelInput = {
+    where: ViewHistoryScalarWhereInput
+    data: XOR<ViewHistoryUpdateManyMutationInput, ViewHistoryUncheckedUpdateManyWithoutNovelInput>
+  }
+
   export type NovelCreateWithoutCategoriesInput = {
     id?: string
     sharedId: string
@@ -12305,6 +14010,7 @@ export namespace Prisma {
     comments?: CommentCreateNestedManyWithoutNovelInput
     likes?: LikeNovelCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUncheckedCreateWithoutCategoriesInput = {
@@ -12318,6 +14024,7 @@ export namespace Prisma {
     comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
     likes?: LikeNovelUncheckedCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutNovelInput
   }
 
   export type NovelCreateOrConnectWithoutCategoriesInput = {
@@ -12351,6 +14058,7 @@ export namespace Prisma {
     novels?: NovelCreateNestedManyWithoutAuthorInput
     likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFolloweeInput
     followees?: FollowCreateNestedManyWithoutFollowerInput
   }
@@ -12365,6 +14073,7 @@ export namespace Prisma {
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
     likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
     followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
   }
@@ -12385,6 +14094,7 @@ export namespace Prisma {
     categories?: CategoryCreateNestedManyWithoutNovelInput
     likes?: LikeNovelCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUncheckedCreateWithoutCommentsInput = {
@@ -12398,6 +14108,7 @@ export namespace Prisma {
     categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
     likes?: LikeNovelUncheckedCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutNovelInput
   }
 
   export type NovelCreateOrConnectWithoutCommentsInput = {
@@ -12426,6 +14137,7 @@ export namespace Prisma {
     novels?: NovelUpdateManyWithoutAuthorNestedInput
     likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUpdateManyWithoutFollowerNestedInput
   }
@@ -12440,6 +14152,7 @@ export namespace Prisma {
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
     likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUncheckedUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
   }
@@ -12466,6 +14179,7 @@ export namespace Prisma {
     categories?: CategoryUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateWithoutCommentsInput = {
@@ -12479,6 +14193,7 @@ export namespace Prisma {
     categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUncheckedUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUncheckedUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type UserCreateWithoutLikeNovelsInput = {
@@ -12491,6 +14206,7 @@ export namespace Prisma {
     novels?: NovelCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFolloweeInput
     followees?: FollowCreateNestedManyWithoutFollowerInput
   }
@@ -12505,6 +14221,7 @@ export namespace Prisma {
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     likeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
     followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
   }
@@ -12525,6 +14242,7 @@ export namespace Prisma {
     categories?: CategoryCreateNestedManyWithoutNovelInput
     comments?: CommentCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUncheckedCreateWithoutLikesInput = {
@@ -12538,6 +14256,7 @@ export namespace Prisma {
     categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
     comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceUncheckedCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutNovelInput
   }
 
   export type NovelCreateOrConnectWithoutLikesInput = {
@@ -12566,6 +14285,7 @@ export namespace Prisma {
     novels?: NovelUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUpdateManyWithoutFollowerNestedInput
   }
@@ -12580,6 +14300,7 @@ export namespace Prisma {
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     likeSentence?: LikeSentenceUncheckedUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
   }
@@ -12606,6 +14327,7 @@ export namespace Prisma {
     categories?: CategoryUpdateManyWithoutNovelNestedInput
     comments?: CommentUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateWithoutLikesInput = {
@@ -12619,6 +14341,7 @@ export namespace Prisma {
     categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
     comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUncheckedUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type UserCreateWithoutLikeSentenceInput = {
@@ -12631,6 +14354,7 @@ export namespace Prisma {
     novels?: NovelCreateNestedManyWithoutAuthorInput
     comments?: CommentCreateNestedManyWithoutUserInput
     likeNovels?: LikeNovelCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutUserInput
     followers?: FollowCreateNestedManyWithoutFolloweeInput
     followees?: FollowCreateNestedManyWithoutFollowerInput
   }
@@ -12645,6 +14369,7 @@ export namespace Prisma {
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
     likeNovels?: LikeNovelUncheckedCreateNestedManyWithoutUserInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutUserInput
     followers?: FollowUncheckedCreateNestedManyWithoutFolloweeInput
     followees?: FollowUncheckedCreateNestedManyWithoutFollowerInput
   }
@@ -12665,6 +14390,7 @@ export namespace Prisma {
     categories?: CategoryCreateNestedManyWithoutNovelInput
     comments?: CommentCreateNestedManyWithoutNovelInput
     likes?: LikeNovelCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryCreateNestedManyWithoutNovelInput
   }
 
   export type NovelUncheckedCreateWithoutLikeSentenceInput = {
@@ -12678,6 +14404,7 @@ export namespace Prisma {
     categories?: CategoryUncheckedCreateNestedManyWithoutNovelInput
     comments?: CommentUncheckedCreateNestedManyWithoutNovelInput
     likes?: LikeNovelUncheckedCreateNestedManyWithoutNovelInput
+    viewHistory?: ViewHistoryUncheckedCreateNestedManyWithoutNovelInput
   }
 
   export type NovelCreateOrConnectWithoutLikeSentenceInput = {
@@ -12706,6 +14433,7 @@ export namespace Prisma {
     novels?: NovelUpdateManyWithoutAuthorNestedInput
     comments?: CommentUpdateManyWithoutUserNestedInput
     likeNovels?: LikeNovelUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutUserNestedInput
     followers?: FollowUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUpdateManyWithoutFollowerNestedInput
   }
@@ -12720,6 +14448,7 @@ export namespace Prisma {
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
     likeNovels?: LikeNovelUncheckedUpdateManyWithoutUserNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutUserNestedInput
     followers?: FollowUncheckedUpdateManyWithoutFolloweeNestedInput
     followees?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
   }
@@ -12746,6 +14475,7 @@ export namespace Prisma {
     categories?: CategoryUpdateManyWithoutNovelNestedInput
     comments?: CommentUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateWithoutLikeSentenceInput = {
@@ -12759,6 +14489,7 @@ export namespace Prisma {
     categories?: CategoryUncheckedUpdateManyWithoutNovelNestedInput
     comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUncheckedUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelCreateManyAuthorInput = {
@@ -12794,6 +14525,11 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ViewHistoryCreateManyUserInput = {
+    id?: string
+    novelId: string
+  }
+
   export type FollowCreateManyFolloweeInput = {
     id?: string
     followerId: string
@@ -12817,6 +14553,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateWithoutAuthorInput = {
@@ -12830,6 +14567,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUncheckedUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUncheckedUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateManyWithoutAuthorInput = {
@@ -12913,6 +14651,21 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ViewHistoryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    novel?: NovelUpdateOneRequiredWithoutViewHistoryNestedInput
+  }
+
+  export type ViewHistoryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    novelId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ViewHistoryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    novelId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type FollowUpdateWithoutFolloweeInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12971,6 +14724,11 @@ export namespace Prisma {
     startIndex: number
     endIndex: number
     createdAt?: Date | string
+  }
+
+  export type ViewHistoryCreateManyNovelInput = {
+    id?: string
+    userId: string
   }
 
   export type CategoryUpdateWithoutNovelInput = {
@@ -13060,6 +14818,21 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ViewHistoryUpdateWithoutNovelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user?: UserUpdateOneRequiredWithoutViewHistoryNestedInput
+  }
+
+  export type ViewHistoryUncheckedUpdateWithoutNovelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ViewHistoryUncheckedUpdateManyWithoutNovelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type NovelUpdateWithoutCategoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
@@ -13071,6 +14844,7 @@ export namespace Prisma {
     comments?: CommentUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateWithoutCategoriesInput = {
@@ -13084,6 +14858,7 @@ export namespace Prisma {
     comments?: CommentUncheckedUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUncheckedUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUncheckedUpdateManyWithoutNovelNestedInput
+    viewHistory?: ViewHistoryUncheckedUpdateManyWithoutNovelNestedInput
   }
 
   export type NovelUncheckedUpdateManyWithoutCategoriesInput = {

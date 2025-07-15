@@ -12,7 +12,7 @@ import { GetAllNovelsService } from './services/get-all-novels.service';
 import { GetNovelsByIdService } from './services/get-novel-by-id.service';
 import { GetPreviewByIdService } from './services/get-preview-by-id.service';
 import { DeleteNovelsService } from './services/delete-novels.service';
-import { SearchNovelsService } from './services/search-novels';
+import { SearchNovelsService } from './services/search-novels.service';
 
 // import { CommentsService } from '../comments/comments.service';
 import { GetCommentsByNovelIdService } from '../comments/service/get-comments-by-novelid.service';
@@ -32,7 +32,7 @@ import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
 import { PostgresNovelRepository } from './repositories/search-novels/postgres';
 import { CategoriesModule } from 'src/categories/categories.module';
 import { MulterModule } from '@nestjs/platform-express';
-// import { SearchAuthor } from './repositories';
+
 import { diskStorage } from 'multer';
 import * as path from 'path';
 import { v4 as uuid4 } from 'uuid';

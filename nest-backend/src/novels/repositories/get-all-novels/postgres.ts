@@ -6,8 +6,16 @@ import { Novel as PrismaNovel } from '../../../../generated/postgresql';
 export class PostgresGetAllNovelRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAllNovel(): Promise<PrismaNovel[]> {
+  async findAllNovel() {
     return this.prisma.novel.findMany({
+      include: {
+        _count: {
+          select: {
+            viewHistory: true,
+            likes: true,
+          }
+        }
+      },
       orderBy: { createdAt: 'desc' },
     });
   }

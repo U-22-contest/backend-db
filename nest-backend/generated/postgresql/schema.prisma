@@ -23,6 +23,7 @@ model User {
   comments     Comment[]      @relation("UserComments")
   likeNovels   LikeNovel[]    @relation("UserLikeNovels")
   likeSentence LikeSentence[] @relation("UserLikeSentence")
+  viewHistory  ViewHistory[]  @relation("UserViewHistory")
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
@@ -45,6 +46,16 @@ model Follow {
   @@unique([followerId, followeeId])
 }
 
+model ViewHistory {
+  id      String @id @default(uuid())
+  userId  String
+  user    User   @relation("UserViewHistory", fields: [userId], references: [id], onDelete: Cascade)
+  novelId String
+  novel   Novel  @relation("NovelViewHistory", fields: [novelId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, novelId])
+}
+
 model Novel {
   id             String         @id @default(uuid())
   sharedId       String         @unique
@@ -58,6 +69,7 @@ model Novel {
   comments       Comment[]      @relation("NovelComments")
   likes          LikeNovel[]    @relation("NovelLikes")
   LikeSentence   LikeSentence[] @relation("SentenceLikes")
+  viewHistory    ViewHistory[]  @relation("NovelViewHistory")
 }
 
 model Category {
