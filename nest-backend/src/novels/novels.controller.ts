@@ -69,7 +69,7 @@ export class NovelsController {
     @Request()
     req: { user: JWTPayload },
   ): Promise<CreateNovelResponse> {
-    const imagePath = file ? `./../../img/cover/${file.filename}` : null;
+    const imagePath = file ? `/uploads/covers/${file.filename}` : null;
     createNovelDto.coverImagePath = imagePath;
     return this.createNovelsService.createNovel(
       req.user.userId,

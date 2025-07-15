@@ -5,6 +5,7 @@ import { MongoGetPreviewByIdRepository } from '../repositories/get-preview-by-id
 export type GetPreviewByIdResponse = {
     sharedId: string;
     content: string;
+    overview: string;
 };
 
 @Injectable()
@@ -22,6 +23,7 @@ export class GetPreviewByIdService {
         return {
             sharedId,
             content: mongoNovel.content ?? '',
+            overview: mongoNovel.overview ?? '',
         };
     }
 }
