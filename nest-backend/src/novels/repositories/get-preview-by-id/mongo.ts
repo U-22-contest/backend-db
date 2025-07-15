@@ -20,6 +20,7 @@ export class MongoGetPreviewByIdRepository {
             sharedId: 1,
             // TODO: preview取得機能しないので、後に確認
             content: { $substrCP: ['$content', 0, 30] }, // 最初50文字を取得
+            overview: 1,
             _id: 0,
           },
         },

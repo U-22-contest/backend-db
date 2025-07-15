@@ -12,6 +12,7 @@ export type GetAllNovelsResponse = {
   updatedAt: Date;
   title: string;
   content: string;
+  overview: string;
 };
 
 @Injectable()
@@ -51,6 +52,7 @@ export class GetAllNovelsService {
       return {
         ...psqlNovel,
         content: mongo?.content ?? '',
+        overview: mongo?.overview ?? '',
       };
     });
 
