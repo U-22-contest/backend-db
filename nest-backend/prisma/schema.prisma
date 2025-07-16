@@ -15,17 +15,18 @@ datasource db {
 }
 
 model User {
-  id           String         @id @default(uuid())
-  username     String         @unique
-  email        String         @unique
-  password     String
-  novels       Novel[]        @relation("UserNovels")
-  comments     Comment[]      @relation("UserComments")
-  likeNovels   LikeNovel[]    @relation("UserLikeNovels")
-  likeSentence LikeSentence[] @relation("UserLikeSentence")
-  viewHistory  ViewHistory[]  @relation("UserViewHistory")
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id               String         @id @default(uuid())
+  username         String         @unique
+  email            String         @unique
+  password         String
+  profileImagePath String?
+  novels           Novel[]        @relation("UserNovels")
+  comments         Comment[]      @relation("UserComments")
+  likeNovels       LikeNovel[]    @relation("UserLikeNovels")
+  likeSentence     LikeSentence[] @relation("UserLikeSentence")
+  viewHistory      ViewHistory[]  @relation("UserViewHistory")
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 
   // 自分をフォローしているユーザー（フォロワー）
   followers Follow[] @relation("FolloweeRelation")

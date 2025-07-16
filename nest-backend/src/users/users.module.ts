@@ -8,6 +8,7 @@ import { FollowUserService } from './service/follow-user.service';
 import { UnfollowUserService } from './service/unfollow-user.service';
 import { GetFollowersService } from './service/get-followers.service';
 import { GetFolloweesService } from './service/get-followees.service';
+import { EditProfileService } from './service/edit-profile.service';
 
 // repositories
 import { PostgresCreateUserRepository } from './repositories/create-users/postgres';
@@ -15,21 +16,40 @@ import { PostgresFollowUserRepository } from './repositories/follow-user/postgre
 import { PostgresUnfollowUserRepository } from './repositories/unfollow-user/postgres';
 import { PostgresGetFollowersRepository } from './repositories/get-followers/postgres';
 import { PostgresGetFolloweesRepository } from './repositories/get-followees/postgres';
+import { PostgresEditProfileRepository } from './repositories/edit-profile/postgres';
+import {MulterModule} from "@nestjs/platform-express";
+import {diskStorage} from "multer";
+import　* as path from "path";
+import {v4 as uuid4} from "uuid";
 
 @Module({
-  imports: [PrismaModule],
+  imports: [
+    PrismaModule,
+    MulterModule.register({
+      storage: diskStorage({
+        destination: './uploads/profiles', // プロジェクトのルートディレクトリからの相対パス
+        filename: (req, file, callback) => {
+          const ext = path.extname(file.originalname);
+          const filename = `$${uuid4()}${ext}`;
+          callback(null, filename);
+        },
+      }),
+    }),
+  ],
   providers: [
     CreateUsersService,
     FollowUserService,
     UnfollowUserService,
     GetFollowersService,
     GetFolloweesService,
+    EditProfileService,
 
     PostgresCreateUserRepository,
     PostgresFollowUserRepository,
     PostgresUnfollowUserRepository,
     PostgresGetFollowersRepository,
     PostgresGetFolloweesRepository,
+    PostgresEditProfileRepository,
   ],
   controllers: [UsersController],
   exports: [CreateUsersService],

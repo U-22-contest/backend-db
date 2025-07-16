@@ -10,6 +10,7 @@ import {
   UseInterceptors,
   UploadedFile,
   Put,
+  Query,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
@@ -17,6 +18,7 @@ import { CreateNovelDto } from './dto/request/create-novel.dto';
 import { GetAllNovelsResponse } from './dto/request/get-all-novels.dto';
 import { GetNovelByIdResponse } from './dto/request/get-novel-by-id.dto';
 import { SearchNovelsDto } from './dto/request/search-novels.dto';
+import { EditNovelsDto } from './dto/request/edit-novel.dto';
 import { OptionalJwtAuthGuard } from '../auth/guads/optional-jwt.guard';
 
 import { CreateNovelsService } from './services/create-novels.service';
@@ -25,13 +27,11 @@ import { GetNovelsByIdService } from './services/get-novel-by-id.service';
 import { GetPreviewByIdService } from './services/get-preview-by-id.service';
 import { DeleteNovelsService } from './services/delete-novels.service';
 import { SearchNovelsService } from './services/search-novels.service';
+import { EditNovelService } from './services/edit-novel-by-id.service';
 
 import { CreateNovelResponse } from './types/novel.types';
-import { Query } from '@nestjs/common';
 import { Novel } from './types/novel.types';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { EditNovelService } from './services/edit-novel-by-id.service';
-import { EditNovelsDto } from './dto/request/edit-novel.dto';
 import { Express } from 'express';
 
 @Controller('novels')

@@ -7,6 +7,9 @@ import {
   UseGuards,
   Param,
   Delete,
+  Put,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
@@ -16,6 +19,7 @@ import { FollowUserService } from './service/follow-user.service';
 import { UnfollowUserService } from './service/unfollow-user.service';
 import { GetFollowersService } from './service/get-followers.service';
 import { GetFolloweesService } from './service/get-followees.service';
+import { EditProfileService } from './service/edit-profile.service';
 
 import {
   CreateUserDto,
@@ -25,6 +29,13 @@ import { FollowUserDto } from './dto/follow-user.dto';
 import { UnfollowUserDto } from './dto/unfollow-user.dto';
 import { GetFolloweesResponse } from './dto/get-followees.dto';
 import { GetFollowersResponse } from './dto/get-followers.dto';
+import {　
+  EditProfileDto,
+  EditProfileResponse,
+} from "./dto/edit-profile.dto";
+
+import { FileInterceptor } from '@nestjs/platform-express';
+import { Express } from 'express';
 
 @Controller('users')
 export class UsersController {
@@ -34,6 +45,7 @@ export class UsersController {
     private readonly unfollowUserService: UnfollowUserService,
     private readonly getFollowersService: GetFollowersService,
     private readonly getFolloweesService: GetFolloweesService,
+    private readonly editProfileService: EditProfileService,
   ) {}
 
   @Post('signup')
@@ -41,6 +53,21 @@ export class UsersController {
     @Body() createUserDto: CreateUserDto,
   ): Promise<CreateUserResponse> {
     return this.createUsersService.createUser(createUserDto);
+  }
+
+  @Put('profile')
+  @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(FileInterceptor('file'))
+  async editProfile(
+    @Body() editProfileDto: EditProfileDto,
+    @UploadedFile() file: Express.Multer.File,
+    @Request() req: { user: JWTPayload },
+  ): Promise<EditProfileResponse> {
+    editProfileDto.profileImagePath = file ? `/uploads/profiles/${file.filename}` : null;
+    return this.editProfileService.editProfile(
+      req.user.userId,
+      editProfileDto,
+    );
   }
 
   @Post('follow/:userid')

@@ -1703,6 +1703,7 @@ export namespace Prisma {
     username: string | null
     email: string | null
     password: string | null
+    profileImagePath: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1712,6 +1713,7 @@ export namespace Prisma {
     username: string | null
     email: string | null
     password: string | null
+    profileImagePath: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1721,6 +1723,7 @@ export namespace Prisma {
     username: number
     email: number
     password: number
+    profileImagePath: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1732,6 +1735,7 @@ export namespace Prisma {
     username?: true
     email?: true
     password?: true
+    profileImagePath?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1741,6 +1745,7 @@ export namespace Prisma {
     username?: true
     email?: true
     password?: true
+    profileImagePath?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1750,6 +1755,7 @@ export namespace Prisma {
     username?: true
     email?: true
     password?: true
+    profileImagePath?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1832,6 +1838,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath: string | null
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1858,6 +1865,7 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     password?: boolean
+    profileImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     novels?: boolean | User$novelsArgs<ExtArgs>
@@ -1875,6 +1883,7 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     password?: boolean
+    profileImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1884,6 +1893,7 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     password?: boolean
+    profileImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1893,11 +1903,12 @@ export namespace Prisma {
     username?: boolean
     email?: boolean
     password?: boolean
+    profileImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password" | "profileImagePath" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     novels?: boolean | User$novelsArgs<ExtArgs>
     comments?: boolean | User$commentsArgs<ExtArgs>
@@ -1927,6 +1938,7 @@ export namespace Prisma {
       username: string
       email: string
       password: string
+      profileImagePath: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2363,6 +2375,7 @@ export namespace Prisma {
     readonly username: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly profileImagePath: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -10621,6 +10634,7 @@ export namespace Prisma {
     username: 'username',
     email: 'email',
     password: 'password',
+    profileImagePath: 'profileImagePath',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -10800,6 +10814,7 @@ export namespace Prisma {
     username?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    profileImagePath?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     novels?: NovelListRelationFilter
@@ -10816,6 +10831,7 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    profileImagePath?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     novels?: NovelOrderByRelationAggregateInput
@@ -10835,6 +10851,7 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
+    profileImagePath?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     novels?: NovelListRelationFilter
@@ -10851,6 +10868,7 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    profileImagePath?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -10866,6 +10884,7 @@ export namespace Prisma {
     username?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
+    profileImagePath?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -11293,6 +11312,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
@@ -11309,6 +11329,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
@@ -11325,6 +11346,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
@@ -11341,6 +11363,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
@@ -11357,6 +11380,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -11366,6 +11390,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11375,6 +11400,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11792,6 +11818,21 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -11839,6 +11880,11 @@ export namespace Prisma {
     none?: FollowWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type NovelOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -11868,6 +11914,7 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    profileImagePath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11877,6 +11924,7 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    profileImagePath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11886,6 +11934,7 @@ export namespace Prisma {
     username?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    profileImagePath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11906,6 +11955,24 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -11981,30 +12048,10 @@ export namespace Prisma {
     novelId?: SortOrder
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type CategoryListRelationFilter = {
     every?: CategoryWhereInput
     some?: CategoryWhereInput
     none?: CategoryWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type CategoryOrderByRelationAggregateInput = {
@@ -12039,24 +12086,6 @@ export namespace Prisma {
     coverImagePath?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type CategoryCountOrderByAggregateInput = {
@@ -12314,6 +12343,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -12646,10 +12679,6 @@ export namespace Prisma {
     connect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type UserUpdateOneRequiredWithoutNovelsNestedInput = {
     create?: XOR<UserCreateWithoutNovelsInput, UserUncheckedCreateWithoutNovelsInput>
     connectOrCreate?: UserCreateOrConnectWithoutNovelsInput
@@ -12940,6 +12969,20 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -12979,34 +13022,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -13033,6 +13048,20 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -13427,6 +13456,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
@@ -13442,6 +13472,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
@@ -13462,6 +13493,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
@@ -13477,6 +13509,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
@@ -13508,6 +13541,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
@@ -13523,6 +13557,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
@@ -13549,6 +13584,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
@@ -13564,6 +13600,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
@@ -13579,6 +13616,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
@@ -13594,6 +13632,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
@@ -13658,6 +13697,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
@@ -13673,6 +13713,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
@@ -13727,6 +13768,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentCreateNestedManyWithoutUserInput
@@ -13742,6 +13784,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     comments?: CommentUncheckedCreateNestedManyWithoutUserInput
@@ -13886,6 +13929,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUpdateManyWithoutUserNestedInput
@@ -13901,6 +13945,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     comments?: CommentUncheckedUpdateManyWithoutUserNestedInput
@@ -14053,6 +14098,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
@@ -14068,6 +14114,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
@@ -14132,6 +14179,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
@@ -14147,6 +14195,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
@@ -14201,6 +14250,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
@@ -14216,6 +14266,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
@@ -14280,6 +14331,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
@@ -14295,6 +14347,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
@@ -14349,6 +14402,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelCreateNestedManyWithoutAuthorInput
@@ -14364,6 +14418,7 @@ export namespace Prisma {
     username: string
     email: string
     password: string
+    profileImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     novels?: NovelUncheckedCreateNestedManyWithoutAuthorInput
@@ -14428,6 +14483,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUpdateManyWithoutAuthorNestedInput
@@ -14443,6 +14499,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    profileImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     novels?: NovelUncheckedUpdateManyWithoutAuthorNestedInput
