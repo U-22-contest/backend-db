@@ -2,16 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Error } from 'mongoose';
 import { PostgresGetNovelByIdRepository } from '../repositories/get-novel-by-id/postgres';
 import { MongoGetNovelByIdRepository } from '../repositories/get-novel-by-id/mongo';
-
-export type GetNovelByIdResponse = {
-  id: string;
-  sharedId: string;
-  authorId: string;
-  createdAt: Date;
-  updatedAt: Date;
-  title: string;
-  content: string;
-};
+import { GetNovelByIdResponse } from '../dto/request/get-novel-by-id.dto';
 
 @Injectable()
 export class GetNovelsByIdService {
@@ -21,8 +12,8 @@ export class GetNovelsByIdService {
   ) {}
 
   //id指定で取得
-  async getNovelById(id: string): Promise<GetNovelByIdResponse> {
-    const psqlNovel = await this.postgresGetNovelById.findNovelById(id);
+  async getNovelById(novelId: string, userId?: string): Promise<GetNovelByIdResponse> {
+    const psqlNovel = await this.postgresGetNovelById.findNovelById(novelId, userId);
     if (!psqlNovel) throw new Error('該当する小説がありません');
 
     //小説内容の取得
@@ -34,6 +25,7 @@ export class GetNovelsByIdService {
     return {
       ...psqlNovel,
       content: mongoNovel.content ?? '',
+      overview: mongoNovel.overview ?? '',
     };
   }
 }

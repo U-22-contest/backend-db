@@ -18,6 +18,7 @@ export class AuthService {
         email: true,
         username: true,
         password: true,
+        profileImagePath: true,
       }
     });
 
@@ -30,6 +31,7 @@ export class AuthService {
       userId: user.id,
       email: user.email,
       username: user.username,
+      profileImagePath: user.profileImagePath,
     };
 
     // JWTトークンを生成
@@ -40,6 +42,7 @@ export class AuthService {
         id: user.id,
         email: user.email,
         username: user.username,
+        profileImagePath: user.profileImagePath,
       },
       token
     };

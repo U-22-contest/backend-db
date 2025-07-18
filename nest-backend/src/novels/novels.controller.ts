@@ -10,33 +10,28 @@ import {
   UseInterceptors,
   UploadedFile,
   Put,
+  Query,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 import { CreateNovelDto } from './dto/request/create-novel.dto';
+import { GetAllNovelsResponse } from './dto/request/get-all-novels.dto';
+import { GetNovelByIdResponse } from './dto/request/get-novel-by-id.dto';
 import { SearchNovelsDto } from './dto/request/search-novels.dto';
+import { EditNovelsDto } from './dto/request/edit-novel.dto';
+import { OptionalJwtAuthGuard } from '../auth/guads/optional-jwt.guard';
 
 import { CreateNovelsService } from './services/create-novels.service';
-import {
-  GetAllNovelsService,
-  GetAllNovelsResponse,
-} from './services/get-all-novels.service';
-import {
-  GetNovelsByIdService,
-  GetNovelByIdResponse,
-} from './services/get-novel-by-id.service';
-import {
-  GetPreviewByIdService,
-  GetPreviewByIdResponse,
-} from './services/get-preview-by-id.service';
+import { GetAllNovelsService } from './services/get-all-novels.service';
+import { GetNovelsByIdService } from './services/get-novel-by-id.service';
+import { GetPreviewByIdService } from './services/get-preview-by-id.service';
 import { DeleteNovelsService } from './services/delete-novels.service';
-import { SearchNovelsService } from './services/search-novels';
+import { SearchNovelsService } from './services/search-novels.service';
+import { EditNovelService } from './services/edit-novel-by-id.service';
+
 import { CreateNovelResponse } from './types/novel.types';
-import { Query } from '@nestjs/common';
 import { Novel } from './types/novel.types';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { EditNovelService } from './services/edit-novel-by-id.service';
-import { EditNovelsDto } from './dto/request/edit-novel.dto';
 import { Express } from 'express';
 
 @Controller('novels')
@@ -85,10 +80,13 @@ export class NovelsController {
 
   //idによる小説の取得
   @Get(':novelid')
+  @UseGuards(OptionalJwtAuthGuard)
   async findOne(
-    @Param('novelid') novelid: string,
+    @Param('novelid') novelId: string,
+    @Request() req: { user?: JWTPayload }
   ): Promise<GetNovelByIdResponse> {
-    return this.getNovelsByIdService.getNovelById(novelid);
+    const userId = req.user?.userId;
+    return this.getNovelsByIdService.getNovelById(novelId, userId);
   }
 
   //小説の削除
