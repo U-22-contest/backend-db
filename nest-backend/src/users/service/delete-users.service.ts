@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PostgresDeleteUserRepository } from '../repositories/delete-users/postgres';
 
 @Injectable()

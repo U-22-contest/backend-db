@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
-import { Novel as PrismaNovel } from '../../../../generated/postgresql';
 
 @Injectable()
 export class PostgresGetAllNovelRepository {
