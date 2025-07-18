@@ -17,21 +17,47 @@ export class postgresEditNovelRepository {
   }
 
   async updateNovel(id: string, editDto: EditNovelsDto): Promise<PrismaNovel> {
+
+    const updateData: any = {}
+
+    if (editDto.title) {
+      updateData.title = editDto.title;
+    }
+
+    if (editDto.categories) {
+      updateData.categories = {
+        set: [],
+        connectOrCreate: editDto.categories.map((name) => ({
+          where: { categoryName: name },
+          create: { categoryName: name },
+        })),
+      };
+    }
+
+    if (editDto.coverImagePath !== undefined) {
+      updateData.coverImagePath = editDto.coverImagePath;
+    }
+
     return this.prisma.novel.update({
       where: { id },
-      data: {
-        ...(editDto.title && { title: editDto.title }),
-        ...(editDto.categories && {
-          categories: {
-            // set:[]でリレーションを一度初期化する
-            set: [],
-            connectOrCreate: editDto.categories.map((name) => ({
-              where: { categoryName: name },
-              create: { categoryName: name },
-            })),
-          },
-        }),
-      },
-    });
+      data: updateData,
+    })
+
+    // return this.prisma.novel.update({
+    //   where: { id },
+    //   data: {
+    //     ...(editDto.title && { title: editDto.title }),
+    //     ...(editDto.categories && {
+    //       categories: {
+    //         // set:[]でリレーションを一度初期化する
+    //         set: [],
+    //         connectOrCreate: editDto.categories.map((name) => ({
+    //           where: { categoryName: name },
+    //           create: { categoryName: name },
+    //         })),
+    //       },
+    //     }),
+    //   },
+    // });
   }
 }

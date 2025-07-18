@@ -102,11 +102,15 @@ export class NovelsController {
   // 小説の編集
   @Put(':novelId')
   @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(FileInterceptor('file'))
   async edit(
     @Param('novelId') novelid: string,
     @Request() req: { user: JWTPayload },
+    @UploadedFile() file: Express.Multer.File,
     @Body() editDto: EditNovelsDto,
   ): Promise<{ message: string }> {
+    const imagePath = file ? `/uploads/covers/${file.filename}` : null;
+    editDto.coverImagePath = imagePath;
     return this.editNovelService.editNovelById(
       novelid,
       req.user.userId,

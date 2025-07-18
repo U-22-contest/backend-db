@@ -12,8 +12,21 @@ export class MongoEditNovelRepository {
   // TODO: 一旦voidで返す
   async updateContentBySharedId(
     sharedId: string,
-    content: string,
+    editDto,
   ): Promise<void> {
-    await this.novelModel.updateOne({ sharedId }, { $set: { content } });
+    const updateData: any = {}
+
+    if (editDto.content) {
+      updateData.content = editDto.content;
+    }
+
+    if (editDto.overview) {
+      updateData.overview = editDto.overview;
+    }
+
+    await this.novelModel.findOneAndUpdate(
+        { sharedId },
+        { $set: updateData }
+    )
   }
 }

@@ -22,13 +22,15 @@ export class EditNovelService {
     }
 
     // titleとcategoriesの編集
-    const updated = await this.postgresEditNovel.updateNovel(id, editDto);
+    if ( editDto.title || editDto.categories || editDto.coverImagePath ) {
+      await this.postgresEditNovel.updateNovel(id, editDto)
+    }
 
     // contentの編集
-    if (editDto.content) {
-      this.mongoEditNovel.updateContentBySharedId(
+    if (editDto.content || editDto.overview) {
+      await this.mongoEditNovel.updateContentBySharedId(
         novel.sharedId,
-        editDto.content,
+        editDto,
       );
     }
 

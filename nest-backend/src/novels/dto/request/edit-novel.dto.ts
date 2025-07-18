@@ -22,5 +22,5 @@ export class EditNovelsDto {
 
   @IsOptional()
   @IsString()
-  coverImagePath?: string;
+  coverImagePath?: string | null;
 }
