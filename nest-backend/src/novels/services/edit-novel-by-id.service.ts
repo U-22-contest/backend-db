@@ -21,12 +21,12 @@ export class EditNovelService {
       throw new Error('該当小説がありません');
     }
 
-    // titleとcategoriesの編集
+    // titleとcategories、coverImagePathの編集
     if ( editDto.title || editDto.categories || editDto.coverImagePath ) {
       await this.postgresEditNovel.updateNovel(id, editDto)
     }
 
-    // contentの編集
+    // contentとoverviewの編集
     if (editDto.content || editDto.overview) {
       await this.mongoEditNovel.updateContentBySharedId(
         novel.sharedId,
