@@ -11,6 +11,13 @@ export class PostgresGetNovelByIdRepository {
       const novel = await tx.novel.findUnique({
         where: { id: novelId },
         include: {
+          author: {
+            select: {
+              id: true,
+              username: true,
+              profileImagePath: true,
+            }
+          },
           _count: {
             select: {
               viewHistory: true,

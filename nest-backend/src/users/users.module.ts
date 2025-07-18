@@ -4,6 +4,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 
 // service
 import { CreateUsersService } from './service/create-users.service';
+import { DeleteUsersService } from './service/delete-users.service';
 import { FollowUserService } from './service/follow-user.service';
 import { UnfollowUserService } from './service/unfollow-user.service';
 import { GetFollowersService } from './service/get-followers.service';
@@ -12,6 +13,7 @@ import { EditProfileService } from './service/edit-profile.service';
 
 // repositories
 import { PostgresCreateUserRepository } from './repositories/create-users/postgres';
+import { PostgresDeleteUserRepository } from './repositories/delete-users/postgres';
 import { PostgresFollowUserRepository } from './repositories/follow-user/postgres';
 import { PostgresUnfollowUserRepository } from './repositories/unfollow-user/postgres';
 import { PostgresGetFollowersRepository } from './repositories/get-followers/postgres';
@@ -38,6 +40,7 @@ import {v4 as uuid4} from "uuid";
   ],
   providers: [
     CreateUsersService,
+    DeleteUsersService,
     FollowUserService,
     UnfollowUserService,
     GetFollowersService,
@@ -45,6 +48,7 @@ import {v4 as uuid4} from "uuid";
     EditProfileService,
 
     PostgresCreateUserRepository,
+    PostgresDeleteUserRepository,
     PostgresFollowUserRepository,
     PostgresUnfollowUserRepository,
     PostgresGetFollowersRepository,

@@ -5,7 +5,7 @@ import { MongoGetCommentsByNovelIdRepository } from '../repositories/get-comment
 export type GetCommentsByNovelIdResponse = {
   id: string,
   sharedId: string,
-  userId: string,
+  userId: string | null,
   novelId: string,
   startIndex: number,
   endIndex: number,

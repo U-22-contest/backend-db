@@ -9,6 +9,13 @@ export class PostgresGetAllNovelRepository {
   async findAllNovel() {
     return this.prisma.novel.findMany({
       include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            profileImagePath: true,
+          }
+        },
         _count: {
           select: {
             viewHistory: true,

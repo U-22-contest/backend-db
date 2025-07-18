@@ -3,10 +3,14 @@ export type GetAllNovelsResponse = {
     id: string;
     sharedId: string;
     title: string;
-    authorId: string;
     coverImagePath: string | null;
     createdAt: Date;
     updatedAt: Date;
+    author: {
+        id: string;
+        username: string;
+        profileImagePath: string | null;
+    } | null;
     _count: {
         viewHistory: number;
         likes: number;
