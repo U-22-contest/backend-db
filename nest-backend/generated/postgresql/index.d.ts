@@ -5194,7 +5194,7 @@ export namespace Prisma {
     id: string
     sharedId: string
     title: string
-    authorId: string
+    authorId: string | null
     coverImagePath: string | null
     createdAt: Date
     updatedAt: Date
@@ -5225,7 +5225,7 @@ export namespace Prisma {
     coverImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Novel$authorArgs<ExtArgs>
     categories?: boolean | Novel$categoriesArgs<ExtArgs>
     comments?: boolean | Novel$commentsArgs<ExtArgs>
     likes?: boolean | Novel$likesArgs<ExtArgs>
@@ -5242,7 +5242,7 @@ export namespace Prisma {
     coverImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Novel$authorArgs<ExtArgs>
   }, ExtArgs["result"]["novel"]>
 
   export type NovelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5253,7 +5253,7 @@ export namespace Prisma {
     coverImagePath?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Novel$authorArgs<ExtArgs>
   }, ExtArgs["result"]["novel"]>
 
   export type NovelSelectScalar = {
@@ -5268,7 +5268,7 @@ export namespace Prisma {
 
   export type NovelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sharedId" | "title" | "authorId" | "coverImagePath" | "createdAt" | "updatedAt", ExtArgs["result"]["novel"]>
   export type NovelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Novel$authorArgs<ExtArgs>
     categories?: boolean | Novel$categoriesArgs<ExtArgs>
     comments?: boolean | Novel$commentsArgs<ExtArgs>
     likes?: boolean | Novel$likesArgs<ExtArgs>
@@ -5277,16 +5277,16 @@ export namespace Prisma {
     _count?: boolean | NovelCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type NovelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Novel$authorArgs<ExtArgs>
   }
   export type NovelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Novel$authorArgs<ExtArgs>
   }
 
   export type $NovelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Novel"
     objects: {
-      author: Prisma.$UserPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs> | null
       categories: Prisma.$CategoryPayload<ExtArgs>[]
       comments: Prisma.$CommentPayload<ExtArgs>[]
       likes: Prisma.$LikeNovelPayload<ExtArgs>[]
@@ -5297,7 +5297,7 @@ export namespace Prisma {
       id: string
       sharedId: string
       title: string
-      authorId: string
+      authorId: string | null
       coverImagePath: string | null
       createdAt: Date
       updatedAt: Date
@@ -5695,7 +5695,7 @@ export namespace Prisma {
    */
   export interface Prisma__NovelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    author<T extends Novel$authorArgs<ExtArgs> = {}>(args?: Subset<T, Novel$authorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     categories<T extends Novel$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Novel$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comments<T extends Novel$commentsArgs<ExtArgs> = {}>(args?: Subset<T, Novel$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     likes<T extends Novel$likesArgs<ExtArgs> = {}>(args?: Subset<T, Novel$likesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikeNovelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6130,6 +6130,25 @@ export namespace Prisma {
      * Limit how many Novels to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Novel.author
+   */
+  export type Novel$authorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -7492,7 +7511,7 @@ export namespace Prisma {
   export type CommentGroupByOutputType = {
     id: string
     sharedId: string
-    userId: string
+    userId: string | null
     novelId: string
     startIndex: number
     endIndex: number
@@ -7528,7 +7547,7 @@ export namespace Prisma {
     endIndex?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Comment$userArgs<ExtArgs>
     novel?: boolean | NovelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
@@ -7541,7 +7560,7 @@ export namespace Prisma {
     endIndex?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Comment$userArgs<ExtArgs>
     novel?: boolean | NovelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
@@ -7554,7 +7573,7 @@ export namespace Prisma {
     endIndex?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Comment$userArgs<ExtArgs>
     novel?: boolean | NovelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
@@ -7571,28 +7590,28 @@ export namespace Prisma {
 
   export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sharedId" | "userId" | "novelId" | "startIndex" | "endIndex" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Comment$userArgs<ExtArgs>
     novel?: boolean | NovelDefaultArgs<ExtArgs>
   }
   export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Comment$userArgs<ExtArgs>
     novel?: boolean | NovelDefaultArgs<ExtArgs>
   }
   export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Comment$userArgs<ExtArgs>
     novel?: boolean | NovelDefaultArgs<ExtArgs>
   }
 
   export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Comment"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs> | null
       novel: Prisma.$NovelPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       sharedId: string
-      userId: string
+      userId: string | null
       novelId: string
       startIndex: number
       endIndex: number
@@ -7992,7 +8011,7 @@ export namespace Prisma {
    */
   export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends Comment$userArgs<ExtArgs> = {}>(args?: Subset<T, Comment$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     novel<T extends NovelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, NovelDefaultArgs<ExtArgs>>): Prisma__NovelClient<$Result.GetResult<Prisma.$NovelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8424,6 +8443,25 @@ export namespace Prisma {
      * Limit how many Comments to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Comment.user
+   */
+  export type Comment$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -10999,11 +11037,11 @@ export namespace Prisma {
     id?: StringFilter<"Novel"> | string
     sharedId?: StringFilter<"Novel"> | string
     title?: StringFilter<"Novel"> | string
-    authorId?: StringFilter<"Novel"> | string
+    authorId?: StringNullableFilter<"Novel"> | string | null
     coverImagePath?: StringNullableFilter<"Novel"> | string | null
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     categories?: CategoryListRelationFilter
     comments?: CommentListRelationFilter
     likes?: LikeNovelListRelationFilter
@@ -11015,7 +11053,7 @@ export namespace Prisma {
     id?: SortOrder
     sharedId?: SortOrder
     title?: SortOrder
-    authorId?: SortOrder
+    authorId?: SortOrderInput | SortOrder
     coverImagePath?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11034,11 +11072,11 @@ export namespace Prisma {
     OR?: NovelWhereInput[]
     NOT?: NovelWhereInput | NovelWhereInput[]
     title?: StringFilter<"Novel"> | string
-    authorId?: StringFilter<"Novel"> | string
+    authorId?: StringNullableFilter<"Novel"> | string | null
     coverImagePath?: StringNullableFilter<"Novel"> | string | null
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     categories?: CategoryListRelationFilter
     comments?: CommentListRelationFilter
     likes?: LikeNovelListRelationFilter
@@ -11050,7 +11088,7 @@ export namespace Prisma {
     id?: SortOrder
     sharedId?: SortOrder
     title?: SortOrder
-    authorId?: SortOrder
+    authorId?: SortOrderInput | SortOrder
     coverImagePath?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11066,7 +11104,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Novel"> | string
     sharedId?: StringWithAggregatesFilter<"Novel"> | string
     title?: StringWithAggregatesFilter<"Novel"> | string
-    authorId?: StringWithAggregatesFilter<"Novel"> | string
+    authorId?: StringNullableWithAggregatesFilter<"Novel"> | string | null
     coverImagePath?: StringNullableWithAggregatesFilter<"Novel"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Novel"> | Date | string
@@ -11118,20 +11156,20 @@ export namespace Prisma {
     NOT?: CommentWhereInput | CommentWhereInput[]
     id?: StringFilter<"Comment"> | string
     sharedId?: StringFilter<"Comment"> | string
-    userId?: StringFilter<"Comment"> | string
+    userId?: StringNullableFilter<"Comment"> | string | null
     novelId?: StringFilter<"Comment"> | string
     startIndex?: IntFilter<"Comment"> | number
     endIndex?: IntFilter<"Comment"> | number
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     novel?: XOR<NovelScalarRelationFilter, NovelWhereInput>
   }
 
   export type CommentOrderByWithRelationInput = {
     id?: SortOrder
     sharedId?: SortOrder
-    userId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     novelId?: SortOrder
     startIndex?: SortOrder
     endIndex?: SortOrder
@@ -11147,20 +11185,20 @@ export namespace Prisma {
     AND?: CommentWhereInput | CommentWhereInput[]
     OR?: CommentWhereInput[]
     NOT?: CommentWhereInput | CommentWhereInput[]
-    userId?: StringFilter<"Comment"> | string
+    userId?: StringNullableFilter<"Comment"> | string | null
     novelId?: StringFilter<"Comment"> | string
     startIndex?: IntFilter<"Comment"> | number
     endIndex?: IntFilter<"Comment"> | number
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     novel?: XOR<NovelScalarRelationFilter, NovelWhereInput>
   }, "id" | "sharedId">
 
   export type CommentOrderByWithAggregationInput = {
     id?: SortOrder
     sharedId?: SortOrder
-    userId?: SortOrder
+    userId?: SortOrderInput | SortOrder
     novelId?: SortOrder
     startIndex?: SortOrder
     endIndex?: SortOrder
@@ -11179,7 +11217,7 @@ export namespace Prisma {
     NOT?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Comment"> | string
     sharedId?: StringWithAggregatesFilter<"Comment"> | string
-    userId?: StringWithAggregatesFilter<"Comment"> | string
+    userId?: StringNullableWithAggregatesFilter<"Comment"> | string | null
     novelId?: StringWithAggregatesFilter<"Comment"> | string
     startIndex?: IntWithAggregatesFilter<"Comment"> | number
     endIndex?: IntWithAggregatesFilter<"Comment"> | number
@@ -11499,7 +11537,7 @@ export namespace Prisma {
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNovelsInput
+    author?: UserCreateNestedOneWithoutNovelsInput
     categories?: CategoryCreateNestedManyWithoutNovelInput
     comments?: CommentCreateNestedManyWithoutNovelInput
     likes?: LikeNovelCreateNestedManyWithoutNovelInput
@@ -11511,7 +11549,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
-    authorId: string
+    authorId?: string | null
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11529,7 +11567,7 @@ export namespace Prisma {
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNovelsNestedInput
+    author?: UserUpdateOneWithoutNovelsNestedInput
     categories?: CategoryUpdateManyWithoutNovelNestedInput
     comments?: CommentUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUpdateManyWithoutNovelNestedInput
@@ -11541,7 +11579,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11556,7 +11594,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
-    authorId: string
+    authorId?: string | null
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11575,7 +11613,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11627,14 +11665,14 @@ export namespace Prisma {
     endIndex: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutCommentsInput
+    user?: UserCreateNestedOneWithoutCommentsInput
     novel: NovelCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateInput = {
     id?: string
     sharedId: string
-    userId: string
+    userId?: string | null
     novelId: string
     startIndex: number
     endIndex: number
@@ -11649,14 +11687,14 @@ export namespace Prisma {
     endIndex?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    user?: UserUpdateOneWithoutCommentsNestedInput
     novel?: NovelUpdateOneRequiredWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     novelId?: StringFieldUpdateOperationsInput | string
     startIndex?: IntFieldUpdateOperationsInput | number
     endIndex?: IntFieldUpdateOperationsInput | number
@@ -11667,7 +11705,7 @@ export namespace Prisma {
   export type CommentCreateManyInput = {
     id?: string
     sharedId: string
-    userId: string
+    userId?: string | null
     novelId: string
     startIndex: number
     endIndex: number
@@ -11687,7 +11725,7 @@ export namespace Prisma {
   export type CommentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     novelId?: StringFieldUpdateOperationsInput | string
     startIndex?: IntFieldUpdateOperationsInput | number
     endIndex?: IntFieldUpdateOperationsInput | number
@@ -12046,6 +12084,11 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     novelId?: SortOrder
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type CategoryListRelationFilter = {
@@ -12679,10 +12722,12 @@ export namespace Prisma {
     connect?: ViewHistoryWhereUniqueInput | ViewHistoryWhereUniqueInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutNovelsNestedInput = {
+  export type UserUpdateOneWithoutNovelsNestedInput = {
     create?: XOR<UserCreateWithoutNovelsInput, UserUncheckedCreateWithoutNovelsInput>
     connectOrCreate?: UserCreateOrConnectWithoutNovelsInput
     upsert?: UserUpsertWithoutNovelsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNovelsInput, UserUpdateWithoutNovelsInput>, UserUncheckedUpdateWithoutNovelsInput>
   }
@@ -12883,10 +12928,12 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
+  export type UserUpdateOneWithoutCommentsNestedInput = {
     create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
     upsert?: UserUpsertWithoutCommentsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsInput, UserUpdateWithoutCommentsInput>, UserUncheckedUpdateWithoutCommentsInput>
   }
@@ -13294,7 +13341,7 @@ export namespace Prisma {
     id?: StringFilter<"Novel"> | string
     sharedId?: StringFilter<"Novel"> | string
     title?: StringFilter<"Novel"> | string
-    authorId?: StringFilter<"Novel"> | string
+    authorId?: StringNullableFilter<"Novel"> | string | null
     coverImagePath?: StringNullableFilter<"Novel"> | string | null
     createdAt?: DateTimeFilter<"Novel"> | Date | string
     updatedAt?: DateTimeFilter<"Novel"> | Date | string
@@ -13322,7 +13369,7 @@ export namespace Prisma {
     NOT?: CommentScalarWhereInput | CommentScalarWhereInput[]
     id?: StringFilter<"Comment"> | string
     sharedId?: StringFilter<"Comment"> | string
-    userId?: StringFilter<"Comment"> | string
+    userId?: StringNullableFilter<"Comment"> | string | null
     novelId?: StringFilter<"Comment"> | string
     startIndex?: IntFilter<"Comment"> | number
     endIndex?: IntFilter<"Comment"> | number
@@ -13655,7 +13702,7 @@ export namespace Prisma {
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNovelsInput
+    author?: UserCreateNestedOneWithoutNovelsInput
     categories?: CategoryCreateNestedManyWithoutNovelInput
     comments?: CommentCreateNestedManyWithoutNovelInput
     likes?: LikeNovelCreateNestedManyWithoutNovelInput
@@ -13666,7 +13713,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
-    authorId: string
+    authorId?: string | null
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13742,7 +13789,7 @@ export namespace Prisma {
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNovelsNestedInput
+    author?: UserUpdateOneWithoutNovelsNestedInput
     categories?: CategoryUpdateManyWithoutNovelNestedInput
     comments?: CommentUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUpdateManyWithoutNovelNestedInput
@@ -13753,7 +13800,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13822,13 +13869,13 @@ export namespace Prisma {
     endIndex: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutCommentsInput
+    user?: UserCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateWithoutNovelInput = {
     id?: string
     sharedId: string
-    userId: string
+    userId?: string | null
     startIndex: number
     endIndex: number
     createdAt?: Date | string
@@ -14051,7 +14098,7 @@ export namespace Prisma {
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNovelsInput
+    author?: UserCreateNestedOneWithoutNovelsInput
     comments?: CommentCreateNestedManyWithoutNovelInput
     likes?: LikeNovelCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceCreateNestedManyWithoutNovelInput
@@ -14062,7 +14109,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
-    authorId: string
+    authorId?: string | null
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14137,7 +14184,7 @@ export namespace Prisma {
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNovelsInput
+    author?: UserCreateNestedOneWithoutNovelsInput
     categories?: CategoryCreateNestedManyWithoutNovelInput
     likes?: LikeNovelCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceCreateNestedManyWithoutNovelInput
@@ -14148,7 +14195,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
-    authorId: string
+    authorId?: string | null
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14224,7 +14271,7 @@ export namespace Prisma {
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNovelsNestedInput
+    author?: UserUpdateOneWithoutNovelsNestedInput
     categories?: CategoryUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUpdateManyWithoutNovelNestedInput
@@ -14235,7 +14282,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14289,7 +14336,7 @@ export namespace Prisma {
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNovelsInput
+    author?: UserCreateNestedOneWithoutNovelsInput
     categories?: CategoryCreateNestedManyWithoutNovelInput
     comments?: CommentCreateNestedManyWithoutNovelInput
     LikeSentence?: LikeSentenceCreateNestedManyWithoutNovelInput
@@ -14300,7 +14347,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
-    authorId: string
+    authorId?: string | null
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14376,7 +14423,7 @@ export namespace Prisma {
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNovelsNestedInput
+    author?: UserUpdateOneWithoutNovelsNestedInput
     categories?: CategoryUpdateManyWithoutNovelNestedInput
     comments?: CommentUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUpdateManyWithoutNovelNestedInput
@@ -14387,7 +14434,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14441,7 +14488,7 @@ export namespace Prisma {
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutNovelsInput
+    author?: UserCreateNestedOneWithoutNovelsInput
     categories?: CategoryCreateNestedManyWithoutNovelInput
     comments?: CommentCreateNestedManyWithoutNovelInput
     likes?: LikeNovelCreateNestedManyWithoutNovelInput
@@ -14452,7 +14499,7 @@ export namespace Prisma {
     id?: string
     sharedId: string
     title: string
-    authorId: string
+    authorId?: string | null
     coverImagePath?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14528,7 +14575,7 @@ export namespace Prisma {
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNovelsNestedInput
+    author?: UserUpdateOneWithoutNovelsNestedInput
     categories?: CategoryUpdateManyWithoutNovelNestedInput
     comments?: CommentUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUpdateManyWithoutNovelNestedInput
@@ -14539,7 +14586,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14762,7 +14809,7 @@ export namespace Prisma {
   export type CommentCreateManyNovelInput = {
     id?: string
     sharedId: string
-    userId: string
+    userId?: string | null
     startIndex: number
     endIndex: number
     createdAt?: Date | string
@@ -14810,13 +14857,13 @@ export namespace Prisma {
     endIndex?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    user?: UserUpdateOneWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutNovelInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     startIndex?: IntFieldUpdateOperationsInput | number
     endIndex?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14826,7 +14873,7 @@ export namespace Prisma {
   export type CommentUncheckedUpdateManyWithoutNovelInput = {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     startIndex?: IntFieldUpdateOperationsInput | number
     endIndex?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14897,7 +14944,7 @@ export namespace Prisma {
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutNovelsNestedInput
+    author?: UserUpdateOneWithoutNovelsNestedInput
     comments?: CommentUpdateManyWithoutNovelNestedInput
     likes?: LikeNovelUpdateManyWithoutNovelNestedInput
     LikeSentence?: LikeSentenceUpdateManyWithoutNovelNestedInput
@@ -14908,7 +14955,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14922,7 +14969,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sharedId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    authorId?: NullableStringFieldUpdateOperationsInput | string | null
     coverImagePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

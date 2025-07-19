@@ -8,6 +8,10 @@ export class EditNovelsDto {
 
   @IsOptional()
   @IsString()
+  overview?: string;
+
+  @IsOptional()
+  @IsString()
   content?: string;
 
   @IsOptional()
@@ -15,4 +19,8 @@ export class EditNovelsDto {
   @IsString({ each: true })
   @Transform(({ value }) => (Array.isArray(value) ? value : [value]))
   categories?: string[];
+
+  @IsOptional()
+  @IsString()
+  coverImagePath?: string | null;
 }

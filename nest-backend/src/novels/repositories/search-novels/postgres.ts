@@ -79,8 +79,8 @@ export class PostgresNovelRepository {
       return rowResults.map((result) => ({
         sharedId: result.sharedId,
         title: result.title,
-        authorId: result.author.id,
-        username: result.author.username,
+        authorId: result.author?.id || null,
+        username: result.author?.username || null,
         categories: result.categories.map((cat) => cat.categoryName),
         createdAt: result.createdAt,
       }));
@@ -99,8 +99,8 @@ export class PostgresNovelRepository {
       .map((result) => ({
         sharedId: result.sharedId,
         title: result.title,
-        authorId: result.author.id,
-        username: result.author.username,
+        authorId: result.author?.id || null,
+        username: result.author?.username || null,
         categories: result.categories.map((cat) => cat.categoryName),
         createdAt: result.createdAt,
       }));

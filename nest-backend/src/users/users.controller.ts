@@ -15,6 +15,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 import { Follow } from '../../generated/postgresql';
 import { CreateUsersService } from './service/create-users.service';
+import { DeleteUsersService } from './service/delete-users.service';
 import { FollowUserService } from './service/follow-user.service';
 import { UnfollowUserService } from './service/unfollow-user.service';
 import { GetFollowersService } from './service/get-followers.service';
@@ -41,6 +42,7 @@ import { Express } from 'express';
 export class UsersController {
   constructor(
     private readonly createUsersService: CreateUsersService,
+    private readonly deleteUsersService: DeleteUsersService,
     private readonly followUserService: FollowUserService,
     private readonly unfollowUserService: UnfollowUserService,
     private readonly getFollowersService: GetFollowersService,
@@ -53,6 +55,14 @@ export class UsersController {
     @Body() createUserDto: CreateUserDto,
   ): Promise<CreateUserResponse> {
     return this.createUsersService.createUser(createUserDto);
+  }
+
+  @Delete('account')
+  @UseGuards(AuthGuard('jwt'))
+  async deleteAccount(
+    @Request() req: { user: JWTPayload },
+  ): Promise<{ message: string}> {
+    return this.deleteUsersService.deleteUser(req.user.userId);
   }
 
   @Put('profile')

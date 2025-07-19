@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
-import { Novel as PrismaNovel } from '../../../../generated/postgresql';
 
 @Injectable()
 export class PostgresGetAllNovelRepository {
@@ -9,6 +8,13 @@ export class PostgresGetAllNovelRepository {
   async findAllNovel() {
     return this.prisma.novel.findMany({
       include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            profileImagePath: true,
+          }
+        },
         _count: {
           select: {
             viewHistory: true,

@@ -8,6 +8,6 @@ export type CreateNovelResponse = {
 
 export type Novel = {
   sharedId: string;
-  authorId: string;
+  authorId: string | null;
   title: string;
 };

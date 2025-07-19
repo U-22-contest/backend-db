@@ -61,9 +61,9 @@ model Novel {
   id             String         @id @default(uuid())
   sharedId       String         @unique
   title          String
-  authorId       String
+  authorId       String?
+  author         User?          @relation("UserNovels", fields: [authorId], references: [id], onDelete: SetNull)
   coverImagePath String?
-  author         User           @relation("UserNovels", fields: [authorId], references: [id], onDelete: Cascade)
   categories     Category[]     @relation("NovelCategories")
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
@@ -82,8 +82,8 @@ model Category {
 model Comment {
   id         String   @id @default(uuid())
   sharedId   String   @unique
-  userId     String
-  user       User     @relation("UserComments", fields: [userId], references: [id], onDelete: Cascade)
+  userId     String?
+  user       User?    @relation("UserComments", fields: [userId], references: [id], onDelete: SetNull)
   novelId    String
   novel      Novel    @relation("NovelComments", fields: [novelId], references: [id], onDelete: Cascade)
   startIndex Int
