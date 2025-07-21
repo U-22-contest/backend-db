@@ -14,6 +14,7 @@ import { GetPreviewByIdService } from './services/get-preview-by-id.service';
 import { DeleteNovelsService } from './services/delete-novels.service';
 import { SearchNovelsService } from './services/search-novels.service';
 import { EditNovelService } from './services/edit-novel-by-id.service';
+import { GetNovelRankingService } from "./services/get-novel-ranking.service";
 
 // import { CommentsService } from '../comments/comments.service';
 import { GetCommentsByNovelIdService } from '../comments/service/get-comments-by-novelid.service';
@@ -33,6 +34,7 @@ import { MongoSearchNovelRepository } from './repositories/search-novels/mongo';
 import { PostgresNovelRepository } from './repositories/search-novels/postgres';
 import { MongoEditNovelRepository } from './repositories/edit-novel-by-id/mongo';
 import { postgresEditNovelRepository } from './repositories/edit-novel-by-id/postgres';
+import { PostgresGetNovelRankingRepository } from './repositories/get-novel-ranking/postgres';
 
 import { CategoriesModule } from 'src/categories/categories.module';
 
@@ -72,6 +74,7 @@ import { v4 as uuid4 } from 'uuid';
     GetCommentsByNovelIdService,
     DeleteCommentsService,
     EditNovelService,
+    GetNovelRankingService,
 
     MongoCreateNovelRepository,
     PostgresCreateNovelRepository,
@@ -86,6 +89,7 @@ import { v4 as uuid4 } from 'uuid';
     PostgresNovelRepository,
     postgresEditNovelRepository,
     MongoEditNovelRepository,
+    PostgresGetNovelRankingRepository,
   ],
   controllers: [NovelsController],
 })

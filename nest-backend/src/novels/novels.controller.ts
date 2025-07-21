@@ -13,13 +13,17 @@ import {
   Query,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { OptionalJwtAuthGuard } from '../auth/guads/optional-jwt.guard';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 import { CreateNovelDto } from './dto/request/create-novel.dto';
 import { GetAllNovelsResponse } from './dto/request/get-all-novels.dto';
 import { GetNovelByIdResponse } from './dto/request/get-novel-by-id.dto';
 import { SearchNovelsDto } from './dto/request/search-novels.dto';
 import { EditNovelsDto } from './dto/request/edit-novel.dto';
-import { OptionalJwtAuthGuard } from '../auth/guads/optional-jwt.guard';
+import {
+  GetNovelRankingDto,
+  GetNovelRankingResponse,
+} from "./dto/request/get-novels-ranking.dto";
 
 import { CreateNovelsService } from './services/create-novels.service';
 import { GetAllNovelsService } from './services/get-all-novels.service';
@@ -28,6 +32,7 @@ import { GetPreviewByIdService } from './services/get-preview-by-id.service';
 import { DeleteNovelsService } from './services/delete-novels.service';
 import { SearchNovelsService } from './services/search-novels.service';
 import { EditNovelService } from './services/edit-novel-by-id.service';
+import { GetNovelRankingService } from "./services/get-novel-ranking.service";
 
 import { CreateNovelResponse } from './types/novel.types';
 import { Novel } from './types/novel.types';
@@ -44,6 +49,7 @@ export class NovelsController {
     private readonly deleteNovelsService: DeleteNovelsService,
     private readonly searchNovelsService: SearchNovelsService,
     private readonly editNovelService: EditNovelService,
+    private readonly getNovelRankingService: GetNovelRankingService,
   ) {}
 
   // 小説検索
@@ -76,6 +82,13 @@ export class NovelsController {
   @Get()
   async findAll(): Promise<GetAllNovelsResponse[]> {
     return this.getAllNovelsService.getAllNovel();
+  }
+
+  @Get('ranking')
+  async getNovelRanking(
+    @Query() getNovelRankingDto: GetNovelRankingDto,
+  ): Promise<GetNovelRankingResponse[]> {
+    return this.getNovelRankingService.getNovelRanking(getNovelRankingDto);
   }
 
   //idによる小説の取得
