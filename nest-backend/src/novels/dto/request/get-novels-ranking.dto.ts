@@ -1,4 +1,4 @@
-import { IsEnum, IsOptional, IsNumber } from 'class-validator';
+import { IsEnum, IsOptional, IsNumber, IsString } from 'class-validator';
 
 export enum RankingPeriod {
     WEEKLY = 'weekly',
@@ -9,6 +9,10 @@ export enum RankingPeriod {
 export class GetNovelRankingDto {
     @IsEnum(RankingPeriod)
     period: RankingPeriod = RankingPeriod.ALL_TIME;
+
+    @IsOptional()
+    @IsString()
+    categoryName?: string;
 
     @IsOptional()
     @IsNumber()

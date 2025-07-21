@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { MongoGetAllNovelRepository } from '../repositories/get-all-novels/mongo';
 import { GetPreviewByIdService } from './get-preview-by-id.service';
 import { GetNovelRankingDto, GetNovelRankingResponse } from "../dto/request/get-novels-ranking.dto";
 import { PostgresGetNovelRankingRepository } from "../repositories/get-novel-ranking/postgres";
@@ -8,19 +7,19 @@ import { PostgresGetNovelRankingRepository } from "../repositories/get-novel-ran
 export class GetNovelRankingService {
   constructor(
     private readonly postgresGetNovelRanking: PostgresGetNovelRankingRepository,
-    private readonly mongoGetAllNovel: MongoGetAllNovelRepository,
     private readonly getPreviewByIdService: GetPreviewByIdService,
   ) {}
 
   //全小説の取得
   async getNovelRanking(getNovelRankingDto: GetNovelRankingDto): Promise<GetNovelRankingResponse[]> {
 
-    const { period, limit = 20, offset = 0 } = getNovelRankingDto
+    const { period, limit = 20, offset = 0, categoryName } = getNovelRankingDto
 
     const novels = await this.postgresGetNovelRanking.findNovelByLikeRanking(
       period,
       limit,
       offset,
+      categoryName,
     );
 
     if (!novels?.length) return [];
