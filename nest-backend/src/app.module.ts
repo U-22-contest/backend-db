@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { CategoriesModule } from './categories/categories.module';
 import { LikeModule } from './like/like.module';
+import { BookmarkModule } from './bookmark/bookmark.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
@@ -28,6 +29,7 @@ if (!mongoUrl) throw new Error('MONGO_URL environment variable is not defined');
     CommentsModule,
     CategoriesModule,
     LikeModule,
+    BookmarkModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads', 'covers'),
       serveRoot: '/static/covers',

@@ -25,6 +25,7 @@ model User {
   likeNovels       LikeNovel[]    @relation("UserLikeNovels")
   likeSentence     LikeSentence[] @relation("UserLikeSentence")
   viewHistory      ViewHistory[]  @relation("UserViewHistory")
+  bookMark         Bookmark[]     @relation("UserBookmark")
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
 
@@ -71,6 +72,7 @@ model Novel {
   likes          LikeNovel[]    @relation("NovelLikes")
   LikeSentence   LikeSentence[] @relation("SentenceLikes")
   viewHistory    ViewHistory[]  @relation("NovelViewHistory")
+  bookmark       Bookmark[]     @relation("Bookmark")
 }
 
 model Category {
@@ -115,4 +117,15 @@ model LikeSentence {
   createdAt  DateTime @default(now())
 
   @@unique([userId, novelId, startIndex, endIndex])
+}
+
+model Bookmark {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation("UserBookmark", fields: [userId], references: [id], onDelete: Cascade)
+  novelId   String
+  novel     Novel    @relation("Bookmark", fields: [novelId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, novelId])
 }
