@@ -31,14 +31,6 @@ export class PostgresLikeSentenceRepository {
         startIndex,
         endIndex,
       },
-      include: {
-        user: {
-          select: {
-            id: true,
-            username: true,
-          },
-        },
-      },
     });
   }
 
