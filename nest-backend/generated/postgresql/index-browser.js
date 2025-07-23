@@ -182,6 +182,13 @@ exports.Prisma.LikeSentenceScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.BookmarkScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  novelId: 'novelId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -206,7 +213,8 @@ exports.Prisma.ModelName = {
   Category: 'Category',
   Comment: 'Comment',
   LikeNovel: 'LikeNovel',
-  LikeSentence: 'LikeSentence'
+  LikeSentence: 'LikeSentence',
+  Bookmark: 'Bookmark'
 };
 
 /**

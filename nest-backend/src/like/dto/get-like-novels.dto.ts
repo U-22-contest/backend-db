@@ -1,13 +1,16 @@
-
-export type GetNovelByIdResponse = {
+export class GetLikeNovelResponse {
+  id: string;
+  userId: string;
+  novelId: string;
+  createdAt: Date;
+  novel: {
     id: string;
     sharedId: string;
-    title: string;
     coverImagePath: string | null;
+    categories: string[];
     createdAt: Date;
     updatedAt: Date;
     author: {
-        id: string;
         username: string;
         profileImagePath: string | null;
     } | null;
@@ -15,7 +18,6 @@ export type GetNovelByIdResponse = {
         likes: number;
         bookmark: number;
         viewHistory: number;
-    }
-    overview: string;
-    content: string;
-};
+    };
+  };
+}
