@@ -12,9 +12,9 @@ export type GetNovelByIdResponse = {
         profileImagePath: string | null;
     } | null;
     _count: {
-        viewHistory: number;
         likes: number;
         bookmark: number;
+        viewHistory: number;
     }
     overview: string;
     content: string;

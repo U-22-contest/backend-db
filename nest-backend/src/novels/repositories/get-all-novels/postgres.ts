@@ -17,9 +17,9 @@ export class PostgresGetAllNovelRepository {
         },
         _count: {
           select: {
-            viewHistory: true,
             likes: true,
             bookmark: true,
+            viewHistory: true,
           }
         }
       },

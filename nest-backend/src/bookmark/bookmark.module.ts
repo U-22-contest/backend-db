@@ -10,8 +10,13 @@ import { PostgresGetBookmarkRepository } from "./repositories/get-bookmark/postg
 import { PostgresBookmarkRepository } from "./repositories/bookmark/postgres";
 import { PostgresRemoveBookmarkRepository } from "./repositories/remove-bookmark/postgres";
 
+import { NovelsModule } from "../novels/novels.module";
+
 @Module({
-  imports: [PrismaModule],
+  imports: [
+    PrismaModule,
+    NovelsModule,
+  ],
   controllers: [BookmarkController],
   providers: [
     GetBookmarkService,

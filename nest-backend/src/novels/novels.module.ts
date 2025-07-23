@@ -92,5 +92,9 @@ import { v4 as uuid4 } from 'uuid';
     PostgresGetNovelRankingRepository,
   ],
   controllers: [NovelsController],
+  exports: [
+    GetPreviewByIdService,
+    MongoGetPreviewByIdRepository,
+  ],
 })
 export class NovelsModule {}
