@@ -7,7 +7,7 @@ export class PostgresGetBookmarkRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async getBookmarks(userId: string) : Promise<LikeNovel[] | null> {
-    return this.prisma.likeNovel.findMany({
+    return this.prisma.bookmark.findMany({
       where: { userId },
       orderBy: { createdAt: 'desc' }
     })

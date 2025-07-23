@@ -41,5 +41,6 @@ export type GetNovelRankingResponse = {
     }[];
     _count: {
         likes: number;
+        bookmark: number;
     }
 };

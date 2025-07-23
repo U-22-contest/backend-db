@@ -22,6 +22,7 @@ export class PostgresGetNovelByIdRepository {
             select: {
               viewHistory: true,
               likes: true,
+              bookmark: true,
             }
           }
         }

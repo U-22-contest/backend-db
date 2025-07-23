@@ -28,6 +28,7 @@ export class PostgresGetNovelRankingRepository {
         _count: {
           select: {
             likes: dateFilter ? { where: dateFilter } : true,
+            bookmark: dateFilter ? { where: dateFilter } : true,
           },
         },
       },

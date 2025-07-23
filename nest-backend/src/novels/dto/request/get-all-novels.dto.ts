@@ -14,6 +14,7 @@ export type GetAllNovelsResponse = {
     _count: {
         viewHistory: number;
         likes: number;
+        bookmark: number;
     }
     overview: string;
     content: string;

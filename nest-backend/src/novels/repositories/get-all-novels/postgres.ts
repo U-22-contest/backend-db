@@ -19,6 +19,7 @@ export class PostgresGetAllNovelRepository {
           select: {
             viewHistory: true,
             likes: true,
+            bookmark: true,
           }
         }
       },

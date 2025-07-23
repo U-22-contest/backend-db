@@ -7,7 +7,7 @@ export class PostgresRemoveBookmarkRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async findBookmarkRelation(userId: string, novelId: string) : Promise<LikeNovel | null> {
-    return this.prisma.likeNovel.findFirst({
+    return this.prisma.bookmark.findFirst({
       where: {
         userId,
         novelId,
@@ -16,7 +16,7 @@ export class PostgresRemoveBookmarkRepository {
   }
 
   async deleteBookmark( id: string ) : Promise<void> {
-    await this.prisma.likeNovel.delete({
+    await this.prisma.bookmark.delete({
       where: { id },
     });
   }
