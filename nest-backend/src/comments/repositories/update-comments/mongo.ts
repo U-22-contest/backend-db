@@ -1,8 +1,7 @@
-                                           import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Comment, CommentDocument } from '../../../mongo/schema/comment.schema';
-import { UpdateCommentDto } from '../../dto/update-comment.dto';
 
 @Injectable()
 export class MongoUpdateCommentRepository {
@@ -10,10 +9,11 @@ export class MongoUpdateCommentRepository {
     @InjectModel(Comment.name) private readonly commentModel: Model<CommentDocument>,
   ) {}
 
-  async updateCommentBySharedId(sharedId: string, dto: UpdateCommentDto): Promise<void> {
-    await this.commentModel.updateOne(
+  async updateCommentBySharedId(sharedId: string, comment: string) {
+    return this.commentModel.findOneAndUpdate(
       { sharedId },
-      { $set: { comment: dto.content } },
+      { $set: { comment: comment } },
+      { new: true }
     );
   }
 }
