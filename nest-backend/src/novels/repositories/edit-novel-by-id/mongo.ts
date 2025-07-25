@@ -13,7 +13,7 @@ export class MongoEditNovelRepository {
   async updateContentBySharedId(
     sharedId: string,
     editDto,
-  ): Promise<void> {
+  ){
     const updateData: any = {}
 
     if (editDto.content) {
@@ -24,9 +24,10 @@ export class MongoEditNovelRepository {
       updateData.overview = editDto.overview;
     }
 
-    await this.novelModel.findOneAndUpdate(
+    return this.novelModel.findOneAndUpdate(
         { sharedId },
-        { $set: updateData }
+        { $set: updateData },
+        { new: true } //更新後データの取得
     )
   }
 }

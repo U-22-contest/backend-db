@@ -10,7 +10,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
-import { UpdateCommentDto } from './dto/update-comment.dto';
+import {
+  UpdateCommentDto,
+  UpdateCommentResponse,
+} from './dto/update-comment.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 
@@ -77,7 +80,7 @@ export class CommentsController {
     @Param('commentId') commentId: string,
     @Body() updateCommentDto: UpdateCommentDto,
     @Request() req: { user: JWTPayload },
-  ): Promise<{ message: string }> {
+  ): Promise<UpdateCommentResponse> {
     return this.updateCommentService.updateComment(
       commentId,
       req.user.userId,

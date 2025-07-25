@@ -19,7 +19,10 @@ import { CreateNovelDto } from './dto/request/create-novel.dto';
 import { GetAllNovelsResponse } from './dto/request/get-all-novels.dto';
 import { GetNovelByIdResponse } from './dto/request/get-novel-by-id.dto';
 import { SearchNovelsDto } from './dto/request/search-novels.dto';
-import { EditNovelsDto } from './dto/request/edit-novel.dto';
+import {
+  EditNovelsDto,
+  EditNovelsResponse,
+} from './dto/request/edit-novel.dto';
 import {
   GetNovelRankingDto,
   GetNovelRankingResponse,
@@ -121,7 +124,7 @@ export class NovelsController {
     @Request() req: { user: JWTPayload },
     @UploadedFile() file: Express.Multer.File,
     @Body() editDto: EditNovelsDto,
-  ): Promise<{ message: string }> {
+  ): Promise<EditNovelsResponse> {
     const imagePath = file ? `/uploads/covers/${file.filename}` : null;
     editDto.coverImagePath = imagePath;
     return this.editNovelService.editNovelById(

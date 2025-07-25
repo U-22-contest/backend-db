@@ -23,6 +23,7 @@ model User {
   novels           Novel[]        @relation("UserNovels")
   comments         Comment[]      @relation("UserComments")
   likeNovels       LikeNovel[]    @relation("UserLikeNovels")
+  likeComments     LikeComment[]  @relation("UserLikeComments")
   likeSentence     LikeSentence[] @relation("UserLikeSentence")
   viewHistory      ViewHistory[]  @relation("UserViewHistory")
   bookMark         Bookmark[]     @relation("UserBookmark")
@@ -82,16 +83,17 @@ model Category {
 }
 
 model Comment {
-  id         String   @id @default(uuid())
-  sharedId   String   @unique
-  userId     String?
-  user       User?    @relation("UserComments", fields: [userId], references: [id], onDelete: SetNull)
-  novelId    String
-  novel      Novel    @relation("NovelComments", fields: [novelId], references: [id], onDelete: Cascade)
-  startIndex Int
-  endIndex   Int
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id           String        @id @default(uuid())
+  sharedId     String        @unique
+  userId       String?
+  user         User?         @relation("UserComments", fields: [userId], references: [id], onDelete: SetNull)
+  novelId      String
+  novel        Novel         @relation("NovelComments", fields: [novelId], references: [id], onDelete: Cascade)
+  startIndex   Int
+  endIndex     Int
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  likesComment LikeComment[] @relation("CommentLikes")
 }
 
 model LikeNovel {
@@ -103,6 +105,17 @@ model LikeNovel {
   createdAt DateTime @default(now())
 
   @@unique([userId, novelId])
+}
+
+model LikeComment {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation("UserLikeComments", fields: [userId], references: [id], onDelete: Cascade)
+  commentId String
+  comment   Comment  @relation("CommentLikes", fields: [commentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, commentId])
 }
 
 model LikeSentence {

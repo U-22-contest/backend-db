@@ -24,3 +24,15 @@ export class EditNovelsDto {
   @IsString()
   coverImagePath?: string | null;
 }
+
+export class EditNovelsResponse {
+  id: string;
+  sharedId: string;
+  title: string;
+  authorId: string | null;
+  coverImagePath: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  overview: string | undefined;
+  content: string | undefined;
+}
