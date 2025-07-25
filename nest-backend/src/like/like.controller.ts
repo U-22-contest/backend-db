@@ -6,6 +6,7 @@ import {
   Get,
   Request,
   UseGuards,
+  Param,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
@@ -23,6 +24,7 @@ import { LikeNovelService } from './services/like-novel.service';
 import { RemoveLikeNovelService } from './services/remove-like-novel.service';
 import { LikeSentenceService } from './services/like-sentence.service';
 import { RemoveLikeSentenceService } from './services/remove-like-sentence.service';
+import { GetLikeUsersByNovelService } from './services/get-like-users-by-novel.service';
 
 @Controller('likes')
 export class LikeController {
@@ -33,9 +35,10 @@ export class LikeController {
     private readonly removeLikeNovelService: RemoveLikeNovelService,
     private readonly likeSentenceService: LikeSentenceService,
     private readonly removeLikeSentenceService: RemoveLikeSentenceService,
+    private readonly getLikeUsersByNovelService: GetLikeUsersByNovelService,
   ) {}
 
-  // いいね取得（小説）
+  // ユーザーいいねしている小説を取得
   @Get('novel')
   @UseGuards(AuthGuard('jwt'))
   async getLikeNovels(
@@ -45,7 +48,7 @@ export class LikeController {
     return this.getLikeNovelsService.getLikeNovels(userId);
   }
 
-  // いいね取得（小説）
+  // ユーザーいいねしている文章の小説情報を取得
   @Get('sentence')
   @UseGuards(AuthGuard('jwt'))
   async getLikeSentence(
@@ -53,6 +56,14 @@ export class LikeController {
   ) : Promise<GetLikeSentenceResponse[] | null>  {
     const userId = req.user.userId;
     return this.getLikeSentenceService.getLikeSentence(userId);
+  }
+
+  // ユーザーいいねしている小説を取得
+  @Get(':novelId')
+  async getLikeUsersNovel(
+    @Param('novelId') novelId: string,
+  ) {
+    return this.getLikeUsersByNovelService.getLikeUsers(novelId);
   }
 
   // 小説全体にいいね
