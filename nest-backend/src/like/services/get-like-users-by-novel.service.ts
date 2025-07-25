@@ -18,7 +18,7 @@ export class GetLikeUsersByNovelService {
       id: likeUser.user.id,
       username: likeUser.user.username,
       profileImagePath: likeUser.user.profileImagePath,
-      likedAt: likeUser.createdAt,
+      createdAt: likeUser.createdAt,
     }));
   }
 }
