@@ -16,6 +16,15 @@ export class postgresEditNovelRepository {
     });
   }
 
+  async updateTimestamp(id: string): Promise<PrismaNovel> {
+    return this.prisma.novel.update({
+      where: {id},
+      data: {
+        updatedAt: new Date(), // 明示的に現在時刻を設定
+      },
+    });
+  }
+
   async updateNovel(id: string, editDto: EditNovelsDto): Promise<PrismaNovel> {
 
     const updateData: any = {}
