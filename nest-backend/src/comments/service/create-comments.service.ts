@@ -6,10 +6,10 @@ import { CommentDocument } from '../../mongo/schema/comment.schema';
 import { PostgresCreateCommentRepository } from '../repositories/create-comments/postgres';
 import { MongoCreateCommentRepository } from '../repositories/create-comments/mongo';
 
-export type CreateCommentResponse = {
+export class CreateCommentResponse {
   postgresComment: PrismaComment;
   mongoComment: CommentDocument;
-};
+}
 
 @Injectable()
 export class CreateCommentsService {

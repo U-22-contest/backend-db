@@ -17,7 +17,6 @@ import {
   ApiOperation,
   ApiResponse,
   ApiParam,
-  ApiBody,
   ApiBearerAuth,
   ApiConsumes, ApiQuery,
 } from '@nestjs/swagger';
@@ -51,6 +50,7 @@ import { Novel } from './types/novel.types';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 
+@ApiTags('Novels')
 @Controller('novels')
 export class NovelsController {
   constructor(
