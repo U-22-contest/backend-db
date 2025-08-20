@@ -12,6 +12,15 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiBody,
+  ApiBearerAuth,
+  ApiConsumes, ApiQuery,
+} from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { OptionalJwtAuthGuard } from '../auth/guads/optional-jwt.guard';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
@@ -57,6 +66,25 @@ export class NovelsController {
 
   // 小説検索
   @Get('search')
+  @ApiOperation({ summary: '小説検索' })
+  @ApiQuery({
+    name: 'keyword',
+    description: '検索キーワード',
+    required: false,
+    type: String,
+  })
+  @ApiQuery({
+    name: 'author',
+    description: '作者名',
+    required: false,
+    type: String,
+  })
+  @ApiQuery({
+    name: 'categories',
+    description: 'カテゴリー',
+    required: false,
+    type: [String],
+  })
   async searchNovels(
     @Query() query: SearchNovelsDto,
   ): Promise<{ novels: Novel[] }> {
@@ -67,6 +95,10 @@ export class NovelsController {
   @Post()
   @UseGuards(AuthGuard('jwt'))
   @UseInterceptors(FileInterceptor('file'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '小説投稿' })
+  @ApiConsumes('multipart/form-data')
+  @ApiResponse({ status: 201, type: CreateNovelResponse })
   async create(
     @Body() createNovelDto: CreateNovelDto,
     @UploadedFile() file: Express.Multer.File,
@@ -83,11 +115,44 @@ export class NovelsController {
 
   //全小説の取得
   @Get()
+  @ApiOperation({ summary: '全小説取得' })
+  @ApiResponse({ status: 200, type: [GetAllNovelsResponse] })
   async findAll(): Promise<GetAllNovelsResponse[]> {
     return this.getAllNovelsService.getAllNovel();
   }
 
   @Get('ranking')
+  @ApiOperation({ summary: '小説ランキング取得' })
+  @ApiQuery({
+    name: 'period',
+    description: '期間(WEEKLY, MONTHLY, ALL_TIME(default))　',
+    required: false,
+    example: 'WEEKLY'
+  })
+  @ApiQuery({
+    name: 'categoryName',
+    description: 'カテゴリー',
+    required: false,
+  })
+  @ApiQuery({
+    name: 'limit',
+    description: '取得件数（1-100）',
+    required: false,
+    type: Number,
+    example: 20
+  })
+  @ApiQuery({
+    name: 'offset',
+    description: 'オフセット（ページネーション用）',
+    required: false,
+    type: Number,
+    example: 0
+  })
+  @ApiResponse({
+    status: 200,
+    description: '小説ランキング',
+    type: [GetNovelRankingResponse]
+  })
   async getNovelRanking(
     @Query() getNovelRankingDto: GetNovelRankingDto,
   ): Promise<GetNovelRankingResponse[]> {
@@ -97,6 +162,16 @@ export class NovelsController {
   //idによる小説の取得
   @Get(':novelid')
   @UseGuards(OptionalJwtAuthGuard)
+  @ApiOperation({ summary: 'id指定小説取得　＊ログイン時トークン送信してください' })
+  @ApiParam({
+    name: 'novelid',
+    description: '小説ID',
+  })
+  @ApiResponse({
+    status: 200,
+    description: '小説詳細情報',
+    type: GetNovelByIdResponse
+  })
   async findOne(
     @Param('novelid') novelId: string,
     @Request() req: { user?: JWTPayload }
@@ -108,6 +183,16 @@ export class NovelsController {
   //小説の削除
   @Delete(':novelId')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '小説削除' })
+  @ApiParam({
+    name: 'novelId',
+    description: '削除する小説ID',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'novelを削除しました',
+  })
   async delete(
     @Param('novelId') novelid: string,
     @Request() req: { user: JWTPayload },
@@ -119,6 +204,17 @@ export class NovelsController {
   @Put(':novelId')
   @UseGuards(AuthGuard('jwt'))
   @UseInterceptors(FileInterceptor('file'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '小説編集' })
+  @ApiParam({
+    name: 'novelId',
+    description: '編集する小説ID',
+  })
+  @ApiConsumes('multipart/form-data')
+  @ApiResponse({
+    status: 200,
+    type: EditNovelsResponse
+  })
   async edit(
     @Param('novelId') novelid: string,
     @Request() req: { user: JWTPayload },
