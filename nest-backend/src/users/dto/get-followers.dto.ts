@@ -1,7 +1,12 @@
-// ~/user/followers/{userid};
+import { ApiProperty } from "@nestjs/swagger";
 
-export type GetFollowersResponse = {
-    id: string,
-    username: string,
-    followingSince: Date,
-};
+export class GetFollowersResponse {
+    @ApiProperty()
+    id: string;
+
+    @ApiProperty()
+    username: string;
+
+    @ApiProperty()
+    followingSince: Date;
+}
