@@ -86,6 +86,9 @@ export class NovelsController {
     required: false,
     type: [String],
   })
+  @ApiResponse({
+    status: 200, type: [Novel]
+  })
   async searchNovels(
     @Query() query: SearchNovelsDto,
   ): Promise<{ novels: Novel[] }> {
