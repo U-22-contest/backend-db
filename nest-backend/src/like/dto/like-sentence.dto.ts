@@ -1,26 +1,37 @@
 import { IsString, IsNotEmpty, IsInt, Min } from 'class-validator';
+import { ApiProperty } from "@nestjs/swagger";
 
 export class LikeSentenceDto {
-    @IsString()
-    @IsNotEmpty()
-    userId: string;
+  @IsString()
+  @IsNotEmpty()
+  userId: string;
 
-    @IsString()
-    @IsNotEmpty()
-    novelId: string;
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  novelId: string;
 
-    @IsInt()
-    @Min(0)
-    startIndex: number;
+  @ApiProperty()
+  @IsInt()
+  @Min(0)
+  startIndex: number;
 
-    @IsInt()
-    @Min(0)
-    endIndex: number;
+  @ApiProperty()
+  @IsInt()
+  @Min(0)
+  endIndex: number;
 }
 
 export class LikeSentenceResponse {
-    id: string;
-    userId: string;
-    novelId: string;
-    createdAt: Date;
+  @ApiProperty()
+  id: string;
+
+  @ApiProperty()
+  userId: string;
+
+  @ApiProperty()
+  novelId: string;
+
+  @ApiProperty()
+  createdAt: Date;
 }

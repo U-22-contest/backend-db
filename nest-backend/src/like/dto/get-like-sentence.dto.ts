@@ -1,25 +1,78 @@
-export class GetLikeSentenceResponse {
+import { ApiProperty } from "@nestjs/swagger";
+
+export class AuthorInfo {
+  @ApiProperty()
+  username: string;
+
+  @ApiProperty({
+    nullable: true,
+    type: String,
+  })
+  profileImagePath: string | null;
+}
+
+export class CountInfo {
+  @ApiProperty()
+  likes: number;
+
+  @ApiProperty()
+  bookmark: number;
+
+  @ApiProperty()
+  viewHistory: number;
+}
+
+export class NovelInfo {
+  @ApiProperty()
   id: string;
-  userId: string;
-  novelId: string;
-  startIndex: number;
-  endIndex: number;
+
+  @ApiProperty()
+  sharedId: string;
+
+  @ApiProperty({
+    nullable: true,
+    type: String,
+  })
+  coverImagePath: string | null;
+
+  @ApiProperty()
+  categories: string[];
+
+  @ApiProperty()
   createdAt: Date;
-  novel: {
-    id: string;
-    sharedId: string;
-    coverImagePath: string | null;
-    categories: string[];
-    createdAt: Date;
-    updatedAt: Date;
-    author: {
-        username: string;
-        profileImagePath: string | null;
-    } | null;
-    _count: {
-        likes: number;
-        bookmark: number;
-        viewHistory: number;
-    };
-  };
+
+  @ApiProperty()
+  updatedAt: Date;
+
+  @ApiProperty({
+    nullable: true,
+    type: AuthorInfo,
+  })
+  author: AuthorInfo | null;
+
+  @ApiProperty()
+  _count: CountInfo;
+}
+
+export class GetLikeSentenceResponse {
+  @ApiProperty()
+  id: string;
+
+  @ApiProperty()
+  userId: string;
+
+  @ApiProperty()
+  novelId: string;
+
+  @ApiProperty()
+  startIndex: number;
+
+  @ApiProperty()
+  endIndex: number;
+
+  @ApiProperty()
+  createdAt: Date;
+
+  @ApiProperty()
+  novel: NovelInfo;
 }
