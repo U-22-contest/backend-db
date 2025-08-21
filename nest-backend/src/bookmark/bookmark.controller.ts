@@ -7,6 +7,12 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 
@@ -18,6 +24,7 @@ import { GetBookmarkService } from './services/get-bookmark.service'
 import { BookmarkService } from './services/bookmark.service';
 import { RemoveBookmarkService } from './services/remove-bookmark.service';
 
+@ApiTags('Bookmark')
 @Controller('bookmark')
 export class BookmarkController {
   constructor(
@@ -29,6 +36,11 @@ export class BookmarkController {
 
   @Get()
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'ブックマークした小説一覧取得' })
+  @ApiResponse({
+    status: 200, type: [UserBookmarkResponse]
+  })
   async getBookmark(
     @Request() req: { user: JWTPayload },
   ) : Promise<UserBookmarkResponse[] | null>  {
@@ -39,6 +51,11 @@ export class BookmarkController {
   // 小説ブックマーク
   @Post('novel')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '小説ブックマーク追加' })
+  @ApiResponse({
+    status: 201, type: BookmarkResponse,
+  })
   async bookmark(
     @Body() bookmarkDto: BookmarkDto,
     @Request() req: { user: JWTPayload },
@@ -50,6 +67,11 @@ export class BookmarkController {
   // 小説ブックマーク削除
   @Delete('novel')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'ブックマーク削除' })
+  @ApiResponse({
+    status: 200, description: 'Bookmark removed successfully',
+  })
   async removeBookmark(
     @Body() removeBookmarkDto: RemoveBookmarkDto,
     @Request() req: { user: JWTPayload },

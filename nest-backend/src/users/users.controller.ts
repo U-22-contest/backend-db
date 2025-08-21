@@ -11,6 +11,14 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiBearerAuth,
+  ApiConsumes,
+} from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 import { Follow } from '../../generated/postgresql';
@@ -26,7 +34,10 @@ import {
   CreateUserDto,
   CreateUserResponse,
 } from './dto/create-user.dto';
-import { FollowUserDto } from './dto/follow-user.dto';
+import {
+  FollowUserDto,
+  FollowUserResponse
+} from './dto/follow-user.dto';
 import { UnfollowUserDto } from './dto/unfollow-user.dto';
 import { GetFolloweesResponse } from './dto/get-followees.dto';
 import { GetFollowersResponse } from './dto/get-followers.dto';
@@ -38,6 +49,7 @@ import {　
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(
@@ -51,6 +63,8 @@ export class UsersController {
   ) {}
 
   @Post('signup')
+  @ApiOperation({ summary: "ユーザー登録" })
+  @ApiResponse({ status: 201, type: CreateUserResponse})
   async create(
     @Body() createUserDto: CreateUserDto,
   ): Promise<CreateUserResponse> {
@@ -59,15 +73,22 @@ export class UsersController {
 
   @Delete('account')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "アカウント削除" })
+  @ApiResponse({ status: 200, description: "succes delete user" })
   async deleteAccount(
     @Request() req: { user: JWTPayload },
-  ): Promise<{ message: string}> {
+  ): Promise<{ message: string }> {
     return this.deleteUsersService.deleteUser(req.user.userId);
   }
 
   @Put('profile')
   @UseGuards(AuthGuard('jwt'))
   @UseInterceptors(FileInterceptor('file'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "プロフィール更新" })
+  @ApiConsumes('multipart/form-data')
+  @ApiResponse({ status: 200, type: EditProfileResponse })
   async editProfile(
     @Body() editProfileDto: EditProfileDto,
     @UploadedFile() file: Express.Multer.File,
@@ -82,10 +103,14 @@ export class UsersController {
 
   @Post('follow/:userid')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "ユーザーフォロー" })
+  @ApiParam({ name: 'userid', description: 'フォロー対象のユーザーID' })
+  @ApiResponse({ status: 201, type: FollowUserResponse })
   async followUser(
     @Param('userid') followeeId: string,
     @Request() req: { user: JWTPayload },
-  ): Promise<Follow> {
+  ): Promise<FollowUserResponse> {
     const followUserDto: FollowUserDto = {
       followerId: req.user.userId,
       followeeId: followeeId,
@@ -95,6 +120,10 @@ export class UsersController {
 
   @Delete('unfollow/:userid')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: "ユーザーアンフォロー" })
+  @ApiParam({ name: 'userid', description: 'アンフォロー対象のユーザーID' })
+  @ApiResponse({ status: 200, description: "フォロー解除成功" })
   async unfollowUser(
     @Param('userid') followeeId: string,
     @Request() req: { user: JWTPayload },
@@ -107,13 +136,19 @@ export class UsersController {
   }
 
   @Get('followers/:userid')
+  @ApiOperation({ summary: "フォロワー一覧取得" })
+  @ApiParam({ name: 'userid', description: 'フォロワーを取得するユーザーID' })
+  @ApiResponse({ status: 200, type: [GetFollowersResponse] })
   async getFollowers(
     @Param('userid') userid: string,
   ): Promise<GetFollowersResponse[]> {
     return this.getFollowersService.getFollowers(userid);
   }
 
-  @Get('followees/:userId')
+  @Get('followees/:userid')
+  @ApiOperation({ summary: "フォロー中ユーザー一覧取得" })
+  @ApiParam({ name: 'userid', description: 'フォロー中ユーザーを取得するユーザーID' })
+  @ApiResponse({ status: 200, type: [GetFolloweesResponse] })
   async getFollowees(
     @Param('userid') userid: string,
   ): Promise<GetFolloweesResponse[]> {

@@ -1,25 +1,77 @@
-export class GetLikeCommentResponse {
+import { ApiProperty } from "@nestjs/swagger";
+
+class UserInfo {
+  @ApiProperty()
+  username: string;
+
+  @ApiProperty({
+    nullable: true,
+    type: String,
+  })
+  profileImagePath: string | null;
+}
+
+class NovelInfo {
+  @ApiProperty()
   id: string;
-  userId: string;
-  commentId: string;
+
+  @ApiProperty()
+  title: string;
+
+  @ApiProperty({ nullable: true })
+  coverImagePath: string | null;
+}
+
+class CountInfo {
+  @ApiProperty()
+  likesComment: number;
+}
+
+class CommentInfo {
+  @ApiProperty()
+  id: string;
+
+  @ApiProperty()
+  startIndex: number;
+
+  @ApiProperty()
+  endIndex: number;
+
+  @ApiProperty()
   createdAt: Date;
-  comment: {
-    id: string,
-    startIndex: number,
-    endIndex: number,
-    createdAt: Date,
-    updatedAt: Date,
-    user: {
-      username: string,
-      profileImagePath: string | null,
-    } | null,
-    novel: {
-      id: string,
-      title: string,
-      coverImagePath: string | null,
-    } | null,
-    _count: {
-      likesComment: number,
-    }
-  }
+
+  @ApiProperty()
+  updatedAt: Date;
+
+  @ApiProperty({
+    nullable: true,
+    type: UserInfo,
+  })
+  user: UserInfo | null;
+
+  @ApiProperty({
+    nullable: true,
+    type: NovelInfo,
+  })
+  novel: NovelInfo | null;
+
+  @ApiProperty()
+  _count: CountInfo;
+}
+
+export class GetLikeCommentResponse {
+  @ApiProperty()
+  id: string;
+
+  @ApiProperty()
+  userId: string;
+
+  @ApiProperty()
+  commentId: string;
+
+  @ApiProperty()
+  createdAt: Date;
+
+  @ApiProperty()
+  comment: CommentInfo;
 }

@@ -1,18 +1,27 @@
 import { IsString, IsNotEmpty } from 'class-validator';
+import { ApiProperty } from "@nestjs/swagger";
 
 export class LikeCommentDto {
-    @IsString()
-    @IsNotEmpty()
-    userId: string;
+  @IsString()
+  @IsNotEmpty()
+  userId: string;
 
-    @IsString()
-    @IsNotEmpty()
-    commentId: string;
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  commentId: string;
 }
 
 export class LikeCommentResponse {
-    id: string;
-    userId: string;
-    commentId: string;
-    createdAt: Date;
+  @ApiProperty()
+  id: string;
+
+  @ApiProperty()
+  userId: string;
+
+  @ApiProperty()
+  commentId: string;
+
+  @ApiProperty()
+  createdAt: Date;
 }

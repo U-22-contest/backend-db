@@ -9,7 +9,15 @@ import {
   Param,
   UseGuards,
 } from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { CreateCommentDto } from './dto/create-comment.dto';
+import { GetCommentsByNovelIdResponse } from './dto/get-comment-by-novelid.dto';
 import {
   UpdateCommentDto,
   UpdateCommentResponse,
@@ -25,11 +33,11 @@ import {
 } from './service/create-comments.service';
 import {
   GetCommentsByNovelIdService,
-  GetCommentsByNovelIdResponse,
 } from './service/get-comments-by-novelid.service';
 import { DeleteCommentsService } from './service/delete-comments.service';
 import { UpdateCommentService } from './service/update-comments.service';
 
+@ApiTags('Comments')
 @Controller('comments')
 export class CommentsController {
   constructor(
@@ -43,6 +51,16 @@ export class CommentsController {
   // 小説のコメント投稿
   @Post(':novelId')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'コメント投稿' })
+  @ApiParam({
+    name: 'novelId',
+    description: 'コメントを投稿する小説のID',
+  })
+  @ApiResponse({
+    status: 201,
+    type: CreateCommentResponse
+  })
   async create(
     @Param('novelId') novelId: string,
     @Body() createCommentDto: CreateCommentDto,
@@ -57,6 +75,15 @@ export class CommentsController {
 
   // コメント取得
   @Get(':novelId')
+  @ApiOperation({ summary: '小説のコメント一覧取得' })
+  @ApiParam({
+    name: 'novelId',
+    description: 'コメントを取得する小説のID',
+  })
+  @ApiResponse({
+    status: 200,
+    type: [GetCommentsByNovelIdResponse]
+  })
   async findAll(
     @Param('novelId') novelId: string,
   ): Promise<GetCommentsByNovelIdResponse[]> {
@@ -66,6 +93,16 @@ export class CommentsController {
   // コメント削除（comment.idで削除）
   @Delete(':commentId')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'コメント削除' })
+  @ApiParam({
+    name: 'commentId',
+    description: '削除するコメントのID',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'コメント削除完了',
+  })
   async delete(
     @Param('commentId') commentId: string,
     @Request() req: { user: JWTPayload },
@@ -76,6 +113,16 @@ export class CommentsController {
 
   @Patch(':commentId')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'コメント編集' })
+  @ApiParam({
+    name: 'commentId',
+    description: '編集するコメントのID',
+  })
+  @ApiResponse({
+    status: 200,
+    type: UpdateCommentResponse
+  })
   async update(
     @Param('commentId') commentId: string,
     @Body() updateCommentDto: UpdateCommentDto,

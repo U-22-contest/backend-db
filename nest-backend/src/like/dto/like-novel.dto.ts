@@ -1,19 +1,27 @@
 import { IsString, IsNotEmpty } from 'class-validator';
-// import { LikeNovel } from '../../../generated/postgresql';
+import { ApiProperty } from "@nestjs/swagger";
 
 export class LikeNovelDto {
-    @IsString()
-    @IsNotEmpty()
-    userId: string;
+  @IsString()
+  @IsNotEmpty()
+  userId: string;
 
-    @IsString()
-    @IsNotEmpty()
-    novelId: string;
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  novelId: string;
 }
 
 export class LikeNovelResponse {
-    id: string;
-    userId: string;
-    novelId: string;
-    createdAt: Date;
+  @ApiProperty()
+  id: string;
+
+  @ApiProperty()
+  userId: string;
+
+  @ApiProperty()
+  novelId: string;
+
+  @ApiProperty()
+  createdAt: Date;
 }

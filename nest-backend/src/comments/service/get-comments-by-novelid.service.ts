@@ -1,18 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PostgresGetCommentsByNovelIdRepository } from '../repositories/get-comments-by-novelid/postgres'
 import { MongoGetCommentsByNovelIdRepository } from '../repositories/get-comments-by-novelid/mongo'
+import { GetCommentsByNovelIdResponse } from '../dto/get-comment-by-novelid.dto'
 
-export type GetCommentsByNovelIdResponse = {
-  id: string,
-  sharedId: string,
-  userId: string | null,
-  novelId: string,
-  startIndex: number,
-  endIndex: number,
-  createdAt: Date,
-  updatedAt: Date,
-  comment: string,
-};
 
 @Injectable()
 export class GetCommentsByNovelIdService {

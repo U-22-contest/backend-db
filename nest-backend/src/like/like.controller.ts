@@ -8,6 +8,13 @@ import {
   UseGuards,
   Param,
 } from '@nestjs/common';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { JWTPayload } from '../auth/interface/jwt-payload.interface';
 
@@ -33,6 +40,7 @@ import { RemoveLikeSentenceService } from './services/remove-like-sentence.servi
 import { LikeCommentService } from './services/like-comment.service';
 import { RemoveLikeCommentService } from './services/remove-like-comment.service';
 
+@ApiTags('Likes')
 @Controller('likes')
 export class LikeController {
   constructor(
@@ -51,6 +59,11 @@ export class LikeController {
   // ユーザーいいねしている小説を取得
   @Get('novel')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'いいねしている小説取得' })
+  @ApiResponse({
+    status: 200, type: [GetLikeNovelResponse]
+  })
   async getLikeNovels(
     @Request() req: { user: JWTPayload },
   ) : Promise<GetLikeNovelResponse[] | null>  {
@@ -61,6 +74,11 @@ export class LikeController {
   // ユーザーいいねしているコメント情報を取得
   @Get('comment')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'いいねしているコメント取得' })
+  @ApiResponse({
+    status: 200, type: [GetLikeCommentResponse]
+  })
   async getLikeComments(
     @Request() req: { user: JWTPayload },
   ) : Promise<GetLikeCommentResponse[] | null>  {
@@ -71,6 +89,11 @@ export class LikeController {
   // ユーザーいいねしている文章の小説情報を取得
   @Get('sentence')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'いいねしている文章の小説情報取得' })
+  @ApiResponse({
+    status: 200, type: [GetLikeSentenceResponse]
+  })
   async getLikeSentence(
     @Request() req: { user: JWTPayload },
   ) : Promise<GetLikeSentenceResponse[] | null>  {
@@ -78,8 +101,16 @@ export class LikeController {
     return this.getLikeSentenceService.getLikeSentence(userId);
   }
 
-  // ユーザーいいねしている小説を取得
+  // 指定の小説をイイネしているユーザー一覧取得
   @Get(':novelId')
+  @ApiOperation({ summary: '指定の小説をいいねしているユーザー取得' })
+  @ApiParam({
+    name: 'novelId',
+    description: '小説ID',
+  })
+  @ApiResponse({
+    status: 200, type: [GetLikeUsersByNovelResponse]
+  })
   async getLikeUsersNovel(
     @Param('novelId') novelId: string,
   ): Promise<GetLikeUsersByNovelResponse[]> {
@@ -89,6 +120,12 @@ export class LikeController {
   // 小説全体にいいね
   @Post('novel')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '小説へいいね' })
+  @ApiResponse({
+    status: 201,
+    type: LikeNovelResponse,
+  })
   async likeNovel(
     @Body() likeNovelDto: LikeNovelDto,
     @Request() req: { user: JWTPayload },
@@ -100,6 +137,12 @@ export class LikeController {
   // 小説いいね削除
   @Delete('novel')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '小説へのいいね削除' })
+  @ApiResponse({
+    status: 200,
+    description: 'Like removed successfully',
+  })
   async removeLike(
     @Body() removeLikeDto: RemoveLikeDto,
     @Request() req: { user: JWTPayload },
@@ -111,6 +154,12 @@ export class LikeController {
   // コメントにいいね
   @Post('comment')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'コメントへいいね' })
+  @ApiResponse({
+    status: 201,
+    type: LikeCommentResponse,
+  })
   async likeComment(
       @Body() likeCommentDto: LikeCommentDto,
       @Request() req: { user: JWTPayload },
@@ -122,6 +171,12 @@ export class LikeController {
   // コメントいいね削除
   @Delete('comment')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'コメントへのいいね削除' })
+  @ApiResponse({
+    status: 200,
+    description: 'Like comment removed successfully',
+  })
   async removeLikeComment(
       @Body() removeLikeCommentDto: RemoveLikeCommentDto,
       @Request() req: { user: JWTPayload },
@@ -133,6 +188,12 @@ export class LikeController {
   // 文章にいいね
   @Post('sentence')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '文章へいいね' })
+  @ApiResponse({
+    status: 201,
+    type: LikeSentenceResponse,
+  })
   async likeSentence(
     @Body() likeSentenceDto: LikeSentenceDto,
     @Request() req: { user: JWTPayload },
@@ -144,6 +205,12 @@ export class LikeController {
   // 文章いいね削除
   @Delete('sentence')
   @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiOperation({ summary: '文章へのいいね削除' })
+  @ApiResponse({
+    status: 200,
+    description: 'LikeSentence removed successfully',
+  })
   async removeLikeSentence(
     @Body() removeLikeSentenceDto: RemoveLikeSentenceDto,
     @Request() req: { user: JWTPayload },
