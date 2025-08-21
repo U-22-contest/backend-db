@@ -15,7 +15,6 @@ import {
   ApiResponse,
   ApiParam,
   ApiBearerAuth,
-  ApiConsumes,
 } from '@nestjs/swagger';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { GetCommentsByNovelIdResponse } from './dto/get-comment-by-novelid.dto';

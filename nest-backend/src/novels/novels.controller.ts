@@ -18,7 +18,8 @@ import {
   ApiResponse,
   ApiParam,
   ApiBearerAuth,
-  ApiConsumes, ApiQuery,
+  ApiConsumes,
+  ApiQuery,
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { OptionalJwtAuthGuard } from '../auth/guads/optional-jwt.guard';
